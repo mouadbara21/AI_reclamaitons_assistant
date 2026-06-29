@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portail Marocain des Procédures du Commerce Extérieur — PMCE PortNet. Gérez vos réclamations et demandes d'assistance.">
+    <title>Portail Marocain des Procédures du Commerce Extérieur — PortNet</title>
+
+    <!-- Bootstrap 5 (matches Portnet tech stack) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Application styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     DASHBOARD BACKDROP (simplified Portnet portal shell)
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- Top navigation -->
+<nav class="dashboard-nav" id="dashboardNav">
+    <div class="nav-logo">
+        <div class="nav-logo-icon">P</div>
+        <div>
+            <div class="nav-logo-text">PORTNET</div>
+            <div class="nav-logo-subtitle">Commerce Extérieur</div>
+        </div>
+    </div>
+    <div class="nav-user">
+        Bienvenue : <strong id="navUserName">Demo Importateur</strong>
+    </div>
+</nav>
+
+<!-- Scrolling banner -->
+<div class="dashboard-banner">
+    <div class="banner-content">
+        <i class="fas fa-exclamation-triangle" style="margin-right:8px;"></i>
+        Important : Vous utilisez actuellement la version pilote de la plateforme. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Important : Vous utilisez actuellement la version pilote de la plateforme. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Important : Vous utilisez actuellement la version pilote de la plateforme.
+    </div>
+</div>
+
+<!-- Main layout -->
+<div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+        <a href="#" class="sidebar-link active">
+            <i class="fas fa-chart-line"></i> Tableau de bord
+        </a>
+        <div class="sidebar-section-title">Services classifiés</div>
+        <a href="#" class="sidebar-link"><i class="fas fa-file-import"></i> Titres d'import</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-stamp"></i> Franchises douanières</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-broadcast-tower"></i> Import — Équipements télécoms</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-university"></i> Cautions bancaires</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-check-circle"></i> Admis pour conforme</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-certificate"></i> Certificats de conformité</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-file-alt"></i> Déclarations Douanières</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-ship"></i> Services CCS</a>
+        <a href="#" class="sidebar-link"><i class="fas fa-anchor"></i> Services PCS</a>
+    </aside>
+
+    <!-- Main content -->
+    <main class="dashboard-main">
+        <h1>Tableau de bord</h1>
+        <p class="subtitle">Vue d'ensemble de vos opérations</p>
+
+        <div class="dash-cards">
+            <div class="dash-card">
+                <div class="card-label">Délai Moyen de Domiciliation</div>
+                <div class="card-value">0h 0min</div>
+            </div>
+            <div class="dash-card">
+                <div class="card-label">Année courante</div>
+                <div class="card-value">0 DUM / 0 ML</div>
+            </div>
+            <div class="dash-card">
+                <div class="card-label">Mois en cours</div>
+                <div class="card-value">0</div>
+                <div class="card-sub">titres à régulariser</div>
+            </div>
+            <div class="dash-card">
+                <div class="card-label">Délai moyen de la place</div>
+                <div class="card-value">3h 44min</div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Footer -->
+<footer class="dashboard-footer">
+    Copyright ©2026, PORTNET S.A.
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     FLOATING "BESOIN D'AIDE?" BUTTON
+     ═══════════════════════════════════════════════════════════ -->
+
+<button id="helpFloatingBtn" class="help-floating-btn" type="button" title="Ouvrir le centre d'aide">
+    <i class="fas fa-question-circle"></i>
+    Besoin d'aide ?
+</button>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     CENTRE D'AIDE PANEL (right slide-in)
+     ═══════════════════════════════════════════════════════════ -->
+
+<div id="centreAideOverlay" class="centre-aide-overlay"></div>
+
+<div id="centreAidePanel" class="centre-aide-panel">
+    <!-- Panel header -->
+    <div class="panel-header">
+        <div class="panel-header-left">
+            <div class="panel-header-icon">
+                <i class="fas fa-question"></i>
+            </div>
+            <span class="panel-header-title">Centre d'aide</span>
+        </div>
+        <button id="panelCloseBtn" class="panel-close-btn" type="button" title="Fermer">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Navigation menu -->
+    <div class="panel-menu">
+        <button class="panel-menu-item" data-action="faq" type="button">
+            <i class="fas fa-pen"></i> Foires aux questions
+        </button>
+        <button class="panel-menu-item" data-action="mes-reclamations" id="menuMesReclamations" type="button">
+            <i class="fas fa-briefcase"></i> Mes réclamations
+        </button>
+        <button class="panel-menu-item" data-action="nouvelle-reclamation" id="menuNouvelleReclamation" type="button">
+            <i class="fas fa-share"></i> Nouvelle réclamation
+        </button>
+        <button class="panel-menu-item" data-action="contact" type="button">
+            <i class="fas fa-headset"></i> Contactez-nous
+        </button>
+        <button class="panel-menu-item" data-action="tijaria" type="button">
+            <i class="fas fa-comment-dots"></i> TijarIA
+        </button>
+        <button class="panel-menu-item" data-action="historique-tijaria" type="button">
+            <i class="fas fa-comments"></i> Historique TijarIA
+        </button>
+    </div>
+
+    <!-- Mes réclamations section (toggled via menu) -->
+    <div id="mesReclamationsSection" class="mes-reclamations-section">
+        <div class="section-header">
+            <div class="section-header-left">
+                <div class="section-header-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <div class="section-header-text">
+                    <h3>Mes réclamations</h3>
+                    <span id="reclamationsCount">0 réclamation(s)</span>
+                </div>
+            </div>
+            <button id="sectionCloseBtn" class="section-close-btn" type="button" title="Fermer la section">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Search bar -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Réclamation / Référence" autocomplete="off">
+            <button id="searchBtn" class="search-btn" type="button" title="Rechercher">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+
+        <!-- Reclamation cards list (dynamically filled by JS) -->
+        <div id="reclamationsList" class="reclamations-list">
+            <!-- Cards rendered by reclamations-list.js -->
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     DÉTAILS DE LA RÉCLAMATION — MODAL
+     ═══════════════════════════════════════════════════════════ -->
+
+<div id="detailModalOverlay" class="detail-modal-overlay">
+    <div class="detail-modal" id="detailModal">
+        <!-- Header -->
+        <div class="detail-header">
+            <div class="detail-header-left">
+                <div class="detail-header-icon">
+                    <i class="fas fa-info"></i>
+                </div>
+                <div class="detail-header-text">
+                    <h2>Détails de la réclamation</h2>
+                    <span class="detail-ref" id="detailRef"></span>
+                </div>
+            </div>
+            <span class="status-badge" id="detailStatusBadge"></span>
+        </div>
+
+        <!-- Scrollable body -->
+        <div class="detail-body" id="detailBody">
+            <!-- Dynamically filled by reclamation-detail.js -->
+        </div>
+
+        <!-- Footer -->
+        <div class="detail-footer">
+            <button id="detailCloseBtn" class="btn-fermer" type="button">
+                Fermer
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     NOUVELLE RÉCLAMATION — MULTI-STEP FORM MODAL
+     ═══════════════════════════════════════════════════════════ -->
+
+<div id="newRecOverlay" class="new-rec-overlay">
+    <div class="new-rec-modal" id="newRecModal">
+        <!-- Dark navy header -->
+        <div class="new-rec-header">
+            <div>
+                <h2>Nouvelle réclamation</h2>
+                <p>Remplissez ce formulaire en 3 étapes</p>
+            </div>
+            <button id="newRecCloseBtn" class="new-rec-close" type="button" title="Fermer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="new-rec-progress">
+            <div class="new-rec-progress-fill" id="progressFill" style="width: 33.33%;"></div>
+        </div>
+
+        <!-- Stepper -->
+        <div class="new-rec-stepper" id="stepper">
+            <div class="stepper-step active" data-step="1">
+                <div class="stepper-circle active" id="stepperCircle1">1</div>
+                <span class="stepper-label">Type de demande</span>
+            </div>
+            <div class="stepper-line" id="stepperLine1"></div>
+            <div class="stepper-step" data-step="2">
+                <div class="stepper-circle inactive" id="stepperCircle2">2</div>
+                <span class="stepper-label">Service concerné</span>
+            </div>
+            <div class="stepper-line" id="stepperLine2"></div>
+            <div class="stepper-step" data-step="3">
+                <div class="stepper-circle inactive" id="stepperCircle3">3</div>
+                <span class="stepper-label">Détails</span>
+            </div>
+        </div>
+
+        <!-- Form content -->
+        <div class="new-rec-content" id="newRecContent">
+            <!-- Step 1: Type de demande -->
+            <div class="step-container active" id="step1">
+                <h3 class="step-question">Quel est le type de votre demande ?</h3>
+                <p class="step-subtitle">Sélectionnez le type qui correspond le mieux à votre besoin</p>
+                <div class="custom-dropdown" id="typeDropdown">
+                    <span class="custom-dropdown-label">Type de demande</span>
+                    <button class="custom-dropdown-trigger placeholder" id="typeTrigger" type="button">
+                        <span>Type de demande</span>
+                        <i class="fas fa-chevron-down dd-arrow"></i>
+                    </button>
+                    <div class="custom-dropdown-options" id="typeOptions">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Service concerné -->
+            <div class="step-container" id="step2">
+                <h3 class="step-question">Quel service est concerné ?</h3>
+                <p class="step-subtitle">Recherchez et sélectionnez le service approprié</p>
+                <div class="custom-dropdown" id="serviceDropdown">
+                    <span class="custom-dropdown-label">Service concerné</span>
+                    <button class="custom-dropdown-trigger placeholder" id="serviceTrigger" type="button">
+                        <span>Rechercher un service</span>
+                        <i class="fas fa-chevron-down dd-arrow"></i>
+                    </button>
+                    <div class="custom-dropdown-options" id="serviceOptions">
+                        <input type="text" class="dropdown-search-input" id="serviceSearchInput"
+                               placeholder="Rechercher un service..." autocomplete="off">
+                        <div id="serviceOptionsList">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Détails -->
+            <div class="step-container" id="step3">
+                <h3 class="step-question">Complétez votre demande</h3>
+                <p class="step-subtitle success-color">Fournissez les détails nécessaires pour traiter votre demande</p>
+                <div class="form-group">
+                    <input type="text" class="form-input" id="inputObjet" placeholder="Objet *" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-input form-textarea" id="inputSujet" placeholder="Sujet *"></textarea>
+                </div>
+                <div class="file-upload-zone" id="fileUploadZone">
+                    <input type="file" id="fileInput" multiple>
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Joindre des fichiers (optionnel)</span>
+                </div>
+                <div class="uploaded-files" id="uploadedFiles">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Success screen (shown after submission) -->
+            <div class="step-container" id="stepSuccess">
+                <div class="success-screen">
+                    <div class="success-icon"><i class="fas fa-check"></i></div>
+                    <h3>Réclamation envoyée avec succès !</h3>
+                    <p>Votre réclamation a été soumise et sera traitée dans les plus brefs délais.</p>
+                    <div class="success-ref" id="successRef"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer navigation -->
+        <div class="new-rec-footer" id="newRecFooter">
+            <button id="btnRetour" class="btn-retour" type="button">
+                <i class="fas fa-arrow-left"></i> Retour
+            </button>
+            <button id="btnSuivant" class="btn-suivant disabled" type="button">
+                Suivant <i class="fas fa-arrow-right"></i>
+            </button>
+            <button id="btnSoumettre" class="btn-soumettre disabled" type="button" style="display:none;">
+                <i class="fas fa-check"></i> Soumettre
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     TOAST NOTIFICATION
+     ═══════════════════════════════════════════════════════════ -->
+<div id="toast" class="toast"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS (load order: data → api → modules → app)
+     ═══════════════════════════════════════════════════════════ -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/api.js"></script>
+<script src="js/reclamations-list.js"></script>
+<script src="js/reclamation-detail.js"></script>
+<script src="js/new-reclamation.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
