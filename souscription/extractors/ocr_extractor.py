@@ -5,6 +5,7 @@ Includes mock fallback database for the sample scanned documents to allow local 
 Production deployment: Replace `run_ocr()` body with PaddleOCR or Tesseract calls.
 """
 
+import io
 import os
 from souscription.models.enums import DocumentType
 
@@ -72,37 +73,75 @@ def _normalize_filename(name: str) -> str:
     return name.replace("\u2019", "'").replace("\u2018", "'").strip()
 
 
+# --- OCR RÉEL (Tesseract, fra+ara) ------------------------------------------
+TESSERACT_LANGS = "fra+ara"   # français + arabe (documents marocains)
+OCR_DPI = 300
+
+
+def _tesseract_ready() -> bool:
+    try:
+        import pytesseract
+        pytesseract.get_tesseract_version()
+        return True
+    except Exception:
+        return False
+
+
+def _render_pdf_pages(pdf_path: str):
+    """Rend chaque page d'un PDF en image (PyMuPDF) pour l'OCR."""
+    import fitz
+    from PIL import Image
+    doc = fitz.open(pdf_path)
+    try:
+        for page in doc:
+            pix = page.get_pixmap(dpi=OCR_DPI)
+            yield Image.open(io.BytesIO(pix.tobytes("png")))
+    finally:
+        doc.close()
+
+
+def _ocr_image(pil_img, langs: str = TESSERACT_LANGS) -> str:
+    """OCR d'une image, avec prétraitement (gris / débruitage / binarisation)."""
+    import pytesseract
+    try:
+        from souscription.pipeline.preprocessor import preprocess_pil
+        pil_img = preprocess_pil(pil_img)
+    except Exception:
+        pass  # si le prétraitement échoue, on OCR l'image brute
+    return pytesseract.image_to_string(pil_img, lang=langs)
+
+
+def _real_ocr(path: str) -> str:
+    from PIL import Image
+    ext = os.path.splitext(path)[1].lower()
+    if ext in (".png", ".jpg", ".jpeg", ".tif", ".tiff", ".bmp"):
+        return _ocr_image(Image.open(path))
+    return "\n".join(_ocr_image(img) for img in _render_pdf_pages(path))
+
+
 def run_ocr(pdf_path: str) -> str:
-    """
-    Extracts text from a scanned image PDF.
+    """Extrait le texte d'un document scanné.
 
-    Current implementation: checks the mock database for known sample files.
-    Production implementation: call PaddleOCR or Tesseract here.
-
-    Args:
-        pdf_path: Absolute path to the scanned PDF file.
-
-    Returns:
-        Extracted text content.
-
-    Raises:
-        NotImplementedError: If no mock text is available and no real OCR engine
-            is configured.
+    OCR RÉEL via Tesseract (fra+ara). Pour les 2 documents-échantillons du projet,
+    on renvoie une transcription de référence (MOCK_OCR_DB) afin que les tests
+    restent déterministes ; tout autre fichier passe par le vrai OCR.
     """
     fname = os.path.basename(pdf_path)
     normalized = _normalize_filename(fname)
 
-    # 1. Direct match
+    # 1) transcription de référence (échantillons -> tests déterministes)
     if fname in MOCK_OCR_DB:
         return MOCK_OCR_DB[fname]
-
-    # 2. Normalized match (handles curly quotes vs straight quotes)
     for mock_name, text in MOCK_OCR_DB.items():
         if _normalize_filename(mock_name) == normalized:
             return text
 
-    # 3. No match — suggest deploying a real OCR engine
+    # 2) VRAI OCR (Tesseract)
+    if _tesseract_ready():
+        return _real_ocr(pdf_path)
+
+    # 3) Tesseract absent
     raise NotImplementedError(
-        f"Real OCR is not configured for file: {fname}. "
-        "Deploy PaddleOCR (recommended) or Tesseract and update this function."
+        f"Tesseract introuvable pour {fname}. Installez-le (brew install tesseract "
+        "+ langues fra/ara) et 'pip install pytesseract pillow opencv-python'."
     )
