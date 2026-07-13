@@ -39,21 +39,22 @@ class MRZValidationResult(BaseModel):
 
 
 def extract_mrz_lines(text: str) -> list[str]:
-    """Extract 3 MRZ lines (30 chars each) from text.
-    
-    MRZ lines consist of uppercase letters, digits, and '<' filler.
+    """Extract the 3 MRZ lines (TD1, 30 chars each) from text.
+
+    Robuste à l'OCR : on nettoie chaque ligne (on ne garde que A-Z 0-9 <),
+    on accepte dès ~20 caractères avec assez de '<' (l'OCR tronque souvent les
+    '<' de remplissage en fin de ligne), puis on complète à 30 (les '<' finaux
+    sont des données optionnelles, sans effet sur les chiffres de contrôle).
     """
-    # Look for lines that match MRZ character set and are ~30 chars
     candidates = []
     for line in text.split('\n'):
-        clean = line.strip()
-        # MRZ lines only contain: A-Z, 0-9, <
-        if re.match(r'^[A-Z0-9<]{28,32}$', clean):
-            candidates.append(clean[:30])  # Trim to exactly 30
+        clean = re.sub(r'[^A-Z0-9<]', '', line.upper())
+        if len(clean) >= 20 and clean.count('<') >= 2:
+            candidates.append(clean.ljust(30, '<')[:30])  # complète/tronque à 30
 
-    # TD1 format has exactly 3 lines
+    # TD1 = 3 lignes ; on garde les 3 dernières (évite le bruit d'en-tête)
     if len(candidates) >= 3:
-        return candidates[:3]
+        return candidates[-3:]
     return candidates
 
 
@@ -182,3 +183,28 @@ def parse_cni(text: str) -> ExtractedCNI:
         mrz_lines=mrz_lines,
         mrz_valid=mrz_valid
     )
+
+
+# Caractères possibles d'une MRZ (améliore fortement l'OCR).
+_MRZ_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<"
+
+
+def read_cnie_image(image_path: str) -> ExtractedCNI:
+    """Lit une CNIE depuis une IMAGE (dos).
+
+    La MRZ est en bas de la carte : on recadre le bas, on prétraite (gris +
+    binarisation) et on OCR avec une liste de caractères restreinte (A-Z 0-9 <),
+    ce qui fiabilise beaucoup la lecture des 3 lignes. Puis on parse + valide.
+    """
+    import numpy as np
+    import pytesseract
+    from PIL import Image
+    from souscription.pipeline.preprocessor import preprocess
+
+    img = np.array(Image.open(image_path).convert("RGB"))
+    h = img.shape[0]
+    crop = img[int(h * 0.55):, :]                 # ~45% inférieur = zone MRZ
+    g = preprocess(crop, do_deskew=False)
+    cfg = f"--psm 6 -c tessedit_char_whitelist={_MRZ_CHARS}"
+    text = pytesseract.image_to_string(g, lang="eng", config=cfg)
+    return parse_cni(text)
