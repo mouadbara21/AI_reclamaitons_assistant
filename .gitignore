@@ -1,2 +1,8 @@
-# Ignore context folder (contains proprietary screenshots and internal docs)
 context/
+
+# Python compiled files
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
