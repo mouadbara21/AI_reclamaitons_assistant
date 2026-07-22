@@ -1,0 +1,23 @@
+services:
+  postgres:
+    # Base PostgreSQL pour la validation des documents de souscription.
+    # Au 1er démarrage, exécute automatiquement les .sql du dossier ./init
+    image: postgres:16
+    container_name: souscription-postgres
+    environment:
+      POSTGRES_USER: souscription
+      POSTGRES_PASSWORD: souscription
+      POSTGRES_DB: souscription
+    ports:
+      - "5432:5432"                 # port PostgreSQL (pour DBeaver / le backend)
+    volumes:
+      - pg_data:/var/lib/postgresql/data          # persistance des données
+      - ./init:/docker-entrypoint-initdb.d         # scripts SQL d'initialisation
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U souscription"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pg_data:
