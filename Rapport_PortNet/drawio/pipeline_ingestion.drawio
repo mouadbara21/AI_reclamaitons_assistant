@@ -1,0 +1,87 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="pipeline_ingestion" name="Pipeline d&#39;Ingestion à 3 Niveaux">
+    <mxGraphModel dx="1270" dy="744" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Pipeline d&#39;Ingestion et de Traitement à Trois Niveaux" vertex="1">
+          <mxGeometry height="50" width="1700" x="50" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="input" parent="1" style="shape=document;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;fontSize=16;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;size=0.25;" value="Fichier PDF&lt;br&gt;(Opérateur)" vertex="1">
+          <mxGeometry height="80" width="180" x="60" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="tier1_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;arcSize=8;fontSize=14;fontStyle=0;fontColor=#0D47A1;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Niveau 1 — Extraction Textuelle&lt;/b&gt;" vertex="1">
+          <mxGeometry height="210" width="340" x="320" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pymupdf" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="PyMuPDF&lt;br&gt;(Texte vectoriel)" vertex="1">
+          <mxGeometry height="60" width="280" x="350" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="check_len" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=2;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="len &gt; 20 ?" vertex="1">
+          <mxGeometry height="50" width="120" x="430" y="255" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCCBC;strokeColor=#BF360C;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Tesseract OCR&lt;br&gt;(Repli Tier 2)" vertex="1">
+          <mxGeometry height="60" width="200" x="390" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="tier2_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;arcSize=8;fontSize=14;fontStyle=0;fontColor=#1B5E20;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Niveau 2 — Classification&lt;/b&gt;" vertex="1">
+          <mxGeometry height="220" width="350" x="740" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="pos_anchors" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Couche 1&lt;br&gt;Ancres Positives" vertex="1">
+          <mxGeometry height="60" width="280" x="780" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="neg_excl" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Couche 2&lt;br&gt;Exclusions Négatives" vertex="1">
+          <mxGeometry height="60" width="280" x="780" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="tier3_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=3;arcSize=8;fontSize=14;fontStyle=0;fontColor=#BF360C;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Niveau 3 — Validation &amp; Cross-Ref&lt;/b&gt;" vertex="1">
+          <mxGeometry height="330" width="340" x="1160" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="parser" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Extracteur Dédié&lt;br&gt;(7 parsers regex)" vertex="1">
+          <mxGeometry height="50" width="280" x="1190" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="checksum" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Modulo 97&lt;br&gt;(ICE + RIB + MRZ)" vertex="1">
+          <mxGeometry height="50" width="280" x="1190" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="recency" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Récence Modèle J&lt;br&gt;(&lt; 90 jours)" vertex="1">
+          <mxGeometry height="50" width="280" x="1190" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="crossref" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Matrice Cross-Ref&lt;br&gt;(7 variables × N docs)" vertex="1">
+          <mxGeometry height="50" width="280" x="1190" y="375" as="geometry" />
+        </mxCell>
+        <mxCell id="output" parent="1" style="shape=document;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=16;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;size=0.25;" value="Rapport de&lt;br&gt;Validation" vertex="1">
+          <mxGeometry height="80" width="180" x="825" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" edge="1" parent="1" source="input" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontFamily=Arial;" target="pymupdf" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="pymupdf" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" target="check_len" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="check_len" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontFamily=Arial;fontStyle=1;labelBackgroundColor=none;entryX=0;entryY=1;entryDx=0;entryDy=0;" target="pos_anchors" value="Oui">
+          <mxGeometry relative="1" x="0.2143" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="750" y="280" />
+              <mxPoint x="750" y="230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="check_len" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#C62828;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontFamily=Arial;fontStyle=1;" target="ocr" value="Non">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="ocr" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" target="pos_anchors" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="700" y="420" />
+              <mxPoint x="700" y="200" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a6" edge="1" parent="1" source="neg_excl" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="parser" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" edge="1" parent="1" source="crossref" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" target="output" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

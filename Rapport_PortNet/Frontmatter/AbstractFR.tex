@@ -1,0 +1,20 @@
+\chapter*{R\'{e}sum\'{e}}
+\addcontentsline{toc}{chapter}{R\'{e}sum\'{e}}
+
+\begingroup
+\setstretch{1.08}
+
+Ce rapport pr\'{e}sente la conception et la r\'{e}alisation d'un \textbf{syst\`{e}me intelligent de v\'{e}rification documentaire} d\'{e}velopp\'{e} au sein de \textbf{PortNet S.A.}, Guichet Unique National du Commerce Ext\'{e}rieur au Maroc. Le syst\`{e}me automatise le contr\^{o}le de conformit\'{e} des pi\`{e}ces justificatives n\'{e}cessaires \`{a} la souscription des op\'{e}rateurs \'{e}conomiques (importateurs, exportateurs, transitaires) aux services informatiques de PortNet et \`{a} la plateforme BADR de l'Administration des Douanes et Imp\^{o}ts Indirects (ADII).
+
+Le processus existant repose sur un contr\^{o}le visuel manuel r\'{e}alis\'{e} par des agents v\'{e}rificateurs, g\'{e}n\'{e}rant des d\'{e}lais d'instruction de 48 \`{a} 72 heures, un taux d'erreur humaine significatif et l'absence de validation math\'{e}matique des identifiants r\'{e}glementaires. Le syst\`{e}me propos\'{e} r\'{e}pond \`{a} ces limites par une architecture en pipeline \`{a} trois niveaux : extraction textuelle native et OCR, classification par ancres positives et exclusions n\'{e}gatives (classifier \`{a} deux couches), et validation crois\'{e}e inter-documents via une matrice de coh\'{e}rence.
+
+La solution couvre neuf types de documents r\'{e}glementaires marocains : Mod\`{e}le J (Registre de Commerce), Bulletin de Notification de l'Identifiant Fiscal (AAC140B), Attestation de Taxe Professionnelle (AAC060B), Certificat ICE, Attestation de Domiciliation, Attestation de RIB, Carte Nationale d'Identit\'{e} \'{E}lectronique (CNIE), Statuts de la Soci\'{e}t\'{e} et Procuration. Pour chaque type, un extracteur d\'{e}di\'{e} \`{a} base d'expressions r\'{e}guli\`{e}res analyse le texte brut et produit un mod\`{e}le de donn\'{e}es structur\'{e} Pydantic. Les validateurs appliqu\'{e}s comprennent le contr\^{o}le de cl\'{e} Modulo~97 (RIB et ICE), la v\'{e}rification de r\'{e}cence du Mod\`{e}le~J (\textless 90 jours), la comparaison floue des noms et adresses (RapidFuzz, seuil 85\%), et la v\'{e}rification crois\'{e}e de sept variables communes (ICE, RC, IF, TP, Adresse, Raison Sociale, CIN g\'{e}rant).
+
+L'architecture technique repose sur un backend \textbf{FastAPI} avec persistance \textbf{PostgreSQL}, un frontend mono-page (SPA) en HTML/CSS/JavaScript natif reproduisant fid\`{e}lement l'ergonomie du portail PortNet, et une couche d'extraction documentaire pure Python (PyMuPDF). Le syst\`{e}me a \'{e}t\'{e} valid\'{e} par une campagne de tests couvrant \textbf{64 cas de test} (8 types de documents $\times$ 8 sc\'{e}narios) avec un taux de r\'{e}ussite de 100\%.
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+
+{\textbf{Mots-cl\'{e}s~:}} V\'{e}rification documentaire, souscription, PortNet, guichet unique, extraction de texte, classification de documents, validation crois\'{e}e, Modulo~97, FastAPI, PostgreSQL, Python, Pydantic, commerce ext\'{e}rieur, douane marocaine.
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+\endgroup

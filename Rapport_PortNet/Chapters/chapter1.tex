@@ -1,0 +1,298 @@
+\reportchapter{1}{Contexte G\'{e}n\'{e}ral, \'{E}tude de l'Existant et Gestion de Projet}{Pr\'{e}sentation institutionnelle de PortNet S.A., organigramme, partenariat douanier ADII/BADR, \'{e}tude et critique de l'existant, cahier des charges fonctionnel et non-fonctionnel, choix de la stack technologique et m\'{e}thodologie Agile/Scrum.}
+
+\section*{Introduction}
+
+Ce premier chapitre pose le cadre institutionnel, m\'{e}tier et m\'{e}thodologique dans lequel s'inscrit le pr\'{e}sent Projet de Fin d'Ann\'{e}e. Il pr\'{e}sente successivement l'organisme d'accueil PortNet S.A., son r\^{o}le strat\'{e}gique de Guichet Unique National et son organigramme fonctionnel. Il examine ensuite le partenariat critique avec l'Administration des Douanes et Imp\^{o}ts Indirects (ADII) et son syst\`{e}me BADR. Apr\`{e}s une \'{e}tude approfondie et une critique argument\'{e}e du processus manuel existant, le chapitre formalise la probl\'{e}matique m\'{e}tier, les verrous techniques identifi\'{e}s, le cahier des charges fonctionnel et non-fonctionnel, le choix de la stack technologique et, enfin, la d\'{e}marche de conduite de projet Agile Scrum adopt\'{e}e.
+
+\section{Organisme d'Accueil : PortNet S.A.}
+
+\subsection{Pr\'{e}sentation de la Soci\'{e}t\'{e} et Donn\'{e}es Cl\'{e}s}
+
+Initi\'{e}e en 2008 sous l'impulsion de l'Agence Nationale des Ports (ANP) et cr\'{e}\'{e}e sous forme de Soci\'{e}t\'{e} Anonyme en 2012, \textbf{PortNet S.A.} est le Guichet Unique National de la Simplification des Proc\'{e}dures du Commerce Ext\'{e}rieur au Maroc. Sa mission principale est de fluidifier et de d\'{e}mat\'{e}rialiser les flux documentaires entre l'ensemble des acteurs publics et priv\'{e}s intervenant dans la cha\^{\i}ne logistique transfrontali\`{e}re : importateurs, exportateurs, transitaires, compagnies maritimes, agents consignataires, administrations de contr\^{o}le et \'{e}tablissements bancaires.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Logos/Logo_PortNet.png}{\includegraphics[height=1.8cm]{Logos/Logo_PortNet.png}}{\fbox{\parbox{6cm}{\centering\vspace{0.5cm}\textit{Logo PortNet S.A.}\vspace{0.5cm}}}}
+    \caption{PortNet S.A. --- Guichet Unique National du Commerce Ext\'{e}rieur.}
+    \label{fig:portnet-logo-ch1}
+\end{figure}
+
+La plateforme PortNet rassemble une communaut\'{e} d'utilisateurs massive et diversifi\'{e}e, t\'{e}moignant de son r\^{o}le central dans l'\'{e}cosyst\`{e}me du commerce ext\'{e}rieur marocain :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{4.5cm} Y@{}}
+\toprule
+\rowcolor{lightblue}
+Indicateur & Donn\'{e}e \\
+\midrule
+Usagers actifs interconnect\'{e}s & Plus de 50\,000 \\
+Op\'{e}rateurs \'{e}conomiques & Plus de 45\,000 (Importateurs et Exportateurs) \\
+Transitaires agr\'{e}\'{e}s en douane & Plus de 1\,500 \\
+Institutions bancaires partenaires & Plus de 20 \\
+Administrations et organismes de contr\^{o}le & Plus de 43 (ADII, OMPIC, DGI, ONSSA, EACCE, ANP, TMPA) \\
+\bottomrule
+\end{tabularx}
+\caption{Chiffres cl\'{e}s de la communaut\'{e} PortNet S.A.}
+\label{tab:portnet-chiffres}
+\end{table}
+
+Les services num\'{e}riques propos\'{e}s par PortNet couvrent l'ensemble du cycle de vie d'une op\'{e}ration de commerce ext\'{e}rieur : la pr\'{e}paration de l'Engagement d'Importation ou du Titre d'Exportation, le suivi des titres de transport maritime et a\'{e}rien, la gestion du manifeste, la d\'{e}claration douani\`{e}re en liaison directe avec le syst\`{e}me BADR de l'ADII, le circuit de paiement \'{e}lectronique des droits et taxes, ainsi que le suivi logistique portuaire.
+
+\subsection{Organigramme Fonctionnel de PortNet S.A.}
+
+L'organisation interne de PortNet S.A. s'articule autour de quatre p\^{o}les majeurs plac\'{e}s sous la responsabilit\'{e} de la Direction G\'{e}n\'{e}rale :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{P\^{o}le M\'{e}tier et Partenariats} : pilotage des relations avec les administrations partenaires (Douane, OMPIC, DGI), coordination des proc\'{e}dures m\'{e}tier et \'{e}volutions r\'{e}glementaires ;
+    \item \textbf{P\^{o}le Syst\`{e}mes d'Information} : architecture technique, d\'{e}veloppement logiciel, exploitation et maintenance des infrastructures ;
+    \item \textbf{P\^{o}le Finances et Administration} : gestion financi\`{e}re, ressources humaines et affaires juridiques ;
+    \item \textbf{P\^{o}le Communication et D\'{e}veloppement Commercial} : promotion des services, accompagnement des utilisateurs et formation.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/organigramme_portnet.png}{\includegraphics[width=\textwidth]{images/organigramme_portnet.png}}{\fbox{\parbox{14cm}{\centering\vspace{2cm}\textit{Organigramme fonctionnel de PortNet S.A. --- Exporter depuis organigramme\_portnet.drawio}\vspace{2cm}}}}
+    \caption{Organigramme fonctionnel et structurel de PortNet S.A.}
+    \label{fig:organigramme-portnet}
+\end{figure}
+
+Le projet a \'{e}t\'{e} d\'{e}velopp\'{e} au sein du \textbf{D\'{e}partement D\'{e}veloppement et Ing\'{e}nierie Logicielle}, rattach\'{e} au P\^{o}le Syst\`{e}mes d'Information. Ce positionnement a permis un acc\`{e}s direct aux sp\'{e}cifications m\'{e}tier de la proc\'{e}dure de souscription, aux \'{e}chantillons de documents r\'{e}els et \`{a} l'expertise des \'{e}quipes fonctionnelles du P\^{o}le M\'{e}tier responsable de l'interconnexion avec le syst\`{e}me BADR de l'ADII.
+
+\subsection{Cadre de Partenariat avec l'Administration des Douanes (ADII / BADR)}
+
+L'Administration des Douanes et Imp\^{o}ts Indirects (ADII) g\`{e}re le syst\`{e}me \textbf{BADR} (\textit{Base Automatis\'{e}e des Douanes en R\'{e}seau}), plateforme centrale de d\'{e}douanement des marchandises au Maroc. Pour exercer l\'{e}galement une activit\'{e} d'importation ou d'exportation, tout op\'{e}rateur \'{e}conomique doit \^{e}tre immatricul\'{e} aupr\`{e}s de la Douane et disposer d'un identifiant dans le syst\`{e}me BADR.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{Logos/Logo_ADII.png}{\includegraphics[height=1.8cm]{Logos/Logo_ADII.png}}{\fbox{\parbox{6cm}{\centering\vspace{0.5cm}\textit{Logo ADII / Douane}\vspace{0.5cm}}}}
+    \caption{Administration des Douanes et Imp\^{o}ts Indirects (ADII) --- Syst\`{e}me BADR.}
+    \label{fig:douane-logo-ch1}
+\end{figure}
+
+Le Guichet Unique PortNet offre un point d'entr\'{e}e unifi\'{e} permettant d'instruire simultan\'{e}ment la souscription aux services informatiques de PortNet et l'immatriculation sur la plateforme BADR de la Douane. Ce partenariat se traduit par deux modes d'inscription distincts :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Mode PORTNET\_DOUANE} : inscription simultan\'{e}e aux deux plateformes, n\'{e}cessitant le dossier complet de neuf pi\`{e}ces justificatives ;
+    \item \textbf{Mode DOUANE} : inscription \`{a} la plateforme BADR uniquement, avec un sous-ensemble de pi\`{e}ces adapt\'{e}.
+\end{itemize}
+
+Cette dualit\'{e} impose au syst\`{e}me de v\'{e}rification de g\'{e}rer dynamiquement les emplacements de documents requis selon le mode choisi par l'op\'{e}rateur.
+
+\section{\'{E}tude et Critique de l'Existant}
+
+\subsection{Description du Processus Actuel de Souscription}
+
+Le processus d'abonnement aux services PortNet exige la fourniture et la v\'{e}rification de neuf pi\`{e}ces justificatives r\'{e}glementaires :
+
+\begin{enumerate}[leftmargin=*, itemsep=4pt]
+    \item Le \textbf{Mod\`{e}le J} (Extrait du Registre de Commerce d\'{e}livr\'{e} par le Greffe du Tribunal de Commerce) ;
+    \item Le \textbf{Bulletin de Notification de l'Identifiant Fiscal (IF)} (Mod\`{e}le DGI \texttt{AAC140B}) ;
+    \item L'\textbf{Attestation d'Inscription \`{a} la Taxe Professionnelle (TP)} (Mod\`{e}le DGI \texttt{AAC060B}) ;
+    \item Le \textbf{Certificat de l'Identifiant Commun de l'Entreprise (ICE)} (OMPIC/DGI) ;
+    \item L'\textbf{Attestation de Domiciliation} (ou contrat de bail commercial, titre de propri\'{e}t\'{e}) ;
+    \item L'\textbf{Attestation de Relev\'{e} d'Identit\'{e} Bancaire (RIB)} officielle ;
+    \item La \textbf{Carte Nationale d'Identit\'{e} \'{E}lectronique (CNIE)} ou Passeport des g\'{e}rants ;
+    \item Les \textbf{Statuts de la Soci\'{e}t\'{e}} ;
+    \item La \textbf{Procuration} \'{e}ventuelle du repr\'{e}sentant l\'{e}gal.
+\end{enumerate}
+
+Dans l'existant, l'instruction des souscriptions repose enti\`{e}rement sur un contr\^{o}le visuel manuel r\'{e}alis\'{e} par des agents v\'{e}rificateurs. Chaque agent doit ouvrir chaque fichier PDF, lire les informations imprim\'{e}es, v\'{e}rifier visuellement la concordance des num\'{e}ros d'identification entre les diff\'{e}rents documents et comparer les donn\'{e}es avec le formulaire d'inscription rempli par l'op\'{e}rateur. Ce processus est d\'{e}taill\'{e} dans la figure~\ref{fig:processus-existant}.
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/processus_souscription_existant.png}{\includegraphics[width=\textwidth]{images/processus_souscription_existant.png}}{\fbox{\parbox{14cm}{\centering\vspace{2cm}\textit{Processus actuel de souscription --- Exporter depuis processus\_souscription\_existant.drawio}\vspace{2cm}}}}
+    \caption{Processus actuel de souscription et de v\'{e}rification manuelle des dossiers.}
+    \label{fig:processus-existant}
+\end{figure}
+
+\subsection{Critique de l'Existant et Dysfonctionnements}
+
+L'\'{e}valuation approfondie du processus manuel a mis en \'{e}vidence plusieurs faiblesses critiques :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm} Y p{2cm}@{}}
+\toprule
+\rowcolor{lightblue}
+Probl\`{e}me & Description & Gravit\'{e} \\
+\midrule
+D\'{e}lais d'instruction & Les dossiers s'accumulent pendant les p\'{e}riodes de pointe, entra\^{\i}nant des d\'{e}lais de 48h \`{a} 72h ouvr\'{e}es. & Haute \\
+Erreur humaine & Les v\'{e}rificateurs font face \`{a} des dizaines de variantes de documents, provoquant l'inattention lors du contr\^{o}le des num\'{e}ros de s\'{e}rie. & Haute \\
+Absence de Modulo~97 & Impossibilit\'{e} de calculer manuellement les cl\'{e}s de contr\^{o}le des identifiants ICE (15 chiffres) et des comptes RIB (24 chiffres). & Critique \\
+Confusion inter-slots & Aucune alerte lors du d\'{e}p\^{o}t d'un document dans le mauvais emplacement (ex: Mod\`{e}le J au lieu de la CIN). & Haute \\
+Pas de cross-ref & Les incoh\'{e}rences entre documents (ICE diff\'{e}rent sur le Mod\`{e}le J et le Certificat ICE) ne sont pas d\'{e}tect\'{e}es syst\'{e}matiquement. & Critique \\
+\bottomrule
+\end{tabularx}
+\caption{Synth\`{e}se des dysfonctionnements identifi\'{e}s dans le processus existant.}
+\label{tab:critique-existant}
+\end{table}
+
+\section{Probl\'{e}matique M\'{e}tier et Verrous Techniques}
+
+Le d\'{e}veloppement d'un syst\`{e}me automatique d'inspection documentaire se heurte \`{a} trois verrous techniques majeurs, identifi\'{e}s lors de l'analyse forensique des documents r\'{e}els :
+
+\begin{infobox}
+\textbf{Verrou 1 : Faux Positifs Inter-Documents (Cross-Slot Confusion)} \\
+Les pi\`{e}ces justificatives marocaines partagent des mentions l\'{e}gales identiques (\texttt{ICE}, \texttt{RC}, \texttt{IF}, \texttt{ROYAUME DU MAROC}). Un algorithme de classification na\"{\i}f bas\'{e} sur la simple pr\'{e}sence de mots-cl\'{e}s acceptait des Mod\`{e}les~J \`{a} la place de la CIN ou de la Taxe Professionnelle. L'analyse forensique a r\'{e}v\'{e}l\'{e} que seule une combinaison d'ancres textuelles exclusives \`{a} chaque type de document permet une discrimination fiable.
+\end{infobox}
+
+\begin{infobox}
+\textbf{Verrou 2 : Disposition Texte Non-Standard (Value-Before-Label Order)} \\
+Les PDF officiels de l'OMPIC et de la DGI placent les valeurs (ex: \texttt{MEDI TELECOM S.A.}) avant ou s\'{e}par\'{e}ment de leurs libell\'{e}s (ex: \texttt{D\'{e}nomination}), pi\'{e}geant les extracteurs traditionnels de type \og label: valeur \fg{}. La solution requiert des strat\'{e}gies d'extraction par zone positionnelle et par ancres contextuelles.
+\end{infobox}
+
+\begin{infobox}
+\textbf{Verrou 3 : Gestion des Coquilles et Transpositions (Transposition Fallback)} \\
+Les fautes de frappe d'un seul caract\`{e}re sur les num\'{e}ros CIN des g\'{e}rants (\texttt{AB123457} vs \texttt{AB123456}) entra\^{\i}naient des rejets stricts non justifi\'{e}s. Le syst\`{e}me doit int\'{e}grer un m\'{e}canisme de tol\'{e}rance bas\'{e} sur la distance d'\'{e}dition de Levenshtein.
+\end{infobox}
+
+\section{Cahier des Charges Fonctionnel et Non-Fonctionnel}
+
+\subsection{Exigences Fonctionnelles}
+
+Le tableau~\ref{tab:exigences-fonctionnelles} r\'{e}capitule les douze exigences fonctionnelles identifi\'{e}es :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{1.5cm} Y >{\bfseries}p{2cm}@{}}
+\toprule
+\rowcolor{lightblue}
+ID & Description de l'Exigence & Priorit\'{e} \\
+\midrule
+FR-01 & Proposer une interface web SPA responsive multi-\'{e}tapes (\textit{Wizard}). & Haute \\
+FR-02 & G\'{e}rer le mode adaptatif d'inscription (\texttt{DOUANE} ou \texttt{PORTNET\_DOUANE}). & Haute \\
+FR-03 & Fournir des emplacements d'upload Drag \& Drop HTML5 par type de document. & Haute \\
+FR-04 & Effectuer une v\'{e}rification d'emplacement en temps r\'{e}el (\textit{Realtime Slot Verification}). & Critique \\
+FR-05 & Rejeter les faux positifs d'emplacement via un classifier \`{a} 2 couches. & Critique \\
+FR-06 & Extraire les entit\'{e}s m\'{e}tier (Raison Sociale, ICE, RC, IF, TP, Adresse, G\'{e}rants, RIB). & Haute \\
+FR-07 & Valider la r\'{e}cence du Mod\`{e}le~J selon la r\`{e}gle stricte des 3 mois ($< 90$ jours). & Critique \\
+FR-08 & Contr\^{o}ler les cl\'{e}s de v\'{e}rification math\'{e}matique Modulo~97 (ICE et RIB). & Critique \\
+FR-09 & Ex\'{e}cuter la Matrice de Coh\'{e}rence Crois\'{e}e (\textit{Cross-Reference Matrix}). & Critique \\
+FR-10 & G\'{e}rer la tol\'{e}rance aux fautes de frappe sur les CIN g\'{e}rants (\textit{Transposition Fallback}). & Moyenne \\
+FR-11 & G\'{e}n\'{e}rer un rapport de synth\`{e}se interactif avec badges d'\'{e}tat (Vert/Rouge/Orange). & Haute \\
+FR-12 & Persister les dossiers valid\'{e}s dans une base relationnelle PostgreSQL. & Haute \\
+\bottomrule
+\end{tabularx}
+\caption{Matrice des exigences fonctionnelles du syst\`{e}me de souscription.}
+\label{tab:exigences-fonctionnelles}
+\end{table}
+
+\subsection{Exigences Non-Fonctionnelles}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{1.5cm} Y >{\bfseries}p{2cm}@{}}
+\toprule
+\rowcolor{lightblue}
+ID & Description de l'Exigence & Priorit\'{e} \\
+\midrule
+NFR-01 & Temps de r\'{e}ponse inf\'{e}rieur \`{a} 3 secondes par document PDF. & Haute \\
+NFR-02 & Compatibilit\'{e} navigateur (Chrome, Firefox, Edge, Safari). & Haute \\
+NFR-03 & Architecture modulaire et extensible (nouveaux types de documents). & Haute \\
+NFR-04 & Code source document\'{e} et test\'{e} (couverture $\geq 90\%$). & Moyenne \\
+NFR-05 & S\'{e}curit\'{e} des donn\'{e}es sensibles (CIN, informations fiscales). & Critique \\
+NFR-06 & D\'{e}ploiement containeris\'{e} (Docker, uvicorn). & Moyenne \\
+\bottomrule
+\end{tabularx}
+\caption{Matrice des exigences non-fonctionnelles.}
+\label{tab:exigences-nfr}
+\end{table}
+
+\section{Choix de la Stack Technologique}
+
+Le choix des technologies a \'{e}t\'{e} motiv\'{e} par les crit\`{e}res de performance, de maintenabilit\'{e} et de compatibilit\'{e} avec l'\'{e}cosyst\`{e}me PortNet. Le tableau~\ref{tab:stack-technologique} synth\'{e}tise les choix effectu\'{e}s et les alternatives \'{e}cart\'{e}es :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.5cm} p{3cm} p{3cm} Y@{}}
+\toprule
+\rowcolor{lightblue}
+Composant & Choix retenu & Alternatives & Justification \\
+\midrule
+Langage backend & Python 3.11 & Java, Node.js & \'{E}cosyst\`{e}me NLP et PDF mature (PyMuPDF, RapidFuzz) \\
+Framework API & FastAPI & Django, Flask & Performances async, validation Pydantic native \\
+Base de donn\'{e}es & PostgreSQL 15 & MySQL, MongoDB & Transactions ACID, support JSON natif \\
+Extraction PDF & PyMuPDF (fitz) & pdfplumber, Tabula & Extraction rapide du texte vectoriel natif \\
+Moteur OCR (Tier 2) & Tesseract OCR 5 & Google Vision, Textract & Gratuit, d\'{e}ployable hors-ligne, confidentialit\'{e} \\
+Pr\'{e}traitement Image & OpenCV (cv2) & Pillow (PIL), ImageMagick & Binarisation adaptative et deskew pour l'OCR \\
+Validation Donn\'{e}es & Pydantic v2 & dataclasses, marshmallow & Validation automatique, mod\'{e}lisation des 7 docs \\
+Matching flou & RapidFuzz & FuzzyWuzzy, difflib & 10x plus rapide que FuzzyWuzzy, C++ natif \\
+Frontend SPA & HTML/CSS/JS natif & React, Angular & Simplicit\'{e}, z\'{e}ro d\'{e}pendance, portail PortNet \\
+Framework Tests & pytest 7.x & unittest, nose2 & Fixtures flexibles, validation 64 cas (100\% PASS) \\
+Containerisation & Docker \& Compose & Machines Virtuelles (VM) & Isolation environnement, d\'{e}ploiement reproductible \\
+\bottomrule
+\end{tabularx}
+\caption{Tableau comparatif de la stack technologique (11 composants).}
+\label{tab:stack-technologique}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/comparaison_stack.png}{\includegraphics[width=\textwidth]{images/comparaison_stack.png}}{\fbox{\parbox{14cm}{\centering\vspace{1.5cm}\textit{Comparaison visuelle de la stack --- Exporter depuis comparaison\_stack.drawio}\vspace{1.5cm}}}}
+    \caption{Comparaison visuelle des technologies retenues et alternatives \'{e}cart\'{e}es.}
+    \label{fig:comparaison-stack}
+\end{figure}
+
+\section{Gestion de Projet et M\'{e}thodologie Agile / Scrum}
+
+\subsection{Choix de la M\'{e}thodologie}
+
+Le projet s'est d\'{e}roul\'{e} sur une p\'{e}riode de \textbf{12 semaines} selon la m\'{e}thodologie \textbf{Agile Scrum}. Ce choix a \'{e}t\'{e} motiv\'{e} par la nature it\'{e}rative du d\'{e}veloppement : les sp\'{e}cifications des extracteurs et des r\`{e}gles de validation ont \'{e}volu\'{e} au fil de l'analyse forensique des documents r\'{e}els, n\'{e}cessitant une adaptation continue du product backlog.
+
+Les c\'{e}r\'{e}monies Scrum suivantes ont \'{e}t\'{e} appliqu\'{e}es :
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Sprint Planning} : d\'{e}finition des user stories et estimation en points de complexit\'{e} ;
+    \item \textbf{Daily Stand-up} : synchronisation quotidienne avec l'encadrant externe ;
+    \item \textbf{Sprint Review} : d\'{e}monstration des incr\'{e}ments fonctionnels ;
+    \item \textbf{Sprint Retrospective} : am\'{e}lioration continue du processus de d\'{e}veloppement.
+\end{itemize}
+
+\subsection{Planification en Sprints}
+
+Les quatre sprints d'ing\'{e}nierie ont \'{e}t\'{e} structur\'{e}s comme suit :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.5cm} p{2.5cm} Y@{}}
+\toprule
+\rowcolor{lightblue}
+Sprint & P\'{e}riode & Livrables \\
+\midrule
+Sprint 1 & Semaines 1--3 & Cadrage des besoins, \'{e}tude de l'existant, conception du Design System UI, maquettes fonctionnelles \\
+Sprint 2 & Semaines 4--6 & Impl\'{e}mentation du Classifier \`{a} 2 couches, d\'{e}veloppement des 7 extracteurs PDF d\'{e}di\'{e}s \\
+Sprint 3 & Semaines 7--9 & D\'{e}veloppement de la Matrice Cross-Ref, contr\^{o}les Modulo~97, persistance PostgreSQL, int\'{e}gration backend \\
+Sprint 4 & Semaines 10--12 & Recette globale, campagne de tests 64/64 PASS, optimisation des performances, r\'{e}daction du rapport \\
+\bottomrule
+\end{tabularx}
+\caption{Planification des quatre sprints du projet.}
+\label{tab:sprints}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \IfFileExists{images/gantt_agile.png}{\includegraphics[width=\textwidth]{images/gantt_agile.png}}{\fbox{\parbox{14cm}{\centering\vspace{2cm}\textit{Diagramme de Gantt Agile --- Exporter depuis gantt\_agile.drawio}\vspace{2cm}}}}
+    \caption{Chronogramme de Gantt de la d\'{e}marche Agile Scrum (Sprints 1 \`{a} 4).}
+    \label{fig:gantt-agile}
+\end{figure}
+
+\subsection{Outils de Gestion de Projet}
+
+Le suivi des t\^{a}ches et des artefacts a \'{e}t\'{e} r\'{e}alis\'{e} \`{a} l'aide des outils suivants :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Tableau Kanban} : organisation visuelle des user stories en colonnes \textit{To Do}, \textit{In Progress}, \textit{Review} et \textit{Done} ;
+    \item \textbf{Git / GitHub} : gestion de version du code source, branches par fonctionnalit\'{e} et revues de code ;
+    \item \textbf{VS Code} : environnement de d\'{e}veloppement int\'{e}gr\'{e} avec extensions Python, LaTeX et Git ;
+    \item \textbf{Docker} : containerisation des services (PostgreSQL, uvicorn) pour la reproductibilit\'{e} des d\'{e}ploiements.
+\end{itemize}
+
+\section*{Conclusion du Chapitre}
+
+Ce premier chapitre a permis de situer le projet dans son contexte institutionnel et m\'{e}tier. L'analyse critique du processus existant a mis en \'{e}vidence des faiblesses structurelles justifiant le d\'{e}veloppement d'un syst\`{e}me automatis\'{e} de v\'{e}rification documentaire. La formalisation du cahier des charges et le choix de la stack technologique \'{e}tablissent les fondations sur lesquelles s'appuieront les chapitres suivants. Le Chapitre~2 pr\'{e}sentera l'\'{e}tat de l'art des techniques d'extraction, de classification et de validation documentaire.

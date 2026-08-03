@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PortNet — Résultat de la vérification documentaire de votre souscription.">
+    <title>Résultat de Souscription | PortNet</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="public/portnetLogo.jpg">
+    <!-- Souscription styles -->
+    <link rel="stylesheet" href="css/souscription.css">
+</head>
+
+<body class="souscription-page">
+
+    <!-- ═══════════════════════════════════════════════════════════
+     TOP NAVIGATION
+     ═══════════════════════════════════════════════════════════ -->
+    <nav class="sousc-nav">
+        <a href="/" title="PortNet S.A.">
+            <img src="public/portnetLogo.jpg" alt="PortNet Logo" class="sousc-nav-logo">
+        </a>
+        <div class="sousc-nav-user">
+            Bienvenue : <strong>Opérateur Économique</strong>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     PAGE HEADER
+     ═══════════════════════════════════════════════════════════ -->
+    <header class="sousc-header">
+        <h1>Résultat de la vérification documentaire</h1>
+        <p>Rapport de conformité automatique de votre dossier de souscription</p>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT (dynamically filled by JS)
+     ═══════════════════════════════════════════════════════════ -->
+    <div class="sousc-content" id="resultContent">
+        <!-- Loading state -->
+        <div id="resultLoading" style="text-align:center; padding:60px 20px;">
+            <div class="sousc-loading-spinner" style="margin:0 auto 16px;"></div>
+            <h3 style="font-size:16px; color:#212529;">Chargement du rapport...</h3>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════ -->
+    <footer class="sousc-page-footer">
+        Copyright ©2026, PORTNET S.A.
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════ -->
+    <script src="js/resultat.js"></script>
+
+</body>
+
+</html>

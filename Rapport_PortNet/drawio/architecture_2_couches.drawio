@@ -1,0 +1,66 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="architecture_2_couches" name="Architecture à Deux Couches">
+    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Architecture Générale à Deux Couches" vertex="1">
+          <mxGeometry height="50" width="1700" x="50" y="20" as="geometry" />
+        </mxCell>
+        <!-- Frontend Layer -->
+        <mxCell id="frontend_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=3;arcSize=5;fontSize=16;fontStyle=0;fontColor=#0D47A1;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Couche Présentation — Frontend SPA (HTML/CSS/JS)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="250" width="700" x="80" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="login" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Login / Register&lt;br&gt;+ Captcha" vertex="1">
+          <mxGeometry height="60" width="180" x="120" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="wizard" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Wizard Multi-Étapes&lt;br&gt;(Organisme → Form → Docs)" vertex="1">
+          <mxGeometry height="60" width="210" x="330" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="dragdrop" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Upload Drag &amp; Drop&lt;br&gt;(9 Emplacements)" vertex="1">
+          <mxGeometry height="60" width="180" x="570" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="report_ui" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Rapport Interactif&lt;br&gt;(Badges V/O/R)" vertex="1">
+          <mxGeometry height="60" width="300" x="280" y="250" as="geometry" />
+        </mxCell>
+        <!-- API Arrow -->
+        <mxCell id="api_arrow" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontColor=#E65100;fontFamily=Arial;whiteSpace=wrap;" value="⟵ REST API (JSON/HTTP) ⟶" vertex="1">
+          <mxGeometry height="40" width="700" x="80" y="370" as="geometry" />
+        </mxCell>
+        <!-- Backend Layer -->
+        <mxCell id="backend_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=3;arcSize=5;fontSize=16;fontStyle=0;fontColor=#1B5E20;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Couche Métier &amp; Données — Backend FastAPI (Python)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="480" width="700" x="80" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="fastapi" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="FastAPI + uvicorn&lt;br&gt;(Endpoints REST)" vertex="1">
+          <mxGeometry height="60" width="300" x="280" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="pipeline_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Pipeline Orchestrator&lt;br&gt;(Classifier → Extract → Validate)" vertex="1">
+          <mxGeometry height="60" width="300" x="120" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="extractors_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="7 Extracteurs Dédiés&lt;br&gt;(Regex + Pydantic)" vertex="1">
+          <mxGeometry height="60" width="250" x="460" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="validators_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Validators&lt;br&gt;(Checksum + Récence + Cross-Ref)" vertex="1">
+          <mxGeometry height="60" width="300" x="120" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="fuzzy_mod" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=10;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Fuzzy Matching&lt;br&gt;(RapidFuzz 85%/75%)" vertex="1">
+          <mxGeometry height="60" width="250" x="460" y="690" as="geometry" />
+        </mxCell>
+        <!-- Database -->
+        <mxCell id="db_box" parent="1" style="shape=cylinder3;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=16;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;size=15;" value="PostgreSQL 15&lt;br&gt;(Inscriptions)" vertex="1">
+          <mxGeometry height="100" width="180" x="280" y="800" as="geometry" />
+        </mxCell>
+        <!-- Sidebar: External Systems -->
+        <mxCell id="ext_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFDE7;strokeColor=#F9A825;strokeWidth=3;arcSize=5;fontSize=16;fontStyle=0;fontColor=#E65100;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Systèmes Externes&lt;/b&gt;" vertex="1">
+          <mxGeometry height="250" width="380" x="900" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="badr" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Système BADR&lt;br&gt;(Douane ADII)" vertex="1">
+          <mxGeometry height="60" width="320" x="930" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="ompic" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#E65100;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="OMPIC (ICE)&lt;br&gt;DGI (IF, TP)" vertex="1">
+          <mxGeometry height="60" width="320" x="930" y="450" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

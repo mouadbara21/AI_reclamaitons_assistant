@@ -1,0 +1,107 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="comparaison_stack" name="Comparaison Stack Technologique">
+    <mxGraphModel dx="1800" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1150" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Comparaison et Justification Exhaustive de la Stack Technologique (11 Composants)" vertex="1">
+          <mxGeometry height="50" width="1500" x="50" y="20" as="geometry" />
+        </mxCell>
+        <!-- Headers -->
+        <mxCell id="h_comp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D1642;strokeWidth=2;arcSize=5;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;" value="Composant" vertex="1">
+          <mxGeometry height="45" width="180" x="60" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="h_choix" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2E7D32;strokeColor=#1B5E20;strokeWidth=2;arcSize=5;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;" value="✓ Choix Retenu" vertex="1">
+          <mxGeometry height="45" width="220" x="260" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="h_alt1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#64748b;strokeColor=#475569;strokeWidth=2;arcSize=5;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;" value="Alternative 1" vertex="1">
+          <mxGeometry height="45" width="200" x="500" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="h_alt2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#64748b;strokeColor=#475569;strokeWidth=2;arcSize=5;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;" value="Alternative 2" vertex="1">
+          <mxGeometry height="45" width="200" x="720" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="h_just" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D1642;strokeWidth=2;arcSize=5;fontSize=14;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;" value="Justification Mettre en Œuvre" vertex="1">
+          <mxGeometry height="45" width="440" x="940" y="85" as="geometry" />
+        </mxCell>
+
+        <!-- Row 1: Backend -->
+        <mxCell id="r1c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Langage Backend" vertex="1"><mxGeometry height="50" width="180" x="60" y="140" as="geometry" /></mxCell>
+        <mxCell id="r1c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Python 3.11" vertex="1"><mxGeometry height="50" width="220" x="260" y="140" as="geometry" /></mxCell>
+        <mxCell id="r1c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Java 17" vertex="1"><mxGeometry height="50" width="200" x="500" y="140" as="geometry" /></mxCell>
+        <mxCell id="r1c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Node.js" vertex="1"><mxGeometry height="50" width="200" x="720" y="140" as="geometry" /></mxCell>
+        <mxCell id="r1c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Écosystème NLP/PDF mature (PyMuPDF, RapidFuzz), prototypage rapide" vertex="1"><mxGeometry height="50" width="440" x="940" y="140" as="geometry" /></mxCell>
+
+        <!-- Row 2: Framework API -->
+        <mxCell id="r2c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Framework API" vertex="1"><mxGeometry height="50" width="180" x="60" y="200" as="geometry" /></mxCell>
+        <mxCell id="r2c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="FastAPI" vertex="1"><mxGeometry height="50" width="220" x="260" y="200" as="geometry" /></mxCell>
+        <mxCell id="r2c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Django" vertex="1"><mxGeometry height="50" width="200" x="500" y="200" as="geometry" /></mxCell>
+        <mxCell id="r2c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Flask" vertex="1"><mxGeometry height="50" width="200" x="720" y="200" as="geometry" /></mxCell>
+        <mxCell id="r2c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Performance async native, validation Pydantic intégrée, doc OpenAPI auto" vertex="1"><mxGeometry height="50" width="440" x="940" y="200" as="geometry" /></mxCell>
+
+        <!-- Row 3: Base de Données -->
+        <mxCell id="r3c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Base de Données" vertex="1"><mxGeometry height="50" width="180" x="60" y="260" as="geometry" /></mxCell>
+        <mxCell id="r3c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="PostgreSQL 15" vertex="1"><mxGeometry height="50" width="220" x="260" y="260" as="geometry" /></mxCell>
+        <mxCell id="r3c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="MySQL" vertex="1"><mxGeometry height="50" width="200" x="500" y="260" as="geometry" /></mxCell>
+        <mxCell id="r3c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="MongoDB" vertex="1"><mxGeometry height="50" width="200" x="720" y="260" as="geometry" /></mxCell>
+        <mxCell id="r3c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Transactions ACID, support JSONB natif, requêtes complexes" vertex="1"><mxGeometry height="50" width="440" x="940" y="260" as="geometry" /></mxCell>
+
+        <!-- Row 4: Extraction PDF -->
+        <mxCell id="r4c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Extraction PDF" vertex="1"><mxGeometry height="50" width="180" x="60" y="320" as="geometry" /></mxCell>
+        <mxCell id="r4c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="PyMuPDF (fitz)" vertex="1"><mxGeometry height="50" width="220" x="260" y="320" as="geometry" /></mxCell>
+        <mxCell id="r4c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="pdfplumber" vertex="1"><mxGeometry height="50" width="200" x="500" y="320" as="geometry" /></mxCell>
+        <mxCell id="r4c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Tabula" vertex="1"><mxGeometry height="50" width="200" x="720" y="320" as="geometry" /></mxCell>
+        <mxCell id="r4c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Très rapide (&lt;100ms/page), liaison C avec MuPDF, préserve la structure" vertex="1"><mxGeometry height="50" width="440" x="940" y="320" as="geometry" /></mxCell>
+
+        <!-- Row 5: Moteur OCR (Tier 2) -->
+        <mxCell id="r5c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Moteur OCR (Tier 2)" vertex="1"><mxGeometry height="50" width="180" x="60" y="380" as="geometry" /></mxCell>
+        <mxCell id="r5c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Tesseract OCR 5" vertex="1"><mxGeometry height="50" width="220" x="260" y="380" as="geometry" /></mxCell>
+        <mxCell id="r5c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Google Vision API" vertex="1"><mxGeometry height="50" width="200" x="500" y="380" as="geometry" /></mxCell>
+        <mxCell id="r5c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="AWS Textract" vertex="1"><mxGeometry height="50" width="200" x="720" y="380" as="geometry" /></mxCell>
+        <mxCell id="r5c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Open-source, gratuit, exécution locale hors-ligne, confidentialité des données" vertex="1"><mxGeometry height="50" width="440" x="940" y="380" as="geometry" /></mxCell>
+
+        <!-- Row 6: Prétraitement d'Image -->
+        <mxCell id="r6c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Prétraitement Image" vertex="1"><mxGeometry height="50" width="180" x="60" y="440" as="geometry" /></mxCell>
+        <mxCell id="r6c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="OpenCV (cv2)" vertex="1"><mxGeometry height="50" width="220" x="260" y="440" as="geometry" /></mxCell>
+        <mxCell id="r6c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Pillow (PIL)" vertex="1"><mxGeometry height="50" width="200" x="500" y="440" as="geometry" /></mxCell>
+        <mxCell id="r6c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="ImageMagick" vertex="1"><mxGeometry height="50" width="200" x="720" y="440" as="geometry" /></mxCell>
+        <mxCell id="r6c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Binarisation adaptative, suppression du bruit et deskew pour optimiser l'OCR" vertex="1"><mxGeometry height="50" width="440" x="940" y="440" as="geometry" /></mxCell>
+
+        <!-- Row 7: Validation de Données -->
+        <mxCell id="r7c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Validation Données" vertex="1"><mxGeometry height="50" width="180" x="60" y="500" as="geometry" /></mxCell>
+        <mxCell id="r7c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Pydantic v2" vertex="1"><mxGeometry height="50" width="220" x="260" y="500" as="geometry" /></mxCell>
+        <mxCell id="r7c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="dataclasses" vertex="1"><mxGeometry height="50" width="200" x="500" y="500" as="geometry" /></mxCell>
+        <mxCell id="r7c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="marshmallow" vertex="1"><mxGeometry height="50" width="200" x="720" y="500" as="geometry" /></mxCell>
+        <mxCell id="r7c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Validation automatique de type, modélisation stricte des 7 documents" vertex="1"><mxGeometry height="50" width="440" x="940" y="500" as="geometry" /></mxCell>
+
+        <!-- Row 8: Matching Flou -->
+        <mxCell id="r8c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Matching Flou" vertex="1"><mxGeometry height="50" width="180" x="60" y="560" as="geometry" /></mxCell>
+        <mxCell id="r8c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="RapidFuzz" vertex="1"><mxGeometry height="50" width="220" x="260" y="560" as="geometry" /></mxCell>
+        <mxCell id="r8c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="FuzzyWuzzy" vertex="1"><mxGeometry height="50" width="200" x="500" y="560" as="geometry" /></mxCell>
+        <mxCell id="r8c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="difflib" vertex="1"><mxGeometry height="50" width="200" x="720" y="560" as="geometry" /></mxCell>
+        <mxCell id="r8c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="10× plus rapide que FuzzyWuzzy, API compatible, implémentation C++" vertex="1"><mxGeometry height="50" width="440" x="940" y="560" as="geometry" /></mxCell>
+
+        <!-- Row 9: Frontend -->
+        <mxCell id="r9c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Frontend SPA" vertex="1"><mxGeometry height="50" width="180" x="60" y="620" as="geometry" /></mxCell>
+        <mxCell id="r9c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="HTML/CSS/JS natif" vertex="1"><mxGeometry height="50" width="220" x="260" y="620" as="geometry" /></mxCell>
+        <mxCell id="r9c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="React" vertex="1"><mxGeometry height="50" width="200" x="500" y="620" as="geometry" /></mxCell>
+        <mxCell id="r9c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Angular" vertex="1"><mxGeometry height="50" width="200" x="720" y="620" as="geometry" /></mxCell>
+        <mxCell id="r9c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Zéro dépendance, reproduit fidèlement le portail PortNet existant" vertex="1"><mxGeometry height="50" width="440" x="940" y="620" as="geometry" /></mxCell>
+
+        <!-- Row 10: Framework Tests -->
+        <mxCell id="r10c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Framework Tests" vertex="1"><mxGeometry height="50" width="180" x="60" y="680" as="geometry" /></mxCell>
+        <mxCell id="r10c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="pytest 7.x" vertex="1"><mxGeometry height="50" width="220" x="260" y="680" as="geometry" /></mxCell>
+        <mxCell id="r10c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="unittest" vertex="1"><mxGeometry height="50" width="200" x="500" y="680" as="geometry" /></mxCell>
+        <mxCell id="r10c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="nose2" vertex="1"><mxGeometry height="50" width="200" x="720" y="680" as="geometry" /></mxCell>
+        <mxCell id="r10c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Fixtures modulaires, assertions expressives, validation des 64 cas (100% PASS)" vertex="1"><mxGeometry height="50" width="440" x="940" y="680" as="geometry" /></mxCell>
+
+        <!-- Row 11: Containerisation -->
+        <mxCell id="r11c1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Containerisation" vertex="1"><mxGeometry height="50" width="180" x="60" y="740" as="geometry" /></mxCell>
+        <mxCell id="r11c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;arcSize=5;fontSize=13;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Docker &amp; Compose" vertex="1"><mxGeometry height="50" width="220" x="260" y="740" as="geometry" /></mxCell>
+        <mxCell id="r11c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Machines Virtuelles (VM)" vertex="1"><mxGeometry height="50" width="200" x="500" y="740" as="geometry" /></mxCell>
+        <mxCell id="r11c4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=13;fontFamily=Arial;align=center;verticalAlign=middle;" value="Installation Host" vertex="1"><mxGeometry height="50" width="200" x="720" y="740" as="geometry" /></mxCell>
+        <mxCell id="r11c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;strokeWidth=1;arcSize=5;fontSize=12;fontFamily=Arial;align=left;verticalAlign=middle;spacing=8;" value="Isolation complète (PostgreSQL, Tesseract, API), reproductibilité 100%" vertex="1"><mxGeometry height="50" width="440" x="940" y="740" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

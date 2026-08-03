@@ -1,10 +1,38 @@
-context/
+# ==========================================
+# GITIGNORE - PORTNET RECLAMATIONS ASSISTANT
+# ==========================================
 
-# Python compiled files
+# 1. AI Temporary, Scratch Scripts & Explanation Guides
+scratch/
+test_*.py
+build_*.py
+render_*.py
+scratchpad*
+*.md
+!README.md
+
+# 2. Sensitive / Personal / Friend's Reference Files
+souscription/
+context/
+storage/
+*.pdf
+
+# 3. Environment & IDE Caches
+.gemini/
+.system_generated/
+.pytest_cache/
 __pycache__/
 *.pyc
-
-# Pytest cache
-.pytest_cache/
-
+*.pyo
 .DS_Store
+.vscode/
+.idea/
+*.log
+
+# 4. Virtual Environments & Node Modules
+venv/
+.venv/
+env/
+node_modules/
+dist/
+build/

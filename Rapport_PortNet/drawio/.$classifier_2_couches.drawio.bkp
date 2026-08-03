@@ -1,0 +1,74 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="classifier_2_couches" name="Classifier à Deux Couches">
+    <mxGraphModel dx="2200" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Classifier à Deux Couches — Ancres Positives + Exclusions Négatives" vertex="1">
+          <mxGeometry height="50" width="1700" x="50" y="20" as="geometry" />
+        </mxCell>
+        <!-- Input -->
+        <mxCell id="input_text" parent="1" style="shape=document;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=16;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Texte Brut PDF&lt;br&gt;+ Slot Attendu" vertex="1">
+          <mxGeometry height="80" width="200" x="50" y="300" as="geometry" />
+        </mxCell>
+        <!-- Normalize -->
+        <mxCell id="normalize" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=15;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Normalisation&lt;br&gt;text.upper()" vertex="1">
+          <mxGeometry height="60" width="180" x="320" y="310" as="geometry" />
+        </mxCell>
+        <!-- Layer 1 Box -->
+        <mxCell id="layer1_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=3;arcSize=5;fontSize=14;fontColor=#1B5E20;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Couche 1 — Ancres Positives&lt;/b&gt;" vertex="1">
+          <mxGeometry height="340" width="350" x="580" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="anchor_mj" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="&lt;b&gt;Modèle J :&lt;/b&gt;&lt;br&gt;REGISTRE ANALYTIQUE&lt;br&gt;INSCRIPTIONS PORTES&lt;br&gt;CODE DEMANDE" vertex="1">
+          <mxGeometry height="70" width="310" x="600" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="anchor_if" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="&lt;b&gt;Document IF :&lt;/b&gt; AAC140B, BULLETIN DE NOTIFICATION" vertex="1">
+          <mxGeometry height="45" width="310" x="600" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="anchor_tp" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="&lt;b&gt;Taxe Prof. :&lt;/b&gt; AAC060B" vertex="1">
+          <mxGeometry height="45" width="310" x="600" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="anchor_ice" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="&lt;b&gt;Certificat ICE :&lt;/b&gt; CERTIFICAT DE L'IDENTIFIANT COMMUN" vertex="1">
+          <mxGeometry height="45" width="310" x="600" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="anchor_rib" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="&lt;b&gt;Attestation RIB :&lt;/b&gt; ATTESTATIONDERIB" vertex="1">
+          <mxGeometry height="45" width="310" x="600" y="390" as="geometry" />
+        </mxCell>
+        <!-- Decision: Positive match? -->
+        <mxCell id="dec_pos" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=2;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Ancre(s)&lt;br&gt;trouvée(s) ?" vertex="1">
+          <mxGeometry height="70" width="140" x="1010" y="230" as="geometry" />
+        </mxCell>
+        <!-- Layer 2 Box -->
+        <mxCell id="layer2_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=3;arcSize=5;fontSize=14;fontColor=#B71C1C;fontFamily=Arial;align=left;verticalAlign=top;spacing=12;spacingTop=8;" value="&lt;b&gt;Couche 2 — Exclusions Négatives&lt;/b&gt;" vertex="1">
+          <mxGeometry height="180" width="350" x="1220" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="neg_check" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1;arcSize=10;fontSize=13;fontStyle=0;fontFamily=Arial;align=left;verticalAlign=middle;spacing=6;" value="Si slot == Modèle J :&lt;br&gt;  rejeter si AAC140B ∈ text&lt;br&gt;  rejeter si AAC060B ∈ text&lt;br&gt;&lt;br&gt;Si slot == Domiciliation :&lt;br&gt;  rejeter si REGISTRE ANALYTIQUE ∈ text" vertex="1">
+          <mxGeometry height="130" width="310" x="1240" y="160" as="geometry" />
+        </mxCell>
+        <!-- Decision: Negative exclusion? -->
+        <mxCell id="dec_neg" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=2;fontSize=14;fontStyle=1;fontFamily=Arial;align=center;verticalAlign=middle;" value="Exclusion&lt;br&gt;trouvée ?" vertex="1">
+          <mxGeometry height="70" width="140" x="1330" y="360" as="geometry" />
+        </mxCell>
+        <!-- Outputs -->
+        <mxCell id="out_ok" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=3;arcSize=12;fontSize=16;fontStyle=1;fontColor=#1B5E20;fontFamily=Arial;align=center;verticalAlign=middle;" value="✓ MATCH&lt;br&gt;Document conforme&lt;br&gt;au slot" vertex="1">
+          <mxGeometry height="80" width="200" x="1220" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="out_ko" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=3;arcSize=12;fontSize=16;fontStyle=1;fontColor=#B71C1C;fontFamily=Arial;align=center;verticalAlign=middle;" value="✗ REJET&lt;br&gt;Document non conforme" vertex="1">
+          <mxGeometry height="80" width="200" x="1500" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="out_nomatch" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;strokeWidth=3;arcSize=12;fontSize=16;fontStyle=1;fontColor=#B71C1C;fontFamily=Arial;align=center;verticalAlign=middle;" value="✗ REJET&lt;br&gt;Aucune ancre" vertex="1">
+          <mxGeometry height="80" width="200" x="850" y="510" as="geometry" />
+        </mxCell>
+        <!-- Arrows -->
+        <mxCell id="a1" edge="1" parent="1" source="input_text" target="normalize" style="rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a2" edge="1" parent="1" source="normalize" target="layer1_box" style="rounded=1;strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a3" edge="1" parent="1" source="layer1_box" target="dec_pos" style="rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a4" edge="1" parent="1" source="dec_pos" target="layer2_box" style="rounded=1;strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontStyle=1;fontColor=#2E7D32;" value="Oui"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a5" edge="1" parent="1" source="dec_pos" target="out_nomatch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#C62828;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontStyle=1;fontColor=#C62828;" value="Non"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a6" edge="1" parent="1" source="layer2_box" target="dec_neg" style="rounded=1;strokeColor=#333;strokeWidth=2;endArrow=blockThin;endFill=1;" value=""><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a7" edge="1" parent="1" source="dec_neg" target="out_ok" style="rounded=1;strokeColor=#2E7D32;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontStyle=1;fontColor=#2E7D32;" value="Non"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="a8" edge="1" parent="1" source="dec_neg" target="out_ko" style="rounded=1;strokeColor=#C62828;strokeWidth=2;endArrow=blockThin;endFill=1;fontSize=13;fontStyle=1;fontColor=#C62828;" value="Oui"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

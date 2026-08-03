@@ -1,0 +1,60 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="cas_utilisation_global" name="Cas d'Utilisation Global">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- System Boundary -->
+        <mxCell id="sys_box" value="Plateforme de Souscription et Contrôle Automatisé - PortNet S.A." style="shape=rect;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=14;fillColor=#F8F9FA;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="240" y="60" width="680" height="700" as="geometry" />
+        </mxCell>
+        <!-- Actor: Opérateur Économique -->
+        <mxCell id="actor_op" value="Opérateur Économique&#xa;(Importateur / Exportateur / Transitaire)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;" vertex="1" parent="1">
+          <mxGeometry x="80" y="280" width="50" height="100" as="geometry" />
+        </mxCell>
+        <!-- Actor: Agent PortNet -->
+        <mxCell id="actor_agent" value="Agent Vérificateur&#xa;PortNet S.A." style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="200" width="50" height="100" as="geometry" />
+        </mxCell>
+        <!-- Actor: Système Douane BADR -->
+        <mxCell id="actor_badr" value="Système Douane&#xa;BADR (ADII)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="480" width="50" height="100" as="geometry" />
+        </mxCell>
+        <!-- Use Cases -->
+        <mxCell id="uc1" value="Créer une Demande de Souscription&#xa;(PortNet / Douane)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="110" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc2" value="Téléverser les Fichiers PDF&#xa;par Emplacement (Slot Drag&amp;Drop)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="220" width="220" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc3" value="Vérifier la Conformité du Document&#xa;en Temps Réel (Slot Classification)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0277BD;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="220" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc4" value="Exécuter la Matrice de Cohérence Croisée&#xa;Inter-Documents (Cross-Reference)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0277BD;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="340" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uc5" value="Valider les Clés Modulo 97&#xa;(ICE &amp; RIB) et Récence (Modèle J)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#0277BD;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="460" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uc6" value="Consulter le Rapport Interactif&#xa;de Validation (Badges &amp; Alertes)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="580" width="230" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uc7" value="Homologuer la Souscription &amp;&#xa;Synchroniser avec la Base BADR" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="580" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="e1" edge="1" parent="1" source="actor_op" target="uc1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="actor_op" target="uc2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="actor_op" target="uc6"><mxGeometry relative="1" as="geometry" /></mxCell>
+        
+        <mxCell id="e4" edge="1" parent="1" source="uc2" target="uc3" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;fontStyle=2;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="uc3" target="uc4" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;fontStyle=2;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="uc4" target="uc5" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;fontStyle=2;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="e7" edge="1" parent="1" source="actor_agent" target="uc7"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="actor_badr" target="uc7"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

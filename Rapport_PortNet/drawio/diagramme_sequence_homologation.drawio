@@ -1,0 +1,100 @@
+<mxfile host="Electron" agent="Mozilla/5.0">
+  <diagram id="diagramme_sequence_homologation" name="Séquence Homologation &amp; BADR Sync">
+    <mxGraphModel dx="1847" dy="1082" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ll_op" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;" value="Opérateur / Agent&#xa;(UI Frontend)" vertex="1">
+          <mxGeometry height="50" width="130" x="60" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_orch" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" value="Pipeline Orchestrator&#xa;(orchestrator.py)" vertex="1">
+          <mxGeometry height="50" width="150" x="300" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_xref" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;" value="Cross-Ref Engine&#xa;(cross_reference.py)" vertex="1">
+          <mxGeometry height="50" width="150" x="560" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_db" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;" value="PostgreSQL DB&#xa;(01_schema.sql)" vertex="1">
+          <mxGeometry height="50" width="140" x="800" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_badr" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;" value="Système Douane&#xa;BADR (ADII)" vertex="1">
+          <mxGeometry height="50" width="130" x="1000" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="line_op" parent="1" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#0277BD;" value="" vertex="1">
+          <mxGeometry height="560" width="10" x="120" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="line_orch" parent="1" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#2E7D32;" value="" vertex="1">
+          <mxGeometry height="560" width="10" x="370" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="line_xref" parent="1" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#BF360C;" value="" vertex="1">
+          <mxGeometry height="560" width="10" x="630" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="line_db" parent="1" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#7B1FA2;" value="" vertex="1">
+          <mxGeometry height="560" width="10" x="865" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="line_badr" parent="1" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#C62828;" value="" vertex="1">
+          <mxGeometry height="560" width="10" x="1060" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m1" edge="1" parent="1" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#0277BD;" value="1: Soumettre le Dossier Complet (POST /api/souscription/upload)">
+          <mxGeometry relative="1" x="-0.0417" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points" />
+            <mxPoint x="125" y="140" as="sourcePoint" />
+            <mxPoint x="365" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" edge="1" parent="1" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#2E7D32;" value="2: Exécuter la Matrice Inter-Documents (check_cross_consistency)">
+          <mxGeometry relative="1" y="-20" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="375" y="200" as="sourcePoint" />
+            <mxPoint x="625" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" edge="1" parent="1" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#BF360C;" value="3: Vérifier ICE, RC, IF, TP, Adresse &amp; Fallback Transposition CIN Gérants">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="260" />
+              <mxPoint x="680" y="290" />
+            </Array>
+            <mxPoint x="635" y="260" as="sourcePoint" />
+            <mxPoint x="635" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" edge="1" parent="1" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#BF360C;" value="4: Retourner le Rapport Global de Cohérence">
+          <mxGeometry relative="1" x="-0.08" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="625" y="340" as="sourcePoint" />
+            <mxPoint x="375" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" edge="1" parent="1" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#7B1FA2;" value="5: Persister la Demande (INSERT INTO souscriptions &amp; souscription_gerants)">
+          <mxGeometry relative="1" x="-0.0722" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="375" y="400" as="sourcePoint" />
+            <mxPoint x="860" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" edge="1" parent="1" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#7B1FA2;" value="6: Confirmation ID Souscription">
+          <mxGeometry relative="1" x="0.0309" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="860" y="450" as="sourcePoint" />
+            <mxPoint x="375" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" edge="1" parent="1" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#C62828;" value="7: Synchronisation BADR (Mode PORTNET_DOUANE)">
+          <mxGeometry relative="1" x="-0.0441" y="10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="375" y="510" as="sourcePoint" />
+            <mxPoint x="1055" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" edge="1" parent="1" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#0277BD;" value="8: Réponse JSON Globale (statut, id_demande, validation_matrix)">
+          <mxGeometry relative="1" x="0.0417" y="-10" as="geometry">
+            <mxPoint as="offset" />
+            <mxPoint x="365" y="570" as="sourcePoint" />
+            <mxPoint x="125" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

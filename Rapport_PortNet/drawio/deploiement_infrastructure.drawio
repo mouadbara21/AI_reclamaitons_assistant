@@ -1,0 +1,38 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="deploiement_infrastructure" name="Déploiement Infrastructure">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Node: Client Browser -->
+        <mxCell id="node_client" value="Client Web Browser&#xa;(HTML5 / Vanilla JS SPA)" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;size=10;" vertex="1" parent="1">
+          <mxGeometry x="80" y="240" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Node: Docker Host Server -->
+        <mxCell id="node_host" value="Infrastructure Host PortNet / Docker Container Environment" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;fontStyle=1;fillColor=#F8F9FA;strokeColor=#1A237E;strokeWidth=2;size=15;" vertex="1" parent="1">
+          <mxGeometry x="380" y="100" width="680" height="420" as="geometry" />
+        </mxCell>
+
+        <!-- Container: FastAPI -->
+        <mxCell id="cont_api" value="Container 1: FastAPI ASGI Server&#xa;(Uvicorn, Python 3.12, PyMuPDF, Tesseract, RapidFuzz)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="420" y="160" width="600" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="api_endpoints" value="API Endpoints:&#xa;• POST /api/souscription/verify-single (Realtime Slot Classification)&#xa;• POST /api/souscription/upload (Full Cross-Reference Pipeline)&#xa;• POST /api/inscriptions (DB Persistence)" style="shape=rect;whiteSpace=wrap;html=1;align=left;fontSize=10;fillColor=#FFFFFF;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="440" y="220" width="560" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Container: PostgreSQL -->
+        <mxCell id="cont_db" value="Container 2: PostgreSQL Database Engine (Port 5432)&#xa;Database: portnet_souscription (Tables: souscriptions, souscription_gerants, documents_log)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="420" y="350" width="600" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Connections -->
+        <mxCell id="conn1" edge="1" parent="1" source="node_client" target="cont_api" value="HTTP REST / JSON&#xa;(Port 8000)" style="fontStyle=1;strokeColor=#0277BD;fontSize=10;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="conn2" edge="1" parent="1" source="cont_api" target="cont_db" value="SQL Driver Connection&#xa;(psycopg2 / asyncpg)" style="fontStyle=1;strokeColor=#2E7D32;fontSize=10;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

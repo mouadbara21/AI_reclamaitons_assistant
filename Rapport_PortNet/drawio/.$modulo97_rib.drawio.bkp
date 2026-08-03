@@ -1,0 +1,65 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="modulo97_rib" name="Algorithme Modulo 97 — RIB">
+    <mxGraphModel dx="1800" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Algorithme de Validation Modulo 97 — Relevé d'Identité Bancaire (RIB)" vertex="1">
+          <mxGeometry height="50" width="1500" x="50" y="20" as="geometry" />
+        </mxCell>
+        <!-- RIB Structure -->
+        <mxCell id="struct_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=16;fontStyle=1;fontColor=#333;fontFamily=Arial;" value="Structure RIB Marocain (24 chiffres) — Exemple : Bank of Africa" vertex="1">
+          <mxGeometry height="30" width="500" x="50" y="85" as="geometry" />
+        </mxCell>
+        <!-- Bank code -->
+        <mxCell id="b1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="0" vertex="1"><mxGeometry height="50" width="40" x="80" y="120" as="geometry" /></mxCell>
+        <mxCell id="b2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="1" vertex="1"><mxGeometry height="50" width="40" x="120" y="120" as="geometry" /></mxCell>
+        <mxCell id="b3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BBDEFB;strokeColor=#1565C0;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="1" vertex="1"><mxGeometry height="50" width="40" x="160" y="120" as="geometry" /></mxCell>
+        <!-- City code -->
+        <mxCell id="c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="7" vertex="1"><mxGeometry height="50" width="40" x="220" y="120" as="geometry" /></mxCell>
+        <mxCell id="c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="8" vertex="1"><mxGeometry height="50" width="40" x="260" y="120" as="geometry" /></mxCell>
+        <mxCell id="c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="0" vertex="1"><mxGeometry height="50" width="40" x="300" y="120" as="geometry" /></mxCell>
+        <!-- Account number (14 digits) -->
+        <mxCell id="acc_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=18;fontStyle=1;fontFamily=Courier New;fontColor=#E65100;" value="0 0 0 0 0 9 2 1 0 0 0 6 4 1" vertex="1">
+          <mxGeometry height="50" width="560" x="360" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="acc_bg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=1;fontFamily=Arial;align=center;verticalAlign=middle;opacity=30;" value="" vertex="1">
+          <mxGeometry height="50" width="560" x="360" y="120" as="geometry" />
+        </mxCell>
+        <!-- Key digits -->
+        <mxCell id="k1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=3;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="5" vertex="1"><mxGeometry height="50" width="40" x="940" y="120" as="geometry" /></mxCell>
+        <mxCell id="k2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=3;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="6" vertex="1"><mxGeometry height="50" width="40" x="980" y="120" as="geometry" /></mxCell>
+        <mxCell id="k3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=3;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="0" vertex="1"><mxGeometry height="50" width="40" x="1020" y="120" as="geometry" /></mxCell>
+        <mxCell id="k4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;strokeWidth=3;fontSize=18;fontStyle=1;fontFamily=Courier New;align=center;verticalAlign=middle;" value="9" vertex="1"><mxGeometry height="50" width="40" x="1060" y="120" as="geometry" /></mxCell>
+        <!-- Segment labels -->
+        <mxCell id="lbl_bank" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#1565C0;fontFamily=Arial;" value="Code&lt;br&gt;Banque (3)" vertex="1">
+          <mxGeometry height="35" width="120" x="80" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_city" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#2E7D32;fontFamily=Arial;" value="Code&lt;br&gt;Ville (3)" vertex="1">
+          <mxGeometry height="35" width="120" x="220" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_acc" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#E65100;fontFamily=Arial;" value="Numéro de Compte (14 chiffres)" vertex="1">
+          <mxGeometry height="25" width="560" x="360" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_ctrl" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontStyle=1;fontColor=#F9A825;fontFamily=Arial;" value="Clé RIB (4)" vertex="1">
+          <mxGeometry height="25" width="160" x="930" y="175" as="geometry" />
+        </mxCell>
+        <!-- Algorithm -->
+        <mxCell id="formula_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontFamily=Arial;align=center;verticalAlign=middle;" value="&lt;b&gt;Formule ISO 7064 :&lt;/b&gt;&lt;br&gt;RIB₂₄ mod 97 = 0&lt;br&gt;&lt;br&gt;011780000009210006415609 mod 97 = &lt;b&gt;0&lt;/b&gt; ✓" vertex="1">
+          <mxGeometry height="100" width="500" x="200" y="280" as="geometry" />
+        </mxCell>
+        <!-- Alpha conversion table -->
+        <mxCell id="alpha_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#333;fontFamily=Arial;" value="Table de conversion alphanumérique (RIB avec lettres)" vertex="1">
+          <mxGeometry height="30" width="500" x="200" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="alpha_table" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;arcSize=8;fontSize=13;fontFamily=Courier New;align=center;verticalAlign=middle;" value="A/J=1  B/K/S=2  C/L/T=3  D/M/U=4  E/N/V=5&lt;br&gt;F/O/W=6  G/P/X=7  H/Q/Y=8  I/R/Z=9" vertex="1">
+          <mxGeometry height="60" width="500" x="200" y="460" as="geometry" />
+        </mxCell>
+        <!-- Result -->
+        <mxCell id="result" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=3;arcSize=12;fontSize=16;fontStyle=1;fontColor=#1B5E20;fontFamily=Arial;align=center;verticalAlign=middle;" value="✓ RIB est VALIDE si le nombre entier de 24 chiffres est divisible par 97" vertex="1">
+          <mxGeometry height="60" width="600" x="150" y="570" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -29,6 +29,8 @@ class ExtractedModelJ(ExtractedDocument):
     activite: str
     gerants: List[Gerant] = []
     date_certification: str  # For recency checking
+    domiciliary_name: Optional[str] = None
+    domiciliary_rc: Optional[str] = None
 
 class ExtractedDocumentIF(ExtractedDocument):
     document_type: DocumentType = DocumentType.DOCUMENT_IF

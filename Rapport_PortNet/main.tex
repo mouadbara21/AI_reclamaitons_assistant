@@ -1,0 +1,67 @@
+% !TeX program = pdflatex
+\documentclass[12pt,a4paper,oneside]{book}
+
+\input{Packages}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=navyblue,
+    citecolor=navyblue,
+    filecolor=navyblue,
+    urlcolor=navyblue,
+    pdfauthor={Mouad BARA},
+    pdftitle={Système Intelligent de Vérification Documentaire pour la Souscription des Opérateurs Économiques -- PortNet S.A.},
+    pdfpagemode=UseOutlines
+}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+
+\include{Frontmatter/Page_de_garde}
+\afterpage{\blankpage}
+
+\frontmatter
+\pagenumbering{arabic}
+
+\input{Frontmatter/Dedication}
+\input{Frontmatter/Acknowledgements}
+\input{Frontmatter/AbstractFR}
+\input{Frontmatter/AbstractEN}
+\cleardoublepage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{Liste des Figures}
+
+\listoftables
+\addcontentsline{toc}{chapter}{Liste des Tableaux}
+
+\input{Endmatter/Acronyms}
+
+\tableofcontents
+\addcontentsline{toc}{chapter}{Table des Matières}
+
+\mainmatter
+\hypersetup{pageanchor=true}
+
+% Introduction Générale
+\input{Frontmatter/GeneralIntroduction}
+
+% Chapitres
+\clearpage
+\input{Chapters/chapter1}
+\clearpage
+\input{Chapters/chapter2}
+\clearpage
+\input{Chapters/chapter3}
+\clearpage
+\input{Chapters/chapter4}
+\clearpage
+\input{Chapters/chapter5}
+
+\clearpage
+\input{Endmatter/ConclusionPerspectives}
+
+\clearpage
+\input{Endmatter/References}
+
+\end{document}

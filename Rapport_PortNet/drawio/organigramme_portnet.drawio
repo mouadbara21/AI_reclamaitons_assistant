@@ -1,0 +1,88 @@
+<mxfile host="Electron" agent="Codex">
+  <diagram id="organigramme_portnet" name="Organigramme PortNet S.A.">
+    <mxGraphModel dx="1355" dy="793" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1050" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=26;fontStyle=1;fontColor=#0f172a;fontFamily=Arial;whiteSpace=wrap;" value="Organigramme Fonctionnel de PortNet S.A." vertex="1">
+          <mxGeometry height="50" width="650" x="360" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dg" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A237E;strokeColor=#0D1642;strokeWidth=2;arcSize=10;fontSize=20;fontStyle=1;fontColor=#FFFFFF;fontFamily=Arial;align=center;verticalAlign=middle;spacing=10;shadow=1" value="Direction Générale" vertex="1">
+          <mxGeometry height="80" width="320" x="580" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pole_metier" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;arcSize=10;fontSize=18;fontStyle=1;fontColor=#0D47A1;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Pôle Métier&lt;br&gt;&amp; Partenariats" vertex="1">
+          <mxGeometry height="80" width="280" x="60" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pole_si" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;arcSize=10;fontSize=18;fontStyle=1;fontColor=#0D47A1;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Pôle Systèmes&lt;br&gt;d&#39;Information" vertex="1">
+          <mxGeometry height="80" width="280" x="420" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pole_finance" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;arcSize=10;fontSize=18;fontStyle=1;fontColor=#0D47A1;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Pôle Finances&lt;br&gt;&amp; Administration" vertex="1">
+          <mxGeometry height="80" width="280" x="790" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="pole_comm" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;arcSize=10;fontSize=18;fontStyle=1;fontColor=#0D47A1;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Pôle Communication&lt;br&gt;&amp; Développement" vertex="1">
+          <mxGeometry height="80" width="280" x="1160" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_douane" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748b;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontColor=#334155;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Département Partenariats&lt;br&gt;Douane (ADII/BADR)" vertex="1">
+          <mxGeometry height="70" width="260" x="70" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_dev" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=3;arcSize=10;fontSize=16;fontStyle=1;fontColor=#1B5E20;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Département Développement&lt;br&gt;&amp; Ingénierie Logicielle&lt;br&gt;⬅ Projet PFA" vertex="1">
+          <mxGeometry height="90" width="260" x="350" y="435" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_infra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748b;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontColor=#334155;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Département Infrastructure&lt;br&gt;&amp; Exploitation" vertex="1">
+          <mxGeometry height="70" width="260" x="550" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_rh" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748b;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontColor=#334155;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Ressources Humaines" vertex="1">
+          <mxGeometry height="70" width="260" x="760" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_fin" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748b;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontColor=#334155;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Comptabilité &amp; Finances" vertex="1">
+          <mxGeometry height="70" width="260" x="970" y="570" as="geometry" />
+        </mxCell>
+        <mxCell id="dept_com" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#64748b;strokeWidth=2;arcSize=10;fontSize=16;fontStyle=0;fontColor=#334155;fontFamily=Arial;align=center;verticalAlign=middle;spacing=8;" value="Marketing &amp; Formation" vertex="1">
+          <mxGeometry height="70" width="260" x="1170" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="dg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="pole_metier" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="dg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="pole_si" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="dg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="pole_finance" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="dg" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="pole_comm" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="pole_metier" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="dept_douane" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="pole_si" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#2E7D32;strokeWidth=2;endArrow=block;endFill=1;" target="dept_dev" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="pole_si" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="dept_infra" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="560.06" y="400" />
+              <mxPoint x="670.06" y="400" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="dept_rh" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="960" y="360" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="pole_finance" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="dept_fin" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="960" y="410" />
+              <mxPoint x="1100" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="pole_comm" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#64748b;strokeWidth=2;endArrow=block;endFill=1;" target="dept_com" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

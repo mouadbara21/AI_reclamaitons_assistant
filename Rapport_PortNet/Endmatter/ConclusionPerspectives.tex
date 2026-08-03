@@ -1,0 +1,36 @@
+\chapter*{Conclusion G\'{e}n\'{e}rale et Perspectives}
+\addcontentsline{toc}{chapter}{Conclusion G\'{e}n\'{e}rale et Perspectives}
+
+\section*{Conclusion}
+
+Ce rapport a pr\'{e}sent\'{e} la conception, la r\'{e}alisation et l'\'{e}valuation d'un syst\`{e}me intelligent de v\'{e}rification documentaire d\'{e}velopp\'{e} au sein de \textbf{PortNet S.A.}, Guichet Unique National du Commerce Ext\'{e}rieur au Maroc. Le travail r\'{e}alis\'{e} dans le cadre de ce Projet de Fin d'Ann\'{e}e avait pour objectif d'automatiser le processus de contr\^{o}le de conformit\'{e} des pi\`{e}ces justificatives n\'{e}cessaires \`{a} la souscription des op\'{e}rateurs \'{e}conomiques aux services informatiques de PortNet et \`{a} la plateforme BADR de l'Administration des Douanes et Imp\^{o}ts Indirects (ADII).
+
+Le projet a r\'{e}pondu \`{a} une probl\'{e}matique m\'{e}tier concr\`{e}te : le processus existant de v\'{e}rification manuelle g\'{e}n\'{e}rait des d\'{e}lais de 48 \`{a} 72 heures ouvr\'{e}es, un taux d'erreur humaine significatif et l'impossibilit\'{e} de r\'{e}aliser des contr\^{o}les math\'{e}matiques critiques sur les identifiants r\'{e}glementaires. Le syst\`{e}me propos\'{e} a adress\'{e} ces limitations par une approche originale combinant trois contributions principales.
+
+\textbf{Premi\`{e}re contribution : le classifier \`{a} deux couches.} L'analyse forensique des documents administratifs marocains a permis d'identifier des ancres textuelles exclusives \`{a} chaque type de document. Le classifier combine des ancres positives (v\'{e}rifiant la pr\'{e}sence de marqueurs uniques) et des exclusions n\'{e}gatives (rejetant les faux positifs par d\'{e}tection de marqueurs d'autres types). Cette approche d\'{e}terministe a atteint un taux de 0\% de faux positifs sur l'ensemble du corpus de test, sans n\'{e}cessiter de donn\'{e}es d'entra\^{\i}nement ni d'infrastructure d'apprentissage automatique.
+
+\textbf{Deuxi\`{e}me contribution : la validation math\'{e}matique Modulo~97.} L'impl\'{e}mentation des algorithmes de cl\'{e} de contr\^{o}le pour les identifiants ICE (15 chiffres) et RIB (24 chiffres) a permis de d\'{e}tecter des erreurs indiscernables \`{a} l'\oe{}il humain, telles qu'un seul chiffre modifi\'{e} par une erreur OCR. L'algorithme de v\'{e}rification MRZ (norme ICAO Doc~9303) compl\`{e}te ce dispositif pour les cartes d'identit\'{e} \'{e}lectroniques.
+
+\textbf{Troisi\`{e}me contribution : la matrice de coh\'{e}rence crois\'{e}e.} Le moteur de cross-r\'{e}f\'{e}rence compare syst\'{e}matiquement sept variables partag\'{e}es entre les documents du dossier (ICE, RC, IF, TP, Raison Sociale, Adresse, CIN g\'{e}rant), en utilisant trois strat\'{e}gies de comparaison adapt\'{e}es (stricte, num\'{e}rique s\'{e}curis\'{e}e, floue). Cette v\'{e}rification permet de d\'{e}tecter les incoh\'{e}rences que le contr\^{o}le document par document ne peut pas r\'{e}v\'{e}ler.
+
+L'architecture technique fond\'{e}e sur FastAPI, PostgreSQL et un frontend SPA natif a permis de livrer un syst\`{e}me fonctionnel, performant (temps de traitement $<500$~ms par document) et fid\`{e}le \`{a} l'ergonomie du portail PortNet existant. La campagne de tests couvrant 64 cas de test (8 types de documents $\times$ 8 sc\'{e}narios) a d\'{e}montr\'{e} un taux de r\'{e}ussite de 100\%, validant la fiabilit\'{e} de l'approche propos\'{e}e.
+
+\section*{Perspectives}
+
+Plusieurs axes d'am\'{e}lioration et d'extension sont envisag\'{e}s pour les \'{e}volutions futures du syst\`{e}me :
+
+\begin{itemize}[leftmargin=*, itemsep=6pt]
+    \item \textbf{Int\'{e}gration d'un moteur OCR avanc\'{e}} : le remplacement de Tesseract par un service OCR sp\'{e}cialis\'{e} pour les documents administratifs marocains (support de l'arabe et du fran\c{c}ais simultan\'{e}s) am\'{e}liorerait la couverture des documents num\'{e}ris\'{e}s \`{a} faible qualit\'{e} ;
+
+    \item \textbf{Apprentissage par renforcement du classifier} : bien que l'approche par ancres forensiques ait prouv\'{e} son efficacit\'{e}, un m\'{e}canisme d'apprentissage semi-supervis\'{e} pourrait permettre au syst\`{e}me de s'adapter automatiquement aux \'{e}volutions de format des documents administratifs ;
+
+    \item \textbf{Extension aux documents internationaux} : l'architecture modulaire du syst\`{e}me permettrait d'ajouter des extracteurs pour les documents commerciaux internationaux (certificats d'origine, lettres de cr\'{e}dit, connaissements maritimes) ;
+
+    \item \textbf{Tableau de bord analytique} : le d\'{e}veloppement d'un dashboard de supervision permettrait aux responsables de PortNet de suivre en temps r\'{e}el les volumes de souscriptions, les taux de rejet et les types d'erreurs les plus fr\'{e}quents ;
+
+    \item \textbf{Int\'{e}gration directe avec BADR} : la mise en place d'une API de synchronisation directe avec le syst\`{e}me BADR de l'ADII permettrait d'automatiser compl\`{e}tement le processus d'immatriculation douani\`{e}re apr\`{e}s validation ;
+
+    \item \textbf{Signature \'{e}lectronique et archivage l\'{e}gal} : l'ajout de fonctionnalit\'{e}s de signature \'{e}lectronique qualifi\'{e}e et d'archivage \`{a} valeur probante compl\'{e}terait la d\'{e}mat\'{e}rialisation int\'{e}grale du processus de souscription.
+\end{itemize}
+
+Ces perspectives t\'{e}moignent du potentiel d'\'{e}volution du syst\`{e}me et de sa capacit\'{e} \`{a} s'int\'{e}grer dans la strat\'{e}gie de transformation num\'{e}rique de PortNet S.A. La contribution apport\'{e}e par ce projet constitue un premier pas vers l'automatisation intelligente des processus de v\'{e}rification documentaire au sein du Guichet Unique National du Commerce Ext\'{e}rieur au Maroc.

@@ -1,0 +1,24 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+\begingroup
+\setstretch{1.08}
+
+\begin{otherlanguage}{english}
+This report presents the design and implementation of an \textbf{intelligent document verification system} developed at \textbf{PortNet S.A.}, the National Single Window for Foreign Trade in Morocco. The system automates the compliance checking of supporting documents required for the subscription of economic operators (importers, exporters, freight forwarders) to PortNet's IT services and to the BADR platform of the Customs and Indirect Taxes Administration (ADII).
+
+The existing process relies on manual visual inspection performed by verification agents, resulting in processing delays of 48 to 72 business hours, significant human error rates, and the absence of mathematical validation for regulatory identifiers. The proposed system addresses these limitations through a three-tier pipeline architecture: native text extraction and OCR, template-based classification using positive anchors and negative exclusions (two-layer classifier), and inter-document cross-validation through a consistency matrix.
+
+The solution covers nine types of Moroccan regulatory documents: Model~J (Trade Registry), Tax Identification Notification (AAC140B), Professional Tax Certificate (AAC060B), ICE Certificate, Domiciliation Attestation, Bank Account Identification (RIB), National Electronic Identity Card (CNIE), Company Statutes, and Power of Attorney. For each type, a dedicated regex-based extractor parses the raw text and produces a structured Pydantic data model. Applied validators include Modulo~97 checksum verification (RIB and ICE), Model~J recency checking (\textless 90~days), fuzzy name and address matching (RapidFuzz, 85\% threshold), and cross-referencing of seven shared variables (ICE, RC, IF, TP, Address, Company Name, Manager CIN).
+
+The technical architecture relies on a \textbf{FastAPI} backend with \textbf{PostgreSQL} persistence, a single-page application (SPA) frontend in native HTML/CSS/JavaScript faithfully reproducing the PortNet portal ergonomics, and a pure Python document extraction layer (PyMuPDF). The system was validated through a test campaign covering \textbf{64 test cases} (8~document types $\times$ 8~scenarios) with a 100\% pass rate.
+\end{otherlanguage}
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+
+\begin{otherlanguage}{english}
+{\textbf{Keywords:}} Document verification, subscription, PortNet, single window, text extraction, document classification, cross-validation, Modulo~97, FastAPI, PostgreSQL, Python, Pydantic, foreign trade, Moroccan customs.
+\end{otherlanguage}
+
+\noindent\rule[2pt]{\textwidth}{0.5pt}
+\endgroup

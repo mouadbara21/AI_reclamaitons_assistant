@@ -1,0 +1,315 @@
+\reportchapter{2}{\'{E}tat de l'Art et Fondements Th\'{e}oriques}{Extraction textuelle PDF, reconnaissance optique de caract\`{e}res, classification de documents, expressions r\'{e}guli\`{e}res, validation math\'{e}matique Modulo~97, correspondance floue et cross-r\'{e}f\'{e}rence inter-documents.}
+
+\section*{Introduction}
+
+Ce chapitre passe en revue les concepts, les approches de recherche et les solutions existantes qui sous-tendent le syst\`{e}me de v\'{e}rification documentaire d\'{e}velopp\'{e} pour PortNet. Il examine successivement les techniques d'extraction de texte \`{a} partir de fichiers PDF, la reconnaissance optique de caract\`{e}res, les m\'{e}thodes de classification de documents, l'extraction d'entit\'{e}s structur\'{e}es par expressions r\'{e}guli\`{e}res, les algorithmes de validation math\'{e}matique (Modulo~97, ICAO MRZ), les m\'{e}triques de correspondance floue et les strat\'{e}gies de cross-r\'{e}f\'{e}rence inter-documents. Le chapitre conclut par un positionnement de la solution propos\'{e}e par rapport \`{a} l'\'{e}tat de l'art.
+
+\section{Extraction de Texte \`{a} Partir de Fichiers PDF}
+
+\subsection{Architecture d'un Fichier PDF}
+
+Le format PDF (\textit{Portable Document Format}), cr\'{e}\'{e} par Adobe en 1993, est devenu le standard de facto pour la diffusion de documents administratifs. Un fichier PDF peut contenir du texte vectoriel (encod\'{e} sous forme de glyphes positionn\'{e}s), des images rasteris\'{e}es, des formulaires interactifs et des m\'{e}tadonn\'{e}es. Cette dualit\'{e} entre texte vectoriel et images num\'{e}ris\'{e}es impose deux strat\'{e}gies d'extraction compl\'{e}mentaires \cite{pdf-spec}.
+
+\subsection{Extraction de Texte Vectoriel Natif}
+
+Lorsque le fichier PDF contient du texte vectoriel natif, l'extraction repose sur l'analyse des op\'{e}rateurs de placement de texte du format PDF (commandes \texttt{Tj}, \texttt{TJ}, \texttt{Tm}). Les biblioth\`{e}ques modernes reconstruisent l'ordre de lecture en analysant la position g\'{e}om\'{e}trique des caract\`{e}res sur la page \cite{pymupdf-doc}.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3cm} Y Y Y@{}}
+\toprule
+\rowcolor{lightblue}
+Biblioth\`{e}que & Principe & Avantages & Limites \\
+\midrule
+PyMuPDF (fitz) & Liaison C avec MuPDF, extraction par blocs de texte & Tr\`{e}s rapide ($<100$ms/page), pr\'{e}serve la structure & Texte vectoriel uniquement \\
+pdfplumber & Analyse des coordonn\'{e}es de chaque caract\`{e}re & Extraction de tableaux pr\'{e}cise & Plus lent (Python pur) \\
+pdfminer.six & Analyse compl\`{e}te de la structure PDF & Contr\^{o}le granulaire & Complexe \`{a} configurer \\
+Tabula & Sp\'{e}cialis\'{e} extraction de tableaux & D\'{e}tection automatique des grilles & N\'{e}cessite Java \\
+\bottomrule
+\end{tabularx}
+\caption{Comparaison des biblioth\`{e}ques d'extraction de texte PDF.}
+\label{tab:pdf-extraction}
+\end{table}
+
+Le choix de \textbf{PyMuPDF} (fitz) a \'{e}t\'{e} motiv\'{e} par sa vitesse d'extraction (inf\'{e}rieure \`{a} 100~ms par page pour les documents administratifs marocains typ\'{e}s de 1 \`{a} 3 pages) et sa capacit\'{e} \`{a} pr\'{e}server l'ordre de lecture m\^{e}me pour des mises en page complexes.
+
+\subsection{Reconnaissance Optique de Caract\`{e}res (OCR)}
+
+Lorsque le fichier PDF contient des images num\'{e}ris\'{e}es (scans) plut\^{o}t que du texte vectoriel, une \'{e}tape de reconnaissance optique de caract\`{e}res (OCR) est n\'{e}cessaire. L'OCR transforme une image rasteris\'{e}e en texte \'{e}ditable par d\'{e}tection et classification des formes de caract\`{e}res \cite{tesseract-doc}.
+
+Le pipeline OCR classique comprend trois phases :
+\begin{enumerate}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Pr\'{e}traitement} : binarisation, correction de l'inclinaison (\textit{deskew}), suppression du bruit ;
+    \item \textbf{Segmentation} : d\'{e}tection des zones de texte, des lignes et des mots ;
+    \item \textbf{Reconnaissance} : classification de chaque caract\`{e}re par un mod\`{e}le entra\^{\i}n\'{e} (r\'{e}seau neuronal LSTM pour Tesseract~5).
+\end{enumerate}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3cm} Y Y Y@{}}
+\toprule
+\rowcolor{lightblue}
+Moteur OCR & Architecture & Pr\'{e}cision typ. & Licence \\
+\midrule
+Tesseract 5 & R\'{e}seau LSTM bidirectionnel & 92--98\% & Apache 2.0 (libre) \\
+Google Vision & API cloud, mod\`{e}les propri\'{e}taires & 97--99\% & Payant \\
+AWS Textract & API cloud, extraction structur\'{e}e & 96--99\% & Payant \\
+EasyOCR & R\'{e}seau CRAFT + CRNN & 90--96\% & Apache 2.0 (libre) \\
+\bottomrule
+\end{tabularx}
+\caption{Comparaison des moteurs OCR disponibles.}
+\label{tab:ocr-comparison}
+\end{table}
+
+Dans l'architecture du syst\`{e}me, l'OCR intervient comme \textbf{repli de deuxi\`{e}me niveau} (\textit{Tier~2 Fallback}) : si l'extraction PyMuPDF produit moins de 20 caract\`{e}res, le document est consid\'{e}r\'{e} comme num\'{e}ris\'{e} et Tesseract est invoqu\'{e}. Cette strat\'{e}gie \'{e}vite le co\^{u}t de l'OCR pour les PDF vectoriels tout en garantissant la couverture des documents scann\'{e}s.
+
+\section{Classification de Documents}
+
+\subsection{Approches par Apprentissage Automatique}
+
+Les syst\`{e}mes de classification de documents traditionnels reposent sur des mod\`{e}les d'apprentissage automatique entra\^{\i}n\'{e}s sur des corpus \'{e}tiquet\'{e}s. Les approches courantes incluent :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Bag-of-Words + SVM/Random Forest} : repr\'{e}sentation TF-IDF du texte, classification par machine \`{a} vecteurs de support ou for\^{e}t al\'{e}atoire ;
+    \item \textbf{Mod\`{e}les de Deep Learning} : r\'{e}seaux convolutifs (CNN) ou transformers (BERT) appliqu\'{e}s au texte brut ou aux images du document ;
+    \item \textbf{LayoutLM / DocTR} : mod\`{e}les multimodaux combinant texte, position et image pour la compr\'{e}hension de documents.
+\end{itemize}
+
+Ces approches n\'{e}cessitent cependant un corpus d'entra\^{\i}nement cons\'{e}quent et \'{e}tiquet\'{e}, une infrastructure GPU pour l'entra\^{\i}nement et une gestion de la d\'{e}rive du mod\`{e}le lorsque de nouveaux formats de documents apparaissent.
+
+\subsection{Approche par Templates et Ancres Textuelles}
+
+L'approche retenue pour le projet PortNet repose sur une \textbf{classification par ancres textuelles} (\textit{template-based verification}). Plut\^{o}t que d'entra\^{\i}ner un mod\`{e}le statistique, le classifier v\'{e}rifie la pr\'{e}sence de marqueurs textuels forensiquement uniques \`{a} chaque type de document :
+
+\begin{successbox}
+\textbf{Principe du Classifier \`{a} Deux Couches} \\
+\textit{Couche 1 --- Ancres Positives} : v\'{e}rifier la pr\'{e}sence de mots-cl\'{e}s/phrases qui apparaissent \textbf{exclusivement} dans le type de document cible. \\
+\textit{Couche 2 --- Exclusions N\'{e}gatives} : rejeter le match si le texte contient des ancres uniques d'un \textbf{autre} type de document.
+\end{successbox}
+
+Cette approche pr\'{e}sente des avantages d\'{e}cisifs pour le contexte PortNet :
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Z\'{e}ro donn\'{e}e d'entra\^{\i}nement} : les r\`{e}gles sont d\'{e}riv\'{e}es de l'analyse forensique des documents r\'{e}els ;
+    \item \textbf{Interpr\'{e}tabilit\'{e} totale} : chaque d\'{e}cision de classification est explicable ;
+    \item \textbf{Maintenance simple} : l'ajout d'un nouveau type de document se r\'{e}duit \`{a} l'identification de ses ancres uniques ;
+    \item \textbf{Z\'{e}ro faux positif} : la combinaison AND des ancres positives et l'exclusion OR des ancres n\'{e}gatives \'{e}liminent les confusions inter-slots.
+\end{itemize}
+
+Le tableau~\ref{tab:ancres-forensiques} r\'{e}capitule les ancres forensiques uniques identifi\'{e}es pour chaque type de document :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm} Y@{}}
+\toprule
+\rowcolor{lightblue}
+Type de Document & Ancres Forensiques Uniques \\
+\midrule
+Mod\`{e}le J & \texttt{REGISTRE ANALYTIQUE}, \texttt{INSCRIPTIONS PORTES}, \texttt{CODE DEMANDE} \\
+Document IF & \texttt{AAC140B}, \texttt{BULLETIN DE NOTIFICATION} \\
+Taxe Professionnelle & \texttt{AAC060B} \\
+Certificat ICE & \texttt{CERTIFICAT DE L'IDENTIFIANT COMMUN DE L'ENTREPRISE} \\
+Attestation RIB & \texttt{ATTESTATIONDERIB} \\
+Statuts & \texttt{PREMIERE TITRE} (combin\'{e} avec \texttt{STATUTS}) \\
+CIN / Passeport & Lignes MRZ (\texttt{<<}) sans ancres d'entreprise \\
+\bottomrule
+\end{tabularx}
+\caption{Carte des ancres forensiques identifi\'{e}es par analyse des 8 documents r\'{e}els.}
+\label{tab:ancres-forensiques}
+\end{table}
+
+\section{Extraction d'Entit\'{e}s Structur\'{e}es}
+
+\subsection{Expressions R\'{e}guli\`{e}res et Grammaires de Patterns}
+
+L'extraction d'entit\'{e}s structur\'{e}es \`{a} partir de texte brut repose traditionnellement sur deux familles d'approches :
+
+\begin{enumerate}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Approches par r\`{e}gles} : expressions r\'{e}guli\`{e}res, grammaires contextuelles, patterns positionnels ;
+    \item \textbf{Approches par apprentissage} : reconnaissance d'entit\'{e}s nomm\'{e}es (NER) par mod\`{e}les CRF, BiLSTM-CRF ou transformers.
+\end{enumerate}
+
+Pour le projet PortNet, l'approche par \textbf{expressions r\'{e}guli\`{e}res} a \'{e}t\'{e} privil\'{e}gi\'{e}e en raison de la structure pr\'{e}visible des documents administratifs marocains. Chaque type de document poss\`{e}de un format fix\'{e} par l'administration \'{e}mettrice (DGI, OMPIC, Greffe du Tribunal), ce qui permet de construire des patterns d'extraction d\'{e}terministes.
+
+Les patterns d'extraction sont centralis\'{e}s dans le registre de configuration :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm} >{\ttfamily}p{5cm} Y@{}}
+\toprule
+\rowcolor{lightblue}
+Entit\'{e} & Pattern Regex & Exemple \\
+\midrule
+ICE & \textbackslash b00\textbackslash d\{13\}\textbackslash b|\textbackslash b\textbackslash d\{15\}\textbackslash b & 002225298000015 \\
+Identifiant Fiscal & \textbackslash b\textbackslash d\{7,9\}\textbackslash b & 50274861 \\
+Registre Commerce & \textbackslash b\textbackslash d\{3,7\}\textbackslash b & 370621 \\
+CNI & \textbackslash b[A-Z]\{1,2\}\textbackslash d\{3,6\}\textbackslash b & AB123456 \\
+RIB & \textbackslash b\textbackslash d\{24\}\textbackslash b & 011780000009210006415609 \\
+Taxe Prof. & \textbackslash b\textbackslash d\{8\}\textbackslash b & 38101253 \\
+\bottomrule
+\end{tabularx}
+\caption{Registre central des patterns regex par type d'entit\'{e}.}
+\label{tab:regex-patterns}
+\end{table}
+
+\subsection{Strat\'{e}gies d'Extraction Positionnelle}
+
+Pour les documents o\`{u} l'ordre \og libell\'{e}: valeur \fg{} n'est pas respect\'{e} (Verrou~2), les extracteurs utilisent des strat\'{e}gies positionnelles :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Extraction par proximit\'{e} de libell\'{e}} : capturer le texte situ\'{e} dans les $n$ lignes suivant un libell\'{e} connu ;
+    \item \textbf{Extraction par section} : d\'{e}couper le document en zones \`{a} l'aide de s\'{e}parateurs structurels (traits, cadres) ;
+    \item \textbf{Extraction par \'{e}limination} : identifier la valeur cible en soustrayant toutes les portions connues du texte.
+\end{itemize}
+
+\section{Validation Math\'{e}matique : Algorithmes Modulo~97}
+
+\subsection{Validation du Relev\'{e} d'Identit\'{e} Bancaire (RIB)}
+
+Le Relev\'{e} d'Identit\'{e} Bancaire marocain est compos\'{e} de 24 chiffres. La validation repose sur l'algorithme Modulo~97 d\'{e}fini par la norme bancaire ISO~7064 \cite{iso7064}. Le principe est le suivant :
+
+\begin{equation}
+\text{RIB est valide} \iff \text{RIB}_{24} \bmod 97 = 0
+\label{eq:modulo97-rib}
+\end{equation}
+
+Pour les RIB contenant des caract\`{e}res alphab\'{e}tiques (certaines banques marocaines utilisent des lettres dans les num\'{e}ros de compte), une table de conversion lettre$\to$chiffre est appliqu\'{e}e avant le calcul :
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{cccccccccc}
+\toprule
+\rowcolor{lightblue}
+A/J & B/K/S & C/L/T & D/M/U & E/N/V & F/O/W & G/P/X & H/Q/Y & I/R/Z \\
+\midrule
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+\bottomrule
+\end{tabular}
+\caption{Table de conversion alphanum\'{e}rique pour la validation RIB (ISO~7064).}
+\label{tab:rib-letter-map}
+\end{table}
+
+\subsection{Validation de l'Identifiant Commun de l'Entreprise (ICE)}
+
+L'ICE marocain est compos\'{e} de 15 chiffres structur\'{e}s en trois segments : 9 chiffres pour l'identifiant d'entit\'{e}, 4 chiffres pour le num\'{e}ro d'\'{e}tablissement et 2 chiffres pour la cl\'{e} de contr\^{o}le. La formule de validation est :
+
+\begin{equation}
+\text{Cl\'{e}} = 97 - \left( \text{ICE}_{13} \times 100 \right) \bmod 97
+\label{eq:modulo97-ice}
+\end{equation}
+
+Avec le cas sp\'{e}cial : si la cl\'{e} calcul\'{e}e vaut 97, elle est stock\'{e}e comme 00.
+
+\subsection{V\'{e}rification MRZ selon la Norme ICAO Doc~9303}
+
+La Machine Readable Zone (MRZ) des cartes d'identit\'{e} et passeports utilise un algorithme de chiffres de contr\^{o}le \`{a} poids $[7, 3, 1]$ d\'{e}fini par l'Organisation de l'Aviation Civile Internationale \cite{icao-mrz}. Pour chaque champ prot\'{e}g\'{e}, le chiffre de contr\^{o}le est calcul\'{e} comme :
+
+\begin{equation}
+\text{Check} = \left( \sum_{i=0}^{n-1} \text{val}(c_i) \times w_{i \bmod 3} \right) \bmod 10
+\label{eq:mrz-check}
+\end{equation}
+
+o\`{u} $w = [7, 3, 1]$ et $\text{val}(c)$ vaut 0--9 pour les chiffres, 10--35 pour les lettres A--Z, et 0 pour le caract\`{e}re de remplissage \texttt{<}.
+
+\section{Correspondance Floue (\textit{Fuzzy Matching})}
+
+\subsection{Distance d'\'{E}dition de Levenshtein}
+
+La distance de Levenshtein entre deux cha\^{\i}nes $a$ et $b$ correspond au nombre minimal d'op\'{e}rations d'\'{e}dition (insertion, suppression, substitution) n\'{e}cessaires pour transformer $a$ en $b$ \cite{levenshtein-1966}. Cette m\'{e}trique est utilis\'{e}e pour d\'{e}tecter les fautes de frappe dans les identifiants des g\'{e}rants.
+
+\begin{equation}
+d_{\text{Lev}}(a, b) = \min \left\{
+\begin{array}{l}
+d_{\text{Lev}}(a[1:], b) + 1 \\
+d_{\text{Lev}}(a, b[1:]) + 1 \\
+d_{\text{Lev}}(a[1:], b[1:]) + \mathbb{1}_{a[0] \neq b[0]}
+\end{array}
+\right\}
+\label{eq:levenshtein}
+\end{equation}
+
+\subsection{Token Set Ratio (RapidFuzz)}
+
+Pour la comparaison des noms de soci\'{e}t\'{e}s et des adresses, le syst\`{e}me utilise la m\'{e}trique \textbf{token\_set\_ratio} de la biblioth\`{e}que RapidFuzz \cite{rapidfuzz-doc}. Cette m\'{e}trique tokenise les deux cha\^{\i}nes, calcule l'intersection et la diff\'{e}rence sym\'{e}trique des tokens, puis retourne le score maximal parmi trois comparaisons :
+
+\begin{equation}
+\text{score} = \max \left\{
+\begin{array}{l}
+\text{ratio}(\text{sorted\_intersection}, \text{sorted\_intersection} \cup \text{diff}_1) \\
+\text{ratio}(\text{sorted\_intersection}, \text{sorted\_intersection} \cup \text{diff}_2) \\
+\text{ratio}(\text{sorted\_intersection} \cup \text{diff}_1, \text{sorted\_intersection} \cup \text{diff}_2)
+\end{array}
+\right\}
+\label{eq:token-set-ratio}
+\end{equation}
+
+Les seuils configur\'{e}s dans le syst\`{e}me sont :
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Noms de soci\'{e}t\'{e}s} : seuil de 85\% (\texttt{FUZZY\_NAME\_THRESHOLD = 85.0}) ;
+    \item \textbf{Adresses} : seuil de 75\% (\texttt{FUZZY\_ADDRESS\_THRESHOLD = 75.0}).
+\end{itemize}
+
+\section{Cross-R\'{e}f\'{e}rence Inter-Documents}
+
+\subsection{Principe de la Matrice de Coh\'{e}rence}
+
+La cross-r\'{e}f\'{e}rence inter-documents consiste \`{a} v\'{e}rifier la coh\'{e}rence des variables partag\'{e}es entre plusieurs pi\`{e}ces du dossier. Le principe repose sur l'observation que les identifiants r\'{e}glementaires (ICE, RC, IF, TP) apparaissent dans plusieurs documents et doivent \^{e}tre identiques partout.
+
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.8cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm} >{\centering\arraybackslash}p{1.2cm}@{}}
+\toprule
+\rowcolor{lightblue}
+Variable & Mod. J & Doc IF & TP & ICE Cert & Domic. & RIB & CIN \\
+\midrule
+ICE & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & & & \\
+RC Num\'{e}ro & $\checkmark$ & $\checkmark$ & & $\checkmark$ & ($\checkmark$) & & \\
+IF Num\'{e}ro & & $\checkmark$ & & $\checkmark$ & & & \\
+TP Num\'{e}ro & & $\checkmark$ & $\checkmark$ & & & & \\
+Raison Sociale & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & \\
+Adresse & $\checkmark$ & $\checkmark$ & & & $\checkmark$ & & \\
+CIN G\'{e}rant & $\checkmark$ & & & & & & $\checkmark$ \\
+\bottomrule
+\end{tabularx}
+\caption{Matrice de coh\'{e}rence crois\'{e}e inter-documents.}
+\label{tab:matrice-coherence}
+\end{table}
+
+\subsection{M\'{e}thodes de Comparaison}
+
+Trois strat\'{e}gies de comparaison sont appliqu\'{e}es selon la nature de la variable :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Comparaison stricte} : pour les identifiants num\'{e}riques (ICE, IF, TP), o\`{u} la moindre diff\'{e}rence est une incoh\'{e}rence critique ;
+    \item \textbf{Comparaison num\'{e}rique s\'{e}curis\'{e}e} : pour le RC, extraction des seuls chiffres avant comparaison (g\`{e}re les cas \texttt{370621/CASABLANCA} vs \texttt{370621}) ;
+    \item \textbf{Comparaison floue} : pour les noms de soci\'{e}t\'{e}s et adresses, utilisant le token\_set\_ratio avec seuils diff\'{e}renci\'{e}s.
+\end{itemize}
+
+\section{Solutions Existantes et Positionnement}
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3cm} Y Y Y@{}}
+\toprule
+\rowcolor{lightblue}
+Solution & Approche & Forces & Limites \\
+\midrule
+ABBYY FlexiCapture & ML + templates configur\'{e}s & Support multi-langues, \'{e}cosyst\`{e}me mature & Co\^{u}t de licence, pas adapt\'{e} aux docs marocains \\
+Amazon Textract & API cloud, extraction structur\'{e}e & Haute pr\'{e}cision, tables et formulaires & D\'{e}pendance cloud, co\^{u}t par page, confidentialit\'{e} \\
+Solution PortNet (propos\'{e}e) & Ancres forensiques + regex + Modulo~97 & Z\'{e}ro ML, 100\% interpr\'{e}table, d\'{e}ployable hors ligne & Sp\'{e}cifique aux documents marocains \\
+\bottomrule
+\end{tabularx}
+\caption{Positionnement de la solution propos\'{e}e par rapport aux alternatives existantes.}
+\label{tab:positionnement}
+\end{table}
+
+\section*{Conclusion du Chapitre}
+
+Ce chapitre a pr\'{e}sent\'{e} les fondements th\'{e}oriques et l'\'{e}tat de l'art des techniques d'extraction, de classification et de validation documentaire. L'analyse comparative a justifi\'{e} le choix d'une approche par ancres forensiques combin\'{e}e \`{a} des algorithmes de validation math\'{e}matique (Modulo~97) et de correspondance floue (RapidFuzz). Le Chapitre~3 traduira ces concepts en une conception d\'{e}taill\'{e}e \`{a} travers la mod\'{e}lisation UML du syst\`{e}me.

@@ -1,0 +1,52 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="architecture_2_couches" name="Architecture Classifier 2 Couches">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Document Input -->
+        <mxCell id="doc_in" value="Document PDF Téléversé&#xa;(ex: Modèle J / CIN / ICE / TP)" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;size=15;" vertex="1" parent="1">
+          <mxGeometry x="60" y="260" width="180" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Pipeline Box -->
+        <mxCell id="engine_box" value="Moteur de Classification et de Vérification à 2 Couches (verify_slot_document)" style="shape=rect;whiteSpace=wrap;html=1;verticalAlign=top;fontStyle=1;fontSize=13;fillColor=#F8F9FA;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="290" y="80" width="580" height="460" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 1: Positive Anchors -->
+        <mxCell id="layer1" value="Couche 1 : Ancrages Structuraux Positifs&#xa;(HasPositiveAnchor)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;size=0.05;" vertex="1" parent="1">
+          <mxGeometry x="340" y="140" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="l1_desc" value="• Modèle J : REGISTRE ANALYTIQUE, INSCRIPTIONS PORTES&#xa;• Document IF : AAC140B, BULLETIN DE NOTIFICATION&#xa;• Taxe Prof : AAC060B, ATTESTATION D'INSCRIPTION&#xa;• ICE : CERTIFICAT DE L'IDENTIFIANT COMMUN DE L'ENTREPRISE&#xa;• CIN : Bande MRZ (&lt;&lt;) ou CARTE NATIONALE / CNIE" style="shape=rect;whiteSpace=wrap;html=1;align=left;fontSize=10;fillColor=#FFFFFF;strokeColor=#0277BD;" vertex="1" parent="1">
+          <mxGeometry x="340" y="240" width="480" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Layer 2: Negative Exclusions -->
+        <mxCell id="layer2" value="Couche 2 : Bloqueurs d'Exclusion Négative Mandatory&#xa;(NOT HasNegativeExclusion)" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;size=0.05;" vertex="1" parent="1">
+          <mxGeometry x="340" y="350" width="480" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="l2_desc" value="• Rejet immédiat si présence d'ancrages appartenant à d'autres documents&#xa;• Élimination stricte de la confusion Modèle J vs CIN vs Domiciliation&#xa;• Garantie d'étanchéité absolue inter-emplacements (0 faux positif)" style="shape=rect;whiteSpace=wrap;html=1;align=left;fontSize=10;fillColor=#FFFFFF;strokeColor=#C62828;" vertex="1" parent="1">
+          <mxGeometry x="340" y="450" width="480" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Outputs -->
+        <mxCell id="out_valid" value="Document VALIDE&#xa;(Emplacement Conforme)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="170" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="out_reject" value="Document REJETÉ&#xa;(Non Conforme / Mismatch)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="380" width="170" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors -->
+        <mxCell id="c1" edge="1" parent="1" source="doc_in" target="layer1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="layer1" target="layer2" value="Ancrage Valide" style="fontStyle=1;strokeColor=#0277BD;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="layer2" target="out_valid" value="Aucune Exclusion" style="fontStyle=1;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="layer1" target="out_reject" value="Ancrage Absent" style="fontStyle=1;strokeColor=#C62828;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c5" edge="1" parent="1" source="layer2" target="out_reject" value="Exclusion Détectée" style="fontStyle=1;strokeColor=#C62828;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

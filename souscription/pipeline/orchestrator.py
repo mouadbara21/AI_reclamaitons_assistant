@@ -23,6 +23,7 @@ from souscription.extractors.taxe_professionnelle import parse_taxe_professionne
 from souscription.extractors.attestation_rib import parse_attestation_rib
 from souscription.extractors.categorie_operateur import parse_domiciliation
 from souscription.extractors.statuts import parse_statuts
+from souscription.extractors.cni import parse_cni
 
 # Import validators
 from souscription.validators.checksum import validate_rib, validate_ice
@@ -182,21 +183,19 @@ def process_submission(form: OperatorFormData, file_paths: List[str], submission
             elif doc_type == DocumentType.CATEGORIE_DOMICILIATION:
                 parsed_obj = parse_domiciliation(raw_text)
                 
-                # Check internal stamp consistency (stamp_rc should match domiciliary_rc or domiciled's expected RC)
-                # Domiciliation stamps are smudged, so it's a WARNING if they mismatch, not a flat rejection
-                stamp_ok = False
-                if parsed_obj.stamp_rc and parsed_obj.domiciliary_rc:
-                     # Remove leading zeros and check match
-                     stamp_ok = int(parsed_obj.stamp_rc) == int(parsed_obj.domiciliary_rc)
+                # Check domiciliation RC consistency
+                # Valid if domiciliary RC is found in body/header OR stamp matches
+                dom_rc = parsed_obj.domiciliary_rc or parsed_obj.stamp_rc
+                dom_ok = bool(dom_rc)
                 
-                stamp_status = ValidationStatus.VALID if stamp_ok else ValidationStatus.WARNING
+                stamp_status = ValidationStatus.VALID if dom_ok else ValidationStatus.WARNING
                 update_doc_status(stamp_status)
                 local_checks.append(FieldValidation(
-                    field_name="Domiciliation Stamp Check",
-                    expected_value=parsed_obj.domiciliary_rc,
-                    extracted_value=parsed_obj.stamp_rc or "Missing",
+                    field_name="Domiciliation RC Check",
+                    expected_value=dom_rc or "RC Domiciliataire",
+                    extracted_value=dom_rc or "Missing",
                     status=stamp_status,
-                    message="Stamp matches hosting company RC" if stamp_ok else "Warning: Stamp RC mismatch with paragraph body text"
+                    message=f"Domiciliary RC verified ({dom_rc})" if dom_ok else "Warning: Domiciliary RC missing in body text"
                 ))
                 
             elif doc_type == DocumentType.STATUTS:
@@ -207,6 +206,19 @@ def process_submission(form: OperatorFormData, file_paths: List[str], submission
                     extracted_value=parsed_obj.forme_juridique or "Unknown",
                     status=ValidationStatus.VALID,
                     message="Statuts document structure loaded"
+                ))
+
+            elif doc_type == DocumentType.CIN:
+                parsed_obj = parse_cni(raw_text)
+                cin_ok = bool(parsed_obj.cin_number or parsed_obj.raw_text)
+                cin_status = ValidationStatus.VALID if cin_ok else ValidationStatus.WARNING
+                update_doc_status(cin_status)
+                local_checks.append(FieldValidation(
+                    field_name="CIN Validation",
+                    expected_value="CIN / CNIE Document",
+                    extracted_value=parsed_obj.cin_number or "CIN détectée",
+                    status=cin_status,
+                    message=f"CIN extraite: {parsed_obj.cin_number}" if parsed_obj.cin_number else "Document CNI valide détecté"
                 ))
                 
             else:

@@ -1,0 +1,55 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="diagramme_etat_dossier" name="Diagramme d'État-Transition">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Start State -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="60" y="240" width="30" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- State 1: CREEE -->
+        <mxCell id="s1" value="Demande d'Inscription&#xa;Initialisée (CREEE)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="225" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- State 2: EN_COURS_VERIFICATION -->
+        <mxCell id="s2" value="En cours de vérification&#xa;temps réel par slot&#xa;(VERIF_SLOT)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="225" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- State 3: REJETE_INCOMPLET / NON_CONFORME -->
+        <mxCell id="s_rej" value="Dossier Non-Conforme&#xa;(REJETE / INCOMPLET)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="380" width="190" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- State 4: CROSS_REF_VALIDATED -->
+        <mxCell id="s3" value="Cohérence Croisée Validée&#xa;(CROSS_REF_VALID)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="640" y="225" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- State 5: VALIDE_POSTGRESQL -->
+        <mxCell id="s4" value="Souscription Enregistrée&#xa;(VALIDE_POSTGRESQL)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="900" y="225" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- State 6: SYNCHRONISE_BADR -->
+        <mxCell id="s5" value="Synchronisé avec Douane&#xa;(SYNCHRONISE_BADR)" style="shape=rect;whiteSpace=wrap;html=1;rounded=1;fontStyle=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="900" y="380" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connectors -->
+        <mxCell id="c1" edge="1" parent="1" source="start" target="s1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="s1" target="s2" value="Saisie Formulaire"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="s2" target="s_rej" value="Echec Slot / Expire"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="s_rej" target="s2" value="Nouveau Upload"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c5" edge="1" parent="1" source="s2" target="s3" value="Slots 8/8 Conformes"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c6" edge="1" parent="1" source="s3" target="s4" value="Soumission Globale"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="c7" edge="1" parent="1" source="s4" target="s5" value="Mode PORTNET_DOUANE"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -172,17 +172,16 @@ def check_cross_consistency(form: OperatorFormData, docs: Dict[str, Any]) -> tup
             
     if model_j_doc and form.gerants:
         for fg in form.gerants:
-            # Check if this manager's CIN is in Model J
             match_found = False
+            clean_fg_cin = re.sub(r'\s', '', fg.cin).upper()
+            form_fullname = f"{fg.prenom} {fg.nom}".strip()
+
+            # 1. First attempt: Strict match on CIN
             for mg in model_j_doc.gerants:
-                # Strict check on normalized CIN
-                clean_fg_cin = re.sub(r'\s', '', fg.cin).upper()
                 clean_mg_cin = re.sub(r'\s', '', mg.cin).upper()
                 if clean_fg_cin == clean_mg_cin:
                     match_found = True
-                    # Fuzzy match on manager name
-                    form_fullname = f"{fg.prenom} {fg.nom}"
-                    matches, score = match_names(form_fullname, mg.nom_complet)
+                    matches, score = match_names(form_fullname, mg.nom_complet) if form_fullname else (True, 100.0)
                     status = ValidationStatus.VALID if matches else ValidationStatus.WARNING
                     update_status(status)
                     checks.append(FieldValidation(
@@ -194,7 +193,30 @@ def check_cross_consistency(form: OperatorFormData, docs: Dict[str, Any]) -> tup
                         message=f"Gerant name match ({score:.1f}%) for CIN {fg.cin}" if matches else f"Fuzzy name warning ({score:.1f}%) for CIN {fg.cin}"
                     ))
                     break
-            
+
+            # 2. Second attempt: Fallback match by Name or near-match CIN (transposition/typo)
+            if not match_found:
+                for mg in model_j_doc.gerants:
+                    clean_mg_cin = re.sub(r'\s', '', mg.cin).upper()
+                    name_matches, score = match_names(form_fullname, mg.nom_complet) if form_fullname else (False, 0.0)
+
+                    # Check if CINs match with high similarity (transposed digits or single-char typo)
+                    cin_matches, cin_score = match_names(clean_fg_cin, clean_mg_cin)
+
+                    if name_matches or cin_score >= 80.0:
+                        match_found = True
+                        status = ValidationStatus.WARNING
+                        update_status(status)
+                        checks.append(FieldValidation(
+                            field_name=f"Gerant CIN ({fg.cin})",
+                            expected_value=fg.cin,
+                            extracted_value=mg.cin,
+                            status=status,
+                            score=cin_score,
+                            message=f"Slight CIN mismatch ({fg.cin} vs {mg.cin} in Modèle J for {mg.nom_complet})"
+                        ))
+                        break
+
             if not match_found:
                 update_status(ValidationStatus.INVALID)
                 checks.append(FieldValidation(
@@ -223,5 +245,46 @@ def check_cross_consistency(form: OperatorFormData, docs: Dict[str, Any]) -> tup
              status=status,
              message="RIB matches document" if is_match else f"RIB mismatch! Form has {form.rib}, document has {rib_doc.rib}"
          ))
+
+    # 8. DOMICILIATION HOST vs MODEL J CROSS-REFERENCE
+    dom_doc = None
+    model_j_doc = None
+    for doc in docs.values():
+        if isinstance(doc, ExtractedDomiciliation):
+            dom_doc = doc
+        elif isinstance(doc, ExtractedModelJ):
+            model_j_doc = doc
+
+    if dom_doc and model_j_doc:
+        host_name_dom = dom_doc.domiciliary_company or dom_doc.stamp_company_name
+        host_rc_dom = dom_doc.domiciliary_rc or dom_doc.stamp_rc
+        
+        host_name_mj = model_j_doc.domiciliary_name
+        host_rc_mj = model_j_doc.domiciliary_rc
+
+        if host_name_dom and host_name_mj:
+            matches, score = match_names(host_name_dom, host_name_mj)
+            status = ValidationStatus.VALID if matches else ValidationStatus.WARNING
+            update_status(status)
+            checks.append(FieldValidation(
+                field_name="Domiciliary Host Name",
+                expected_value=host_name_mj,
+                extracted_value=host_name_dom,
+                status=status,
+                score=score,
+                message=f"Domiciliary Host Name match ({score:.1f}%) between Attestation de Domiciliation and Modèle J" if matches else f"Domiciliary Host mismatch ({score:.1f}%): Domiciliation has '{host_name_dom}', Modèle J has '{host_name_mj}'"
+            ))
+
+        if host_rc_dom and host_rc_mj:
+            is_match = _safe_numeric_match(host_rc_dom, host_rc_mj)
+            status = ValidationStatus.VALID if is_match else ValidationStatus.INVALID
+            update_status(status)
+            checks.append(FieldValidation(
+                field_name="Domiciliary Host RC",
+                expected_value=host_rc_mj,
+                extracted_value=host_rc_dom,
+                status=status,
+                message=f"Domiciliary Host RC match ({host_rc_dom}) between Attestation de Domiciliation and Modèle J" if is_match else f"Domiciliary Host RC mismatch! Attestation has {host_rc_dom}, Modèle J has {host_rc_mj}"
+            ))
 
     return overall_status, checks

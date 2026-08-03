@@ -1,0 +1,30 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="diagramme_classe_technique" name="Diagramme de Classe &amp; ERD Base de Données">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Table: souscriptions -->
+        <mxCell id="t_sousc" value="Table: souscriptions&#xa;---------------------------------------&#xa;+ id: SERIAL [PK]&#xa;+ reference_demande: VARCHAR(50) [UNIQUE]&#xa;+ organisme: VARCHAR(30) (PORTNET_DOUANE/DOUANE)&#xa;+ type_entite: VARCHAR(30)&#xa;+ type_operateur: VARCHAR(30)&#xa;+ raison_sociale: VARCHAR(255)&#xa;+ ice: VARCHAR(15)&#xa;+ rc_numero: VARCHAR(50)&#xa;+ rc_ville: VARCHAR(100)&#xa;+ identifiant_fiscal: VARCHAR(50)&#xa;+ taxe_pro: VARCHAR(50)&#xa;+ siege_social: TEXT&#xa;+ statut_dossier: VARCHAR(30) DEFAULT 'EN_COURS'&#xa;+ created_at: TIMESTAMP" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontFamily=Courier New;fontSize=11;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="160" width="400" height="280" as="geometry" />
+        </mxCell>
+
+        <!-- Table: souscription_gerants -->
+        <mxCell id="t_gerants" value="Table: souscription_gerants&#xa;---------------------------------------&#xa;+ id: SERIAL [PK]&#xa;+ souscription_id: INT [FK -&gt; souscriptions.id]&#xa;+ nom: VARCHAR(100)&#xa;+ prenom: VARCHAR(100)&#xa;+ cin: VARCHAR(30)" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontFamily=Courier New;fontSize=11;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="640" y="160" width="380" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Table: documents_log -->
+        <mxCell id="t_docs" value="Table: documents_log&#xa;---------------------------------------&#xa;+ id: SERIAL [PK]&#xa;+ souscription_id: INT [FK -&gt; souscriptions.id]&#xa;+ slot_name: VARCHAR(50)&#xa;+ filename: VARCHAR(255)&#xa;+ is_valid: BOOLEAN&#xa;+ detected_type: VARCHAR(50)&#xa;+ validation_message: TEXT&#xa;+ uploaded_at: TIMESTAMP" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontFamily=Courier New;fontSize=11;fillColor=#FFFDE7;strokeColor=#BF360C;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="640" y="340" width="380" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- Relations -->
+        <mxCell id="rel1" edge="1" parent="1" source="t_sousc" target="t_gerants" value="1 --- 0..* (ON DELETE CASCADE)" style="fontStyle=1;fontSize=10;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="rel2" edge="1" parent="1" source="t_sousc" target="t_docs" value="1 --- 0..* (ON DELETE CASCADE)" style="fontStyle=1;fontSize=10;strokeColor=#BF360C;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -2,9 +2,17 @@
 Parser for Document IF (Bulletin de Notification d'Identifiant Fiscal) documents.
 
 Layout reference (AAC140B form):
-  - Header: "NOTIFICATION DU NUMERO D'IDENTIFICATION FISCALE"
-  - Structured rows with labels in the left column and values in the right column.
-  - The digital text layer typically renders as sequential label-value lines.
+  Text layer order for this document:
+    Line 346: Modèle AAC140B-07I
+    Line 349: BULLETIN DE NOTIFICATION DU
+    Line 350: N° D'IDENTIFICATION FISCALE
+    Line 359: NOM ET PRENOM (S) / RAISON SOCIALE :
+    Line 360: IMPOT SUR LE REVENU
+    Line 363: MEDI TELECOM S.A
+    Line 366: SA - SOCIETE ANONYM -
+    Line 367: 429045/CASABLANCA
+    Line 371: IDENTIFIANT DE LA TAXE PROFESSIONNELLE :25200117
+    Line 375: Immeubles Les Quatre Temps, La Colline, Sidi Maarouf, 20270
 """
 
 import re
@@ -12,41 +20,81 @@ from souscription.models.document import ExtractedDocumentIF
 from souscription.utils.text_cleaner import clean_whitespace
 
 
+def _is_arabic_only(line: str) -> bool:
+    """Check if a line consists only of Arabic characters and punctuation."""
+    stripped = line.strip()
+    if not stripped:
+        return True
+    return all(
+        ('\u0600' <= c <= '\u06FF' or '\u0750' <= c <= '\u077F'
+         or '\uFB50' <= c <= '\uFDFF' or '\uFE70' <= c <= '\uFEFF'
+         or c in ' .:()،-/*') for c in stripped
+    )
+
+
+def _is_label(line: str) -> bool:
+    """Check if a line is a form label rather than a data value."""
+    labels = [
+        "NOM ET PRENOM", "RAISON SOCIALE", "N° CNI", "CARTE DE SEJOUR",
+        "FORME JURIDIQUE", "REGISTRE DE COMMERCE", "N° ICE",
+        "IDENTIFIANT DE LA TAXE", "ADRESSE DU DOMICILE", "ADRESSE DU DIRIGEANT",
+        "SIEGE SOCIAL", "PRINCIPAL", "PROFESSION", "ACTIVITE",
+        "BULLETIN DE NOTIFICATION", "IDENTIFICATION FISCALE",
+        "Service d'assiette", "Recette de l'administration",
+        "Perception", "Identification du contribuable",
+        "Visa de l'Administration", "SUBDIVISION", "RECETTE DE",
+        "BOULEVARD BRAHIM", "Code de vérification",
+        "IMPOT SUR LE REVENU", "IMPOT SUR LES SOCIETES",
+        "TAXE SUR LA VALEUR", "Ce numéro", "Par ailleurs",
+        "dispositions", "Adresse :", "AAC140B",
+    ]
+    stripped = line.strip()
+    if not stripped or len(stripped) < 3:
+        return True
+    for lbl in labels:
+        if lbl.lower() in stripped.lower():
+            return True
+    # Labels ending with ":"
+    if stripped.endswith(':') and len(stripped) < 50:
+        return True
+    return False
+
+
 def parse_document_if(text: str) -> ExtractedDocumentIF:
     """
     Parses the text of a Bulletin de Notification d'Identifiant Fiscal
     and returns a structured Pydantic object.
-    
-    All values are extracted via regex from the raw text — no hardcoded defaults.
     """
     lines = [line.strip() for line in text.split('\n') if line.strip()]
 
     # 1. Raison Sociale / Dénomination
-    #    Typically the first prominent uppercase block, or appears before the
-    #    legal form line (e.g. "SARL", "SA", "SNC").
+    # Strategy A: Find line containing legal-form suffix (S.A., SARL, etc.)
+    # that is NOT a label
     denom = ""
-    # Strategy A: Look for a line immediately preceding a SARL/SA line
-    for i, line in enumerate(lines):
-        if re.search(r'\bSARL\b|\bS\.A\.R\.L\b|\bSA\b|\bSNC\b', line, re.IGNORECASE):
-            # The previous line is likely the company name
-            if i > 0 and len(lines[i - 1]) >= 3:
-                denom = clean_whitespace(lines[i - 1])
-            # If the legal form is on the same line, try to split
-            if not denom:
-                parts = re.split(r'\s*(?:SARL|S\.A\.R\.L|SA|SNC)\b', line, flags=re.IGNORECASE)
-                if parts and parts[0].strip():
-                    denom = clean_whitespace(parts[0])
+    for line in lines:
+        stripped = clean_whitespace(line)
+        if _is_arabic_only(stripped) or _is_label(stripped):
+            continue
+        if re.search(r'\b(?:S\.A\.?|SARL|S\.A\.R\.L)\b', stripped, re.IGNORECASE):
+            # Exclude legal form description lines like "SA - SOCIETE ANONYM"
+            if re.match(r'^(?:SA\s*-|SARL\s*-)', stripped, re.IGNORECASE):
+                continue
+            denom = stripped
             break
-    # Strategy B: Look for "NOM ET PRENOM" or "RAISON SOCIALE" anchor
+
+    # Strategy B: Look after "RAISON SOCIALE" anchor
     if not denom:
-        match = re.search(r'RAISON SOCIALE\s*:\s*(.+)', text, re.IGNORECASE)
+        match = re.search(r'RAISON SOCIALE\s*:\s*\n\s*(.+)', text, re.IGNORECASE)
         if match:
-            denom = clean_whitespace(match.group(1))
+            candidate = clean_whitespace(match.group(1))
+            if not _is_label(candidate) and len(candidate) > 3:
+                denom = candidate
 
     # 2. Forme juridique
     forme = ""
     forme_match = re.search(
-        r'(SARL\s*-?\s*ASSOCIE\s*UNIQUE\s*-?|'
+        r'(SA\s*-\s*SOCIETE\s+ANONYM[^,\n]*|'
+        r'SARL\s*-?\s*ASSOCIE\s*UNIQUE\s*-?|'
         r'SARL\s*AU|SARL|S\.A\.R\.L|SA|SNC|'
         r'SOCIETE\s+A\s+RESPONSABILITE\s+LIMITEE[^,\n]*)',
         text, re.IGNORECASE
@@ -54,13 +102,17 @@ def parse_document_if(text: str) -> ExtractedDocumentIF:
     if forme_match:
         forme = clean_whitespace(forme_match.group(0))
 
-    # 3. RC Number and City (e.g. "370621/CASABLANCA")
+    # 3. RC Number and City (e.g. "429045/CASABLANCA")
     rc_num = ""
     rc_city = ""
-    rc_match = re.search(r'(\d{3,8})\s*/\s*([A-Z\s]+)', text)
+    rc_match = re.search(r'(\d{3,8})\s*/\s*([A-Z][A-Za-z\s]+)', text)
     if rc_match:
         rc_num = rc_match.group(1)
-        rc_city = clean_whitespace(rc_match.group(2).title())
+        rc_city = clean_whitespace(rc_match.group(2))
+        # Take only city name, not trailing text
+        city_parts = rc_city.split()
+        if city_parts:
+            rc_city = city_parts[0]
 
     # 4. ICE (15 digits, usually starting with 00)
     ice = ""
@@ -71,24 +123,22 @@ def parse_document_if(text: str) -> ExtractedDocumentIF:
         ice = ice_match.group(1)
 
     # 5. Identifiant Fiscal (IF) — typically 8 digits
-    #    The IF usually appears near "Identification Fiscale" label or as a
-    #    standalone 8-digit block that isn't the TP or part of the ICE.
     if_num = ""
-    # Look near the "Identification Fiscale" anchor
-    if_anchor = re.search(r'Identification\s+Fiscale[^0-9]*(\d{7,9})', text, re.IGNORECASE)
+    # The IF number appears at the top of the document as a prominent number
+    if_anchor = re.search(r'Identification\s+Fiscale[^\d]*(\d{7,9})', text, re.IGNORECASE)
     if if_anchor:
         if_num = if_anchor.group(1)
     else:
-        # Collect all 8-digit numbers not already captured
+        # Look for standalone 8-digit number at the beginning of the document
         all_8digits = re.findall(r'\b(\d{8})\b', text)
         for candidate in all_8digits:
             if candidate != rc_num and candidate not in ice:
                 if_num = candidate
                 break
 
-    # 6. Taxe Professionnelle Number (typically 8 digits, different from IF)
+    # 6. Taxe Professionnelle Number
     tp_num = ""
-    tp_anchor = re.search(r'Taxe\s+Professionnelle[^0-9]*(\d{7,9})', text, re.IGNORECASE)
+    tp_anchor = re.search(r'Taxe\s+Professionnelle\s*[:\-N°]*\s*(\d{7,9})', text, re.IGNORECASE)
     if tp_anchor:
         tp_num = tp_anchor.group(1)
     else:
@@ -99,22 +149,26 @@ def parse_document_if(text: str) -> ExtractedDocumentIF:
                 break
 
     # 7. Siège Social (address)
+    # The actual address in this document type is "Immeubles Les Quatre Temps..."
+    # which does NOT contain RUE/AVENUE/BOULEVARD.
+    # Strategy: Find lines that look like a Moroccan address.
     siege = ""
-    # Look for address-like patterns (street number + RUE/AVENUE/BOULEVARD)
-    addr_match = re.search(
-        r'(\d+\s+(?:RUE|AVENUE|BOULEVARD|BD|AV\.?|LOTISSEMENT|LOT|QUARTIER)\s+[^\n]{5,60})',
-        text, re.IGNORECASE
-    )
-    if addr_match:
-        siege = clean_whitespace(addr_match.group(1))
-    else:
-        # Fallback: line containing "siège" or address keywords
-        for line in lines:
-            if re.search(r'(RUE|AVENUE|BD|BOULEVARD)', line, re.IGNORECASE) and len(line) > 10:
-                siege = clean_whitespace(line)
+    addr_patterns = [
+        r'(?:Immeubles|Rue|Avenue|Boulevard|Bd|Lot|Quartier|Hay|Bloc|Résidence|Zone)\s+.{10,}',
+        r'\d+\s+(?:Rue|Avenue|Boulevard|Bd|Av\.?)\s+.{5,}',
+    ]
+    for line in lines:
+        stripped = clean_whitespace(line)
+        if _is_arabic_only(stripped) or _is_label(stripped):
+            continue
+        for pat in addr_patterns:
+            if re.search(pat, stripped, re.IGNORECASE):
+                siege = stripped
                 break
+        if siege:
+            break
 
-    # 8. Edition Date (e.g. "Le 20-12-2021" or "20/12/2021")
+    # 8. Edition Date
     date_ed = ""
     date_match = re.search(r'Le\s*\n?\s*(\d{2}[-/]\d{2}[-/]\d{4})', text, re.IGNORECASE)
     if not date_match:

@@ -25,22 +25,24 @@ def parse_domiciliation(text: str) -> ExtractedDomiciliation:
     All values extracted via generic regex — no hardcoded defaults.
     """
     # 1. Domiciliary company (hosting entity)
-    #    "Nous soussignés la société [NAME], Société à responsabilité limitée"
+    #    "Nous soussignés GOAL VOYAGES, sise à..." or "Nous soussignés la société [NAME], ..."
     domiciliary = ""
     dom_match = re.search(
-        r'soussign[ée]s\s+(?:la\s+)?soci[ée]t[ée]\s+(.+?)\s*,\s*(?:Soci[ée]t[ée]|SARL|S\.A\.R\.L)',
+        r'soussign[ée]s\s+(?:la\s+)?(?:soci[ée]t[ée]\s+)?([A-Z0-9\s\-]+?)\s*,\s*(?:sise|Soci[ée]t[ée]|SARL|S\.A\.R\.L)',
         text, re.IGNORECASE
     )
     if dom_match:
         domiciliary = clean_whitespace(dom_match.group(1))
 
     # 2. Domiciliary RC
-    #    "registre de commerce de [CITY] sous le numéro [RC]"
+    #    "registre de commerce ... sous le numéro [RC]" or "RC : 162657"
     domiciliary_rc = ""
     rc_match = re.search(
         r'registre\s+de\s+commerce\s+(?:de\s+\w+\s+)?sous\s+le\s+num[ée]ro\s+(\d{4,8})',
         text, re.IGNORECASE
     )
+    if not rc_match:
+        rc_match = re.search(r'\bR\.?C\.?\s*:?\s*(\d{4,8})\b', text, re.IGNORECASE)
     if rc_match:
         domiciliary_rc = rc_match.group(1)
 
@@ -87,17 +89,24 @@ def parse_domiciliation(text: str) -> ExtractedDomiciliation:
         if all_dates:
             date_ed = all_dates[-1]
 
-    # 7. Stamp information ("RC: XXXXXX / IF: XXXXXXXX")
+    # 7. Stamp information ("RC: XXXXXX / IF: XXXXXXXX" or "R.C.: 429045 - TP:... - I.F.: 32770927")
     stamp_rc = None
     stamp_if = None
     stamp_company_name = None
 
-    stamp_match = re.search(r'RC\s*:\s*(\d+)\s*/\s*IF\s*:\s*(\d+)', text, re.IGNORECASE)
-    if stamp_match:
+    stamp_match = re.search(r'R\.?C\.?\s*:?\s*(\d+)\s*[/|\-].*?I\.?F\.?\s*:?\s*(\d+)', text, re.IGNORECASE)
+    if not stamp_match:
+        stamp_match = re.search(r'R\.?C\.?\s*:?\s*(\d+)', text, re.IGNORECASE)
+        if stamp_match:
+            stamp_rc = stamp_match.group(1)
+        if_m = re.search(r'I\.?F\.?\s*:?\s*(\d+)', text, re.IGNORECASE)
+        if if_m:
+            stamp_if = if_m.group(1)
+    else:
         stamp_rc = stamp_match.group(1)
         stamp_if = stamp_match.group(2)
 
-    # Stamp company name: line immediately before "RC: ... / IF: ..."
+    # Stamp company name: line immediately before stamp or header company name
     if stamp_match:
         stamp_pos = stamp_match.start()
         text_before_stamp = text[:stamp_pos].rstrip()

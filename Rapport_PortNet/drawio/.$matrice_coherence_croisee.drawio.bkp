@@ -1,0 +1,46 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="matrice_coherence_croisee" name="Matrice de Cohérence Croisée">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Form Center Box -->
+        <mxCell id="form_center" value="Formulaire Saisi par l'Opérateur Économique&#xa;(Raison Sociale, ICE, RC, Ville, IF, TP, Adresse, Gérants, RIB)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fontSize=13;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="320" width="370" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Surrounding Documents -->
+        <mxCell id="doc_mj" value="Modèle J&#xa;(RC, Ville, ICE, Dénomination,&#xa;Siège, Gérants, Domiciliation Hôte)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="doc_ice" value="Certificat ICE&#xa;(ICE, IF, RC, Ville, Dénomination, Sigle)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="460" y="80" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="doc_if" value="Document IF (AAC140B)&#xa;(IF, TP, RC, Ville, ICE, Raison Sociale, Adresse)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="80" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="doc_tp" value="Taxe Professionnelle (AAC060B)&#xa;(TP, IF, ICE, RC, Raison Sociale, Adresse)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="60" y="560" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="doc_dom" value="Attestation de Domiciliation&#xa;(Client, Hôte, RC Hôte, Adresse)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="460" y="560" width="250" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="doc_rib" value="Attestation de RIB&#xa;(RIB 24 chiffres Modulo 97, Titulaire)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFFFF;strokeColor=#1A237E;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="860" y="560" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Relationships -->
+        <mxCell id="r1" edge="1" parent="1" source="form_center" target="doc_mj" value="Strict ICE/RC, Fuzzy Name/Addr, CIN Transposition Fallback" style="fontStyle=1;fontSize=9;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r2" edge="1" parent="1" source="form_center" target="doc_ice" value="Strict ICE (15d) &amp; IF (8d)" style="fontStyle=1;fontSize=9;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r3" edge="1" parent="1" source="form_center" target="doc_if" value="Strict IF (8d) &amp; TP (8d)" style="fontStyle=1;fontSize=9;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r4" edge="1" parent="1" source="form_center" target="doc_tp" value="Strict TP &amp; Fuzzy Address (&gt;= 75%)" style="fontStyle=1;fontSize=9;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r5" edge="1" parent="1" source="form_center" target="doc_dom" value="Cross-Check Hôte Domiciliataire avec Modèle J" style="fontStyle=1;fontSize=9;strokeColor=#0277BD;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r6" edge="1" parent="1" source="form_center" target="doc_rib" value="Strict RIB Modulo 97 Check" style="fontStyle=1;fontSize=9;strokeColor=#2E7D32;"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r7" edge="1" parent="1" source="doc_mj" target="doc_dom" value="Inter-Document Host Cross-Check (GOAL VOYAGES RC:162657)" style="dashed=1;fontStyle=2;fontSize=9;strokeColor=#BF360C;"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

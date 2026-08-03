@@ -1,0 +1,62 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="diagramme_gantt_agile" name="Planning Gantt &amp; Agile Sprints">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Header Timeline -->
+        <mxCell id="th_title" value="Planning de Réalisation du Projet (Sprint 1 à Sprint 4 - 12 Semaines)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fontSize=13;fillColor=#1A237E;textColor=#ffffff;align=center;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1080" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Sprints Boxes -->
+        <mxCell id="sp1" value="Sprint 1 : Cadres &amp; Prototypes&#xa;(S1 - S3)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sp2" value="Sprint 2 : Moteur 2 Couches &amp; Extracteurs&#xa;(S4 - S6)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="100" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sp3" value="Sprint 3 : Cross-Ref &amp; Persistance DB&#xa;(S7 - S9)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="590" y="100" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sp4" value="Sprint 4 : Benchmarks 64/64 &amp; Recette&#xa;(S10 - S12)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="870" y="100" width="250" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Gantt Tasks -->
+        <mxCell id="t1" value="T1. Étude de l'existant &amp; Cadrage des besoins" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#90CAF9;strokeColor=#0277BD;" vertex="1" parent="1">
+          <mxGeometry x="40" y="170" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t2" value="T2. Conception Design System SPA HTML5/CSS3" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#90CAF9;strokeColor=#0277BD;" vertex="1" parent="1">
+          <mxGeometry x="110" y="210" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t3" value="T3. Développement Classifier 2 Couches" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#A5D6A7;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="310" y="250" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="T4. Ingénierie des 7 Extracteurs PDF (Regex/OCR)" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#A5D6A7;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="370" y="290" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t5" value="T5. Matrice de Cohérence Croisée (Cross-Ref)" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#FFE082;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="590" y="330" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t6" value="T6. Validateurs Modulo 97 &amp; Récence Modèle J" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#FFE082;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="650" y="370" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t7" value="T7. Schéma PostgreSQL &amp; API FastAPI Persistence" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#FFE082;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="700" y="410" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t8" value="T8. Matrice de Test 8x8 (64/64 PASS)" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#CE93D8;strokeColor=#7B1FA2;" vertex="1" parent="1">
+          <mxGeometry x="870" y="450" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="t9" value="T9. Recette Utilisateur &amp; Rédaction du Rapport" style="shape=rect;whiteSpace=wrap;html=1;align=left;spacingLeft=10;fontSize=10;fillColor=#CE93D8;strokeColor=#7B1FA2;" vertex="1" parent="1">
+          <mxGeometry x="930" y="490" width="190" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

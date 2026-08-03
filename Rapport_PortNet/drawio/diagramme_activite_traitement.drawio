@@ -1,0 +1,87 @@
+<mxfile host="Electron" agent="Mozilla/5.0">
+  <diagram id="diagramme_activite_traitement" name="Diagramme d&#39;Activité Traitement">
+    <mxGraphModel dx="1847" dy="1082" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="start" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="560" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;" value="Téléversement d&#39;un document PDF dans un slot" vertex="1">
+          <mxGeometry height="50" width="230" x="460" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" value="Extraction de la couche texte (PyMuPDF)" vertex="1">
+          <mxGeometry height="50" width="230" x="460" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;" value="Texte extrait &gt; 20 chars ?" vertex="1">
+          <mxGeometry height="80" width="190" x="480" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="ocr_action" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;" value="Secours OCR Tesseract&#xa;(pytesseract Binarisation + LSTM)" vertex="1">
+          <mxGeometry height="50" width="220" x="760" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;" value="Vérification par Classifier 2 Couches&#xa;(verify_slot_document)" vertex="1">
+          <mxGeometry height="60" width="230" x="460" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" parent="1" style="rhombus;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;" value="Document Conforme au Slot ?" vertex="1">
+          <mxGeometry height="80" width="210" x="470" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="a_reject" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;" value="Rejeter le document &amp; Afficher Badge Rouge (NON CONFORME)" vertex="1">
+          <mxGeometry height="50" width="220" x="180" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="a_extract" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" value="Parser les Entités Métier (Extracteurs Pydantic) &amp; Contrôles Math (Mod 97)" vertex="1">
+          <mxGeometry height="60" width="290" x="430" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="a_badge_green" parent="1" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" value="Afficher Badge Vert (CONFORME) &amp; Mettre à jour la Table de Synthèse" vertex="1">
+          <mxGeometry height="50" width="290" x="430" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="end" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#000000;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="30" width="30" x="560" y="775" as="geometry" />
+        </mxCell>
+        <mxCell id="c1" edge="1" parent="1" source="start" target="a1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c2" edge="1" parent="1" source="a1" target="a2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c3" edge="1" parent="1" source="a2" target="d1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c4" edge="1" parent="1" source="d1" target="a3" value="Oui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c5" edge="1" parent="1" source="d1" target="ocr_action" value="Non (Scan)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c6" edge="1" parent="1" source="ocr_action" target="a3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="410" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c7" edge="1" parent="1" source="a3" target="d2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c8" edge="1" parent="1" source="d2" target="a_reject" value="Non">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c9" edge="1" parent="1" source="d2" target="a_extract" value="Oui">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c10" edge="1" parent="1" source="a_extract" target="a_badge_green">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c11" edge="1" parent="1" source="a_badge_green" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="c12" edge="1" parent="1" source="a_reject" target="end">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="790" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PortNet — Souscription au système Douane. Téléversez vos documents pour compléter votre demande de souscription.">
+    <title>Souscription — Documents | PortNet</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="public/portnetLogo.jpg">
+    <!-- Souscription styles -->
+    <link rel="stylesheet" href="css/souscription.css">
+</head>
+
+<body class="souscription-page">
+
+    <!-- ═══════════════════════════════════════════════════════════
+     TOP NAVIGATION
+     ═══════════════════════════════════════════════════════════ -->
+    <nav class="sousc-nav">
+        <a href="/" title="PortNet S.A.">
+            <img src="public/portnetLogo.jpg" alt="PortNet Logo" class="sousc-nav-logo">
+        </a>
+        <div class="sousc-nav-user">
+            Bienvenue : <strong>Opérateur Économique</strong>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     PAGE HEADER (Blue Banner)
+     ═══════════════════════════════════════════════════════════ -->
+    <header class="sousc-header">
+        <h1>Votre souscription au système Douane</h1>
+        <p>Veuillez saisir les informations suivantes</p>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     STEP INDICATOR
+     ═══════════════════════════════════════════════════════════ -->
+    <div class="sousc-steps">
+        <div class="sousc-step completed">
+            <span class="sousc-step-num"><i class="fas fa-check" style="font-size:11px"></i></span>
+            Informations générales
+        </div>
+        <div class="sousc-step-line completed"></div>
+        <div class="sousc-step completed">
+            <span class="sousc-step-num"><i class="fas fa-check" style="font-size:11px"></i></span>
+            Détails opérateur
+        </div>
+        <div class="sousc-step-line completed"></div>
+        <div class="sousc-step completed">
+            <span class="sousc-step-num"><i class="fas fa-check" style="font-size:11px"></i></span>
+            Informations gérant
+        </div>
+        <div class="sousc-step-line"></div>
+        <div class="sousc-step active">
+            <span class="sousc-step-num">4</span>
+            Documents
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════════ -->
+    <div class="sousc-content">
+
+        <form id="souscriptionForm" enctype="multipart/form-data">
+
+            <!-- ─── Informations de l'opérateur (résumé des étapes précédentes) ─── -->
+            <fieldset class="sousc-fieldset">
+                <legend>
+                    <span class="legend-icon"><i class="fas fa-building"></i></span>
+                    Informations de l'opérateur
+                </legend>
+                <p class="sousc-note">
+                    <i class="fas fa-info-circle"></i>
+                    Ces informations correspondent aux données saisies dans les étapes précédentes.
+                    Elles seront utilisées pour la vérification croisée avec les documents téléversés.
+                </p>
+
+                <div class="sousc-form-grid">
+                    <div class="sousc-form-group">
+                        <label>Raison Sociale <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputRaisonSociale" name="raison_sociale"
+                            placeholder="Ex: GOAL EVENTS" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>ICE <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputICE" name="ice"
+                            placeholder="15 chiffres" required maxlength="15">
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>Numéro RC <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputRC" name="rc_number"
+                            placeholder="Ex: 429045" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>Ville RC <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputRCCity" name="rc_city"
+                            placeholder="Ex: Casablanca" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>Identifiant Fiscal (IF) <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputIF" name="if_number"
+                            placeholder="7-9 chiffres" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>Taxe Professionnelle (TP) <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputTP" name="tp_number"
+                            placeholder="8 chiffres" required>
+                    </div>
+                    <div class="sousc-form-group full-width">
+                        <label>Siège Social <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputSiege" name="siege_social"
+                            placeholder="Adresse complète" required>
+                    </div>
+                </div>
+
+                <!-- Gérant -->
+                <h4 style="font-size:14px; color:var(--pn-header-bg); margin:20px 0 12px; font-weight:600;">
+                    <i class="fas fa-user-tie"></i> Signataire / Gérant
+                </h4>
+                <div class="sousc-form-grid">
+                    <div class="sousc-form-group">
+                        <label>Nom <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputGerantNom" name="gerant_nom"
+                            placeholder="BARA" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>Prénom <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputGerantPrenom" name="gerant_prenom"
+                            placeholder="MOUAD" required>
+                    </div>
+                    <div class="sousc-form-group">
+                        <label>CIN <span class="required">*</span></label>
+                        <input type="text" class="sousc-form-input" id="inputGerantCIN" name="gerant_cin"
+                            placeholder="EC83147" required>
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- ─── Documents Section ─── -->
+            <fieldset class="sousc-fieldset">
+                <legend>
+                    <span class="legend-icon"><i class="fas fa-file-alt"></i></span>
+                    Documents
+                </legend>
+                <p class="sousc-note">
+                    <strong>Nb:</strong> Les fichiers à importer doivent être uniquement du type <strong>.PDF</strong>
+                    et le poids maximal du fichier ne doit pas dépasser <strong>3MO</strong>.
+                </p>
+
+                <div class="sousc-docs-grid">
+
+                    <!-- 1. CIN -->
+                    <div class="sousc-upload-box" data-slot="cni">
+                        <label class="sousc-upload-label">
+                            Copie de la CIN ou du passeport du signataire de la demande <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-cni">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="cni" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-cni"></div>
+                    </div>
+
+                    <!-- 2. Catégorie opérateur -->
+                    <div class="sousc-upload-box" data-slot="categorie_operateur">
+                        <label class="sousc-upload-label">
+                            Copie d'un document justifiant la catégorie de l'opérateur <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-categorie_operateur">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="categorie_operateur" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-categorie_operateur"></div>
+                    </div>
+
+                    <!-- 3. Statuts de la société -->
+                    <div class="sousc-upload-box" data-slot="statuts">
+                        <label class="sousc-upload-label">
+                            Statut de la société <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-statuts">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="statuts" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-statuts"></div>
+                    </div>
+
+                    <!-- 4. Modèle J / Registre de commerce -->
+                    <div class="sousc-upload-box" data-slot="model_j">
+                        <label class="sousc-upload-label">
+                            Copie du modèle J / Registre de commerce <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-model_j">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="model_j" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-model_j"></div>
+                    </div>
+
+                    <!-- 5. Procuration -->
+                    <div class="sousc-upload-box" data-slot="procuration">
+                        <label class="sousc-upload-label">
+                            Procuration par le gérant pour faire la procédure de souscription
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-procuration">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="procuration" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-procuration"></div>
+                    </div>
+
+                    <!-- 6. Taxe Professionnelle -->
+                    <div class="sousc-upload-box" data-slot="taxe_professionnelle">
+                        <label class="sousc-upload-label">
+                            Taxe Professionnelle <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-taxe_professionnelle">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="taxe_professionnelle" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-taxe_professionnelle"></div>
+                    </div>
+
+                    <!-- 7. ICE -->
+                    <div class="sousc-upload-box" data-slot="ice">
+                        <label class="sousc-upload-label">
+                            ICE <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-ice">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="ice_doc" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-ice"></div>
+                    </div>
+
+                    <!-- 8. Attestation de RIB -->
+                    <div class="sousc-upload-box" data-slot="attestation_rib">
+                        <label class="sousc-upload-label">
+                            Attestation de RIB <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-attestation_rib">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="attestation_rib" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-attestation_rib"></div>
+                    </div>
+
+                    <!-- 9. Document IF -->
+                    <div class="sousc-upload-box" data-slot="document_if">
+                        <label class="sousc-upload-label">
+                            Document IF <span class="required">*</span>
+                        </label>
+                        <div class="sousc-upload-area" id="uploadArea-document_if">
+                            <div class="sousc-upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <span class="sousc-upload-text">Choisir un fichier</span>
+                            <button type="button" class="sousc-upload-btn">Parcourir</button>
+                            <button type="button" class="sousc-upload-remove" title="Supprimer"><i class="fas fa-times"></i></button>
+                            <input type="file" class="sousc-upload-input" name="document_if" accept=".pdf">
+                        </div>
+                        <div class="sousc-verify-badge" id="badge-document_if"></div>
+                    </div>
+
+                </div>
+            </fieldset>
+
+            <!-- ─── Terms & Conditions ─── -->
+            <div class="sousc-terms">
+                <input type="checkbox" id="termsCheckbox">
+                <div class="sousc-terms-text">
+                    <span class="required-label">Termes et Conditions d'Utilisation *</span><br>
+                    J'ai lu et j'accepte les <a href="#" target="_blank">Conditions Générales d'Utilisation</a>.
+                    Conformément à la loi 09-08, vous disposez d'un droit d'accès, de rectification et d'opposition au
+                    traitement de vos données personnelles. Ce traitement a été autorisé par la CNDP sous le n° A-GC-318/2016.
+                </div>
+            </div>
+
+            <!-- ─── Footer Buttons ─── -->
+            <div class="sousc-footer">
+                <button type="button" class="sousc-btn sousc-btn-prev" onclick="history.back()">
+                    <i class="fas fa-arrow-left"></i> PRÉCÉDENT
+                </button>
+                <button type="submit" class="sousc-btn sousc-btn-submit" id="submitBtn" disabled>
+                    VALIDER VOTRE SOUSCRIPTION <i class="fas fa-check-circle"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     LOADING OVERLAY (shown during processing)
+     ═══════════════════════════════════════════════════════════ -->
+    <div class="sousc-loading-overlay" id="loadingOverlay">
+        <div class="sousc-loading-card">
+            <div class="sousc-loading-spinner"></div>
+            <h3>Vérification en cours...</h3>
+            <p>Analyse automatique de vos documents. Veuillez patienter.</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════ -->
+    <footer class="sousc-page-footer">
+        Copyright ©2026, PORTNET S.A.
+    </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════ -->
+    <script src="js/souscription.js"></script>
+
+</body>
+
+</html>

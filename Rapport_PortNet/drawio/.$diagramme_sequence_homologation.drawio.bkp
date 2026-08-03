@@ -1,0 +1,68 @@
+<mxfile host="Electron" modified="2026-07-28T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device">
+  <diagram id="diagramme_sequence_homologation" name="Séquence Homologation &amp; BADR Sync">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Lifelines -->
+        <mxCell id="ll_op" value="Opérateur / Agent&#xa;(UI Frontend)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E3F2FD;strokeColor=#0277BD;" vertex="1" parent="1">
+          <mxGeometry x="60" y="50" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_orch" value="Pipeline Orchestrator&#xa;(orchestrator.py)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#E8F5E9;strokeColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="300" y="50" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_xref" value="Cross-Ref Engine&#xa;(cross_reference.py)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFFDE7;strokeColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="560" y="50" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_db" value="PostgreSQL DB&#xa;(01_schema.sql)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="50" width="140" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ll_badr" value="Système Douane&#xa;BADR (ADII)" style="shape=rect;whiteSpace=wrap;html=1;fontStyle=1;fillColor=#FFEBEE;strokeColor=#C62828;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="50" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Vertical Lines -->
+        <mxCell id="line_op" value="" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#0277BD;" vertex="1" parent="1"><mxGeometry x="120" y="100" width="10" height="560" as="geometry" /></mxCell>
+        <mxCell id="line_orch" value="" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#2E7D32;" vertex="1" parent="1"><mxGeometry x="370" y="100" width="10" height="560" as="geometry" /></mxCell>
+        <mxCell id="line_xref" value="" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#BF360C;" vertex="1" parent="1"><mxGeometry x="630" y="100" width="10" height="560" as="geometry" /></mxCell>
+        <mxCell id="line_db" value="" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#7B1FA2;" vertex="1" parent="1"><mxGeometry x="865" y="100" width="10" height="560" as="geometry" /></mxCell>
+        <mxCell id="line_badr" value="" style="line;strokeWidth=2;direction=south;html=1;strokeColor=#C62828;" vertex="1" parent="1"><mxGeometry x="1060" y="100" width="10" height="560" as="geometry" /></mxCell>
+
+        <!-- Messages -->
+        <mxCell id="m1" value="1: Soumettre le Dossier Complet (POST /api/souscription/upload)" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#0277BD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="125" y="140" as="sourcePoint" /><mxPoint x="365" y="140" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m2" value="2: Exécuter la Matrice Inter-Documents (check_cross_consistency)" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#2E7D32;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="375" y="200" as="sourcePoint" /><mxPoint x="625" y="200" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m3" value="3: Vérifier ICE, RC, IF, TP, Adresse &amp; Fallback Transposition CIN Gérants" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#BF360C;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="635" y="260" as="sourcePoint" /><mxPoint x="635" y="290" as="targetPoint" /><Array as="points"><mxPoint x="680" y="260" /><mxPoint x="680" y="290" /></Array></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m4" value="4: Retourner le Rapport Global de Cohérence" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#BF360C;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="625" y="340" as="sourcePoint" /><mxPoint x="375" y="340" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m5" value="5: Persister la Demande (INSERT INTO souscriptions &amp; souscription_gerants)" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#7B1FA2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="375" y="400" as="sourcePoint" /><mxPoint x="860" y="400" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m6" value="6: Confirmation ID Souscription" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#7B1FA2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="860" y="450" as="sourcePoint" /><mxPoint x="375" y="450" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m7" value="7: Synchronisation BADR (Mode PORTNET_DOUANE)" style="endArrow=classic;html=1;fontStyle=1;strokeColor=#C62828;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="375" y="510" as="sourcePoint" /><mxPoint x="1055" y="510" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="m8" value="8: Réponse JSON Globale (statut, id_demande, validation_matrix)" style="endArrow=open;dashed=1;html=1;fontStyle=1;strokeColor=#0277BD;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="365" y="570" as="sourcePoint" /><mxPoint x="125" y="570" as="targetPoint" /></mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
