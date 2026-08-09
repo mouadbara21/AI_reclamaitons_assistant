@@ -4,81 +4,99 @@
 
 Ce premier chapitre pose le cadre institutionnel, m\'{e}tier et m\'{e}thodologique dans lequel s'inscrit le pr\'{e}sent Projet de Fin d'Ann\'{e}e. Il pr\'{e}sente successivement l'organisme d'accueil PortNet S.A., son r\^{o}le strat\'{e}gique de Guichet Unique National et son organigramme fonctionnel. Il examine ensuite le partenariat critique avec l'Administration des Douanes et Imp\^{o}ts Indirects (ADII) et son syst\`{e}me BADR. Apr\`{e}s une \'{e}tude approfondie et une critique argument\'{e}e du processus manuel existant, le chapitre formalise la probl\'{e}matique m\'{e}tier, les verrous techniques identifi\'{e}s, le cahier des charges fonctionnel et non-fonctionnel, le choix de la stack technologique et, enfin, la d\'{e}marche de conduite de projet Agile Scrum adopt\'{e}e.
 
-\section{Organisme d'Accueil : PortNet S.A.}
+\section{L'organisme d'accueil}
 
-\subsection{Pr\'{e}sentation de la Soci\'{e}t\'{e} et Donn\'{e}es Cl\'{e}s}
+\textbf{PortNet S.A.} est une entreprise initiée en 2008 par l'Agence Nationale
+des Ports (l'autorité portuaire au Maroc). Elle est le fruit de l'alliance
+stratégique des communautés portuaires et du commerce international. Il s'agit
+d'un outil propre au gouvernement marocain visant la mise en \oe uvre de
+plusieurs stratégies sectorielles en vue de l'amélioration du climat des
+affaires, des échanges commerciaux, de la compétitivité portuaire et logistique
+et de leur généralisation, sans oublier pour autant l'innovation dans les
+services e-gov.
 
-Initi\'{e}e en 2008 sous l'impulsion de l'Agence Nationale des Ports (ANP) et cr\'{e}\'{e}e sous forme de Soci\'{e}t\'{e} Anonyme en 2012, \textbf{PortNet S.A.} est le Guichet Unique National de la Simplification des Proc\'{e}dures du Commerce Ext\'{e}rieur au Maroc. Sa mission principale est de fluidifier et de d\'{e}mat\'{e}rialiser les flux documentaires entre l'ensemble des acteurs publics et priv\'{e}s intervenant dans la cha\^{\i}ne logistique transfrontali\`{e}re : importateurs, exportateurs, transitaires, compagnies maritimes, agents consignataires, administrations de contr\^{o}le et \'{e}tablissements bancaires.
+Concrètement, PortNet opère le \textbf{Guichet Unique National des procédures du
+commerce extérieur} : une plateforme électronique communautaire qui dématérialise
+et centralise l'ensemble des formalités liées aux opérations d'importation,
+d'exportation et de logistique portuaire, en interconnectant en un point d'entrée
+unique les administrations, les organismes de contrôle, les opérateurs
+portuaires, les banques et les entreprises importatrices et exportatrices.
 
 \begin{figure}[H]
-    \centering
-    \IfFileExists{Logos/Logo_PortNet.png}{\includegraphics[height=1.8cm]{Logos/Logo_PortNet.png}}{\fbox{\parbox{6cm}{\centering\vspace{0.5cm}\textit{Logo PortNet S.A.}\vspace{0.5cm}}}}
-    \caption{PortNet S.A. --- Guichet Unique National du Commerce Ext\'{e}rieur.}
-    \label{fig:portnet-logo-ch1}
+  \centering
+  \includegraphics[width=5cm]{Logos/portnet_logo_cropped.png}
+  \caption{Logo de PortNet S.A.}
+  \label{fig:logo-portnet}
 \end{figure}
 
-La plateforme PortNet rassemble une communaut\'{e} d'utilisateurs massive et diversifi\'{e}e, t\'{e}moignant de son r\^{o}le central dans l'\'{e}cosyst\`{e}me du commerce ext\'{e}rieur marocain :
+\subsection{Données clés}
 
-\begin{table}[H]
-\centering
-\small
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{4.5cm} Y@{}}
-\toprule
-\rowcolor{lightblue}
-Indicateur & Donn\'{e}e \\
-\midrule
-Usagers actifs interconnect\'{e}s & Plus de 50\,000 \\
-Op\'{e}rateurs \'{e}conomiques & Plus de 45\,000 (Importateurs et Exportateurs) \\
-Transitaires agr\'{e}\'{e}s en douane & Plus de 1\,500 \\
-Institutions bancaires partenaires & Plus de 20 \\
-Administrations et organismes de contr\^{o}le & Plus de 43 (ADII, OMPIC, DGI, ONSSA, EACCE, ANP, TMPA) \\
-\bottomrule
-\end{tabularx}
-\caption{Chiffres cl\'{e}s de la communaut\'{e} PortNet S.A.}
-\label{tab:portnet-chiffres}
-\end{table}
+Actuellement, PortNet a franchi la barre des \textbf{66 000 usagers}, incluant
+plus de 55 000 importateurs et exportateurs, 1 700 déclarants et transitaires, 20
+banques et 43 administrations. La plateforme fédère également 200 agents
+maritimes et consignataires, plus de 300 \textit{freight forwarders}, 43
+opérateurs de manutention, 62 opérateurs MEAD et 5 expressistes, répartis sur 12
+ports et 11 aéroports. Elle met à disposition plus de \textbf{120 services en
+ligne} et a acheminé plus de 136 millions de messages EDI.
 
-Les services num\'{e}riques propos\'{e}s par PortNet couvrent l'ensemble du cycle de vie d'une op\'{e}ration de commerce ext\'{e}rieur : la pr\'{e}paration de l'Engagement d'Importation ou du Titre d'Exportation, le suivi des titres de transport maritime et a\'{e}rien, la gestion du manifeste, la d\'{e}claration douani\`{e}re en liaison directe avec le syst\`{e}me BADR de l'ADII, le circuit de paiement \'{e}lectronique des droits et taxes, ainsi que le suivi logistique portuaire.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{images/portnet-chiffres.jpg}
+  \caption{PortNet en chiffres}
+  \label{fig:portnet-chiffres}
+\end{figure}
 
-\subsection{Organigramme Fonctionnel de PortNet S.A.}
+\subsection{L'organigramme de PortNet S.A.}
 
-L'organisation interne de PortNet S.A. s'articule autour de quatre p\^{o}les majeurs plac\'{e}s sous la responsabilit\'{e} de la Direction G\'{e}n\'{e}rale :
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{images/portnet_organisme.png}
+  \caption{L'organigramme de PortNet S.A.}
+  \label{fig:organigramme}
+\end{figure}
 
-\begin{itemize}[leftmargin=*, itemsep=4pt]
-    \item \textbf{P\^{o}le M\'{e}tier et Partenariats} : pilotage des relations avec les administrations partenaires (Douane, OMPIC, DGI), coordination des proc\'{e}dures m\'{e}tier et \'{e}volutions r\'{e}glementaires ;
-    \item \textbf{P\^{o}le Syst\`{e}mes d'Information} : architecture technique, d\'{e}veloppement logiciel, exploitation et maintenance des infrastructures ;
-    \item \textbf{P\^{o}le Finances et Administration} : gestion financi\`{e}re, ressources humaines et affaires juridiques ;
-    \item \textbf{P\^{o}le Communication et D\'{e}veloppement Commercial} : promotion des services, accompagnement des utilisateurs et formation.
+L'organigramme de PortNet montre que l'entreprise est dirigée par
+\textbf{M. Youssef AHOUZI}, Directeur Général. L'organisation comprend plusieurs
+comités, notamment le Conseil d'Administration, le Comité d'Audit, le Comité
+d'Investissement, de Tarification et de Gouvernance, le Comité de Risques et le
+Comité des Recrutements et des Rémunérations.
+
+La Direction Générale s'appuie sur des cellules transverses --- Conformité et
+Risques, Communication et Conduite de Changement, Contrôle de Gestion, Gestion
+des Risques SI et Plan de Continuité d'Activité, Audit interne --- ainsi que sur
+une \textit{Business Unit} Centre de Service IT. Trois directions opérationnelles
+structurent l'activité :
+
+\begin{itemize}[leftmargin=1.6cm,itemsep=2pt,topsep=4pt]
+  \item la \textbf{Direction Administrative \& Financière} (achats et moyens
+        généraux, ressources humaines, comptabilité, finance et trésorerie,
+        facturation et recouvrement) ;
+  \item la \textbf{Direction SI} (AMOA, infrastructures SI, \textit{helpdesk}) ;
+  \item la \textbf{Direction Commerciale} (veille et études stratégiques,
+        marketing, gestion clientèle, maison de services).
 \end{itemize}
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{images/organigramme_portnet.png}{\includegraphics[width=\textwidth]{images/organigramme_portnet.png}}{\fbox{\parbox{14cm}{\centering\vspace{2cm}\textit{Organigramme fonctionnel de PortNet S.A. --- Exporter depuis organigramme\_portnet.drawio}\vspace{2cm}}}}
-    \caption{Organigramme fonctionnel et structurel de PortNet S.A.}
-    \label{fig:organigramme-portnet}
-\end{figure}
+Mon stage s'est déroulé au sein de la \textbf{Direction SI}, en interaction
+directe avec les équipes fonctionnelles responsables du processus de souscription.
 
-Le projet a \'{e}t\'{e} d\'{e}velopp\'{e} au sein du \textbf{D\'{e}partement D\'{e}veloppement et Ing\'{e}nierie Logicielle}, rattach\'{e} au P\^{o}le Syst\`{e}mes d'Information. Ce positionnement a permis un acc\`{e}s direct aux sp\'{e}cifications m\'{e}tier de la proc\'{e}dure de souscription, aux \'{e}chantillons de documents r\'{e}els et \`{a} l'expertise des \'{e}quipes fonctionnelles du P\^{o}le M\'{e}tier responsable de l'interconnexion avec le syst\`{e}me BADR de l'ADII.
+\subsection{Les services de l'entreprise}
 
-\subsection{Cadre de Partenariat avec l'Administration des Douanes (ADII / BADR)}
+PortNet met à disposition de sa communauté plus de 120 services en ligne. Parmi
+les principaux :
 
-L'Administration des Douanes et Imp\^{o}ts Indirects (ADII) g\`{e}re le syst\`{e}me \textbf{BADR} (\textit{Base Automatis\'{e}e des Douanes en R\'{e}seau}), plateforme centrale de d\'{e}douanement des marchandises au Maroc. Pour exercer l\'{e}galement une activit\'{e} d'importation ou d'exportation, tout op\'{e}rateur \'{e}conomique doit \^{e}tre immatricul\'{e} aupr\`{e}s de la Douane et disposer d'un identifiant dans le syst\`{e}me BADR.
-
-\begin{figure}[H]
-    \centering
-    \IfFileExists{Logos/Logo_ADII.png}{\includegraphics[height=1.8cm]{Logos/Logo_ADII.png}}{\fbox{\parbox{6cm}{\centering\vspace{0.5cm}\textit{Logo ADII / Douane}\vspace{0.5cm}}}}
-    \caption{Administration des Douanes et Imp\^{o}ts Indirects (ADII) --- Syst\`{e}me BADR.}
-    \label{fig:douane-logo-ch1}
-\end{figure}
-
-Le Guichet Unique PortNet offre un point d'entr\'{e}e unifi\'{e} permettant d'instruire simultan\'{e}ment la souscription aux services informatiques de PortNet et l'immatriculation sur la plateforme BADR de la Douane. Ce partenariat se traduit par deux modes d'inscription distincts :
-
-\begin{itemize}[leftmargin=*, itemsep=4pt]
-    \item \textbf{Mode PORTNET\_DOUANE} : inscription simultan\'{e}e aux deux plateformes, n\'{e}cessitant le dossier complet de neuf pi\`{e}ces justificatives ;
-    \item \textbf{Mode DOUANE} : inscription \`{a} la plateforme BADR uniquement, avec un sous-ensemble de pi\`{e}ces adapt\'{e}.
+\begin{itemize}[leftmargin=1.6cm,itemsep=3pt,topsep=4pt]
+  \item \textbf{Souscription en ligne} : inscription dématérialisée des opérateurs
+        économiques à la plateforme et, le cas échéant, auprès de l'administration
+        des douanes. C'est le service directement concerné par le présent projet ;
+  \item \textbf{Trade Direct} : gestion en ligne des opérations d'import et
+        d'export (titres, engagements d'importation, licences) ;
+  \item \textbf{Trade Sense} : services d'information et d'aide à la décision sur
+        les procédures et les flux du commerce extérieur ;
+  \item \textbf{Massar Attajir} : suivi et traçabilité du parcours de l'opération
+        commerciale ;
+  \item \textbf{Gestion des accès portuaires} : badges, autorisations et contrôle
+        d'accès aux enceintes portuaires.
 \end{itemize}
-
-Cette dualit\'{e} impose au syst\`{e}me de v\'{e}rification de g\'{e}rer dynamiquement les emplacements de documents requis selon le mode choisi par l'op\'{e}rateur.
 
 \section{\'{E}tude et Critique de l'Existant}
 
@@ -107,31 +125,71 @@ Dans l'existant, l'instruction des souscriptions repose enti\`{e}rement sur un c
     \label{fig:processus-existant}
 \end{figure}
 
-\subsection{Critique de l'Existant et Dysfonctionnements}
+\subsection{Critique de l'existant}
 
-L'\'{e}valuation approfondie du processus manuel a mis en \'{e}vidence plusieurs faiblesses critiques :
+Le tableau~\ref{tab:comparaison} présente une analyse comparative entre le système
+existant et la solution proposée.
 
 \begin{table}[H]
 \centering
+\caption{Comparaison entre le système existant et la solution proposée}
+\label{tab:comparaison}
 \small
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{3.5cm} Y p{2cm}@{}}
-\toprule
-\rowcolor{lightblue}
-Probl\`{e}me & Description & Gravit\'{e} \\
-\midrule
-D\'{e}lais d'instruction & Les dossiers s'accumulent pendant les p\'{e}riodes de pointe, entra\^{\i}nant des d\'{e}lais de 48h \`{a} 72h ouvr\'{e}es. & Haute \\
-Erreur humaine & Les v\'{e}rificateurs font face \`{a} des dizaines de variantes de documents, provoquant l'inattention lors du contr\^{o}le des num\'{e}ros de s\'{e}rie. & Haute \\
-Absence de Modulo~97 & Impossibilit\'{e} de calculer manuellement les cl\'{e}s de contr\^{o}le des identifiants ICE (15 chiffres) et des comptes RIB (24 chiffres). & Critique \\
-Confusion inter-slots & Aucune alerte lors du d\'{e}p\^{o}t d'un document dans le mauvais emplacement (ex: Mod\`{e}le J au lieu de la CIN). & Haute \\
-Pas de cross-ref & Les incoh\'{e}rences entre documents (ICE diff\'{e}rent sur le Mod\`{e}le J et le Certificat ICE) ne sont pas d\'{e}tect\'{e}es syst\'{e}matiquement. & Critique \\
-\bottomrule
-\end{tabularx}
-\caption{Synth\`{e}se des dysfonctionnements identifi\'{e}s dans le processus existant.}
-\label{tab:critique-existant}
+\begin{tabular}{|p{3.2cm}|p{4.6cm}|p{4.6cm}|}
+\hline
+\textbf{Critère} & \textbf{Système existant} & \textbf{Solution proposée} \\
+\hline
+Identification du type de document & Manuelle, à l'ouverture de chaque fichier &
+Classification automatique par ancres textuelles \\
+\hline
+Lecture des documents numérisés & Lecture visuelle par l'agent &
+Reconnaissance optique de caractères (français et arabe) \\
+\hline
+Validité des identifiants & Non vérifiée &
+Contrôle mathématique (modulo 97 du RIB, chiffres de contrôle ICAO de la CNIE) \\
+\hline
+Cohérence formulaire / documents & Comparaison manuelle, champ par champ &
+Rapprochement automatique, avec tolérance sur les libellés \\
+\hline
+Cohérence entre documents & Non contrôlée systématiquement &
+Matrice de cohérence inter-documents \\
+\hline
+Fraîcheur des documents & Vérifiée au cas par cas &
+Contrôle automatique du délai (Modèle J de moins de 90 jours) \\
+\hline
+Traçabilité & Aucun historique structuré &
+Rapport d'audit détaillant chaque contrôle \\
+\hline
+Temps de traitement & De l'ordre de 15 à 20 minutes par dossier &
+Traitement automatisé, contrôle humain limité aux cas douteux \\
+\hline
+\end{tabular}
 \end{table}
 
 \section{Probl\'{e}matique M\'{e}tier et Verrous Techniques}
+\subsection{Problématique du projet}
+Le mode opératoire actuel présente plusieurs limites structurelles. Le contrôle
+d'un dossier complet mobilise un agent pendant une quinzaine à une vingtaine de
+minutes, temps qui croît mécaniquement avec le volume de souscriptions. La
+comparaison de suites de quinze chiffres (ICE) ou de vingt-quatre caractères
+(RIB), répétée des dizaines de fois par jour, est par ailleurs une tâche à fort
+risque d'erreur : une inversion de deux chiffres passe aisément inaperçue.
 
+À cela s'ajoute l'impossibilité de détecter la fraude documentaire à l'\oe il nu :
+rien ne permet à un agent de savoir qu'un numéro de carte d'identité ou un RIB a
+été modifié, alors même que ces identifiants comportent des clés de contrôle
+mathématiques exploitables. Un dossier peut également agréger des pièces
+appartenant en réalité à deux sociétés distinctes sans que cela soit visible,
+faute d'une comparaison systématique champ par champ. Enfin, chaque anomalie
+déclenche un aller-retour par courriel qui allonge le délai d'activation du compte
+et dégrade l'expérience de l'opérateur.
+
+Dans ce contexte, la question se pose : \textbf{comment automatiser la
+vérification des dossiers de souscription, de manière à contrôler systématiquement
+l'authenticité des documents et leur cohérence avec les données saisies par
+l'opérateur, tout en respectant les contraintes de confidentialité propres à un
+tiers de confiance national ?}
+\subsection{ Verrous Techniques} 
 Le d\'{e}veloppement d'un syst\`{e}me automatique d'inspection documentaire se heurte \`{a} trois verrous techniques majeurs, identifi\'{e}s lors de l'analyse forensique des documents r\'{e}els :
 
 \begin{infobox}
@@ -146,8 +204,62 @@ Les PDF officiels de l'OMPIC et de la DGI placent les valeurs (ex: \texttt{MEDI 
 
 \begin{infobox}
 \textbf{Verrou 3 : Gestion des Coquilles et Transpositions (Transposition Fallback)} \\
-Les fautes de frappe d'un seul caract\`{e}re sur les num\'{e}ros CIN des g\'{e}rants (\texttt{AB123457} vs \texttt{AB123456}) entra\^{\i}naient des rejets stricts non justifi\'{e}s. Le syst\`{e}me doit int\'{e}grer un m\'{e}canisme de tol\'{e}rance bas\'{e} sur la distance d'\'{e}dition de Levenshtein.
+Les fautes de frappe d'un seul caract\`{e}re sur les num\'{e}ros CIN des g\'{e}rants (\texttt{EB21345} vs \texttt{EB12345}) entra\^{\i}naient des rejets stricts non justifi\'{e}s. Le syst\`{e}me doit int\'{e}grer un m\'{e}canisme de tol\'{e}rance bas\'{e} sur la distance d'\'{e}dition de Levenshtein.
 \end{infobox}
+ 
+ \section{Objectifs du projet}
+
+Les objectifs assignés au projet sont les suivants :
+
+\begin{enumerate}[leftmargin=1.6cm,itemsep=3pt,topsep=4pt]
+  \item \textbf{Classifier automatiquement} les pièces d'un dossier, c'est-à-dire
+        reconnaître la nature de chaque fichier déposé sans intervention humaine ;
+  \item \textbf{Extraire les données structurantes} de chaque document
+        (identifiants, dénominations, adresses, dates), qu'il s'agisse d'un PDF
+        natif ou d'un document numérisé nécessitant une reconnaissance optique de
+        caractères ;
+  \item \textbf{Vérifier la validité intrinsèque} des identifiants officiels au
+        moyen de leurs clés de contrôle mathématiques ;
+  \item \textbf{Contrôler la cohérence} entre les données du formulaire et celles
+        des documents, ainsi qu'entre les documents eux-mêmes ;
+  \item \textbf{Produire un rapport d'audit} attribuant à chaque dossier un statut
+        exploitable par l'agent --- conforme, à examiner ou non conforme ---
+        assorti du détail des contrôles effectués.
+\end{enumerate}
+
+Ces objectifs sont encadrés par un ensemble de contraintes imposées par
+l'entreprise, résumées dans le tableau~\ref{tab:contraintes}.
+
+\begin{table}[H]
+\centering
+\caption{Contraintes imposées au projet}
+\label{tab:contraintes}
+\small
+\begin{tabular}{|p{3.2cm}|p{9.2cm}|}
+\hline
+\textbf{Nature} & \textbf{Contrainte} \\
+\hline
+Confidentialité & Les documents traités contiennent des données personnelles et
+fiscales : aucun recours à un service d'analyse documentaire externe n'est
+autorisé, l'intégralité du traitement doit s'exécuter en local. \\
+\hline
+Matérielle & Le traitement doit fonctionner sur des serveurs standards, sans
+accélérateur graphique dédié. \\
+\hline
+Économique & Recours exclusif à des composants libres, sans coût de licence. \\
+\hline
+Fonctionnelle & Le système doit tolérer les variations de mise en forme et les
+imperfections de numérisation, et ne jamais rejeter un dossier sur la seule foi
+d'une lecture automatique incertaine : les cas douteux sont orientés vers un
+contrôle humain. \\
+\hline
+Linguistique & Les documents administratifs marocains sont bilingues
+français--arabe et peuvent comporter des chiffres en écriture arabe orientale. \\
+\hline
+\end{tabular}
+\end{table}
+
+
 
 \section{Cahier des Charges Fonctionnel et Non-Fonctionnel}
 
@@ -239,59 +351,82 @@ Containerisation & Docker \& Compose & Machines Virtuelles (VM) & Isolation envi
     \label{fig:comparaison-stack}
 \end{figure}
 
-\section{Gestion de Projet et M\'{e}thodologie Agile / Scrum}
+\begin{figure}[H]
+    \centering
+    \small
+    \begin{tabular}{c c c c}
+        \includegraphics[height=1.1cm]{Logos/logo_python.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_fastapi.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_postgresql.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_docker.png} \\[0.3cm]
+        \textbf{Python 3.11} & \textbf{FastAPI} & \textbf{PostgreSQL} & \textbf{Docker} \\[0.5cm]
+        
+        \includegraphics[height=1.1cm]{Logos/logo_pymupdf.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_tesseract.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_opencv.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_pydantic.png} \\[0.3cm]
+        \textbf{PyMuPDF} & \textbf{Tesseract OCR} & \textbf{OpenCV} & \textbf{Pydantic} \\[0.5cm]
 
-\subsection{Choix de la M\'{e}thodologie}
+        \includegraphics[height=1.1cm]{Logos/logo_html5.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_css3.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_javascript.png} &
+        \includegraphics[height=1.1cm]{Logos/logo_pytest.png} \\[0.3cm]
+        \textbf{HTML5} & \textbf{CSS3} & \textbf{JavaScript} & \textbf{pytest} \\
+    \end{tabular}
+    \caption{Panorama des technologies et composantes logicielles de la solution.}
+    \label{fig:tech-stack-logos}
+\end{figure}
 
-Le projet s'est d\'{e}roul\'{e} sur une p\'{e}riode de \textbf{12 semaines} selon la m\'{e}thodologie \textbf{Agile Scrum}. Ce choix a \'{e}t\'{e} motiv\'{e} par la nature it\'{e}rative du d\'{e}veloppement : les sp\'{e}cifications des extracteurs et des r\`{e}gles de validation ont \'{e}volu\'{e} au fil de l'analyse forensique des documents r\'{e}els, n\'{e}cessitant une adaptation continue du product backlog.
+\section{Planning du projet}
 
-Les c\'{e}r\'{e}monies Scrum suivantes ont \'{e}t\'{e} appliqu\'{e}es :
-\begin{itemize}[leftmargin=*, itemsep=4pt]
-    \item \textbf{Sprint Planning} : d\'{e}finition des user stories et estimation en points de complexit\'{e} ;
-    \item \textbf{Daily Stand-up} : synchronisation quotidienne avec l'encadrant externe ;
-    \item \textbf{Sprint Review} : d\'{e}monstration des incr\'{e}ments fonctionnels ;
-    \item \textbf{Sprint Retrospective} : am\'{e}lioration continue du processus de d\'{e}veloppement.
-\end{itemize}
-
-\subsection{Planification en Sprints}
-
-Les quatre sprints d'ing\'{e}nierie ont \'{e}t\'{e} structur\'{e}s comme suit :
+Le projet s'est déroulé sur neuf semaines, du 15 juin au 15 août 2026, selon une
+démarche itérative et incrémentale rythmée par des points d'avancement
+hebdomadaires avec l'encadrement de l'entreprise. Chaque itération livrait une
+brique fonctionnelle validée par une démonstration sur des documents réels.
 
 \begin{table}[H]
 \centering
+\caption{Déroulement du stage}
+\label{tab:planning}
 \small
-\begin{tabularx}{\textwidth}{@{}>{\bfseries}p{2.5cm} p{2.5cm} Y@{}}
-\toprule
-\rowcolor{lightblue}
-Sprint & P\'{e}riode & Livrables \\
-\midrule
-Sprint 1 & Semaines 1--3 & Cadrage des besoins, \'{e}tude de l'existant, conception du Design System UI, maquettes fonctionnelles \\
-Sprint 2 & Semaines 4--6 & Impl\'{e}mentation du Classifier \`{a} 2 couches, d\'{e}veloppement des 7 extracteurs PDF d\'{e}di\'{e}s \\
-Sprint 3 & Semaines 7--9 & D\'{e}veloppement de la Matrice Cross-Ref, contr\^{o}les Modulo~97, persistance PostgreSQL, int\'{e}gration backend \\
-Sprint 4 & Semaines 10--12 & Recette globale, campagne de tests 64/64 PASS, optimisation des performances, r\'{e}daction du rapport \\
-\bottomrule
-\end{tabularx}
-\caption{Planification des quatre sprints du projet.}
-\label{tab:sprints}
+\begin{tabular}{|p{1.8cm}|p{3.8cm}|p{6.6cm}|}
+\hline
+\textbf{Semaines} & \textbf{Phase} & \textbf{Travaux réalisés} \\
+\hline
+S1--S2 & Intégration et cadrage &
+Découverte de PortNet et de son écosystème, étude du besoin, mise en place de
+l'environnement de développement. \\
+\hline
+S3--S4 & Étude préliminaire &
+Modélisation et alimentation de la base de données, analyse du processus de
+souscription et du corpus documentaire. \\
+\hline
+S5 & Conception &
+Étude comparative des moteurs de reconnaissance optique de caractères, conception
+de la chaîne de traitement et de la matrice de cohérence. \\
+\hline
+S6--S7 & Réalisation &
+Développement du prétraitement d'image et de l'OCR, des analyseurs de documents,
+des contrôles mathématiques et du moteur de rapprochement. \\
+\hline
+S8 & Extension et intégration &
+Formulaire de souscription, interface applicative d'enregistrement, base de
+données, intégration des contributions du binôme. \\
+\hline
+S9 & Tests et restitution &
+Campagne de tests sur documents réels, démonstrations, rédaction du rapport. \\
+\hline
+\end{tabular}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \IfFileExists{images/gantt_agile.png}{\includegraphics[width=\textwidth]{images/gantt_agile.png}}{\fbox{\parbox{14cm}{\centering\vspace{2cm}\textit{Diagramme de Gantt Agile --- Exporter depuis gantt\_agile.drawio}\vspace{2cm}}}}
-    \caption{Chronogramme de Gantt de la d\'{e}marche Agile Scrum (Sprints 1 \`{a} 4).}
-    \label{fig:gantt-agile}
-\end{figure}
-
-\subsection{Outils de Gestion de Projet}
-
-Le suivi des t\^{a}ches et des artefacts a \'{e}t\'{e} r\'{e}alis\'{e} \`{a} l'aide des outils suivants :
-
-\begin{itemize}[leftmargin=*, itemsep=4pt]
-    \item \textbf{Tableau Kanban} : organisation visuelle des user stories en colonnes \textit{To Do}, \textit{In Progress}, \textit{Review} et \textit{Done} ;
-    \item \textbf{Git / GitHub} : gestion de version du code source, branches par fonctionnalit\'{e} et revues de code ;
-    \item \textbf{VS Code} : environnement de d\'{e}veloppement int\'{e}gr\'{e} avec extensions Python, LaTeX et Git ;
-    \item \textbf{Docker} : containerisation des services (PostgreSQL, uvicorn) pour la reproductibilit\'{e} des d\'{e}ploiements.
-\end{itemize}
+Le projet ayant été mené en binôme, le partage des développements s'est fait selon
+la nature des documents et des briques techniques : la chaîne de traitement et la
+matrice de cohérence ont été conçues conjointement, tandis que j'ai pris en charge
+le traitement des documents \textbf{numérisés} (prétraitement d'image,
+reconnaissance optique de caractères, lecture et validation de la carte nationale
+d'identité électronique, formulaire et base de données) et que mon binôme a traité
+les documents \textbf{nativement numériques} (extraction de texte vectoriel,
+analyseurs par type de document, moteur de rapprochement).
 
 \section*{Conclusion du Chapitre}
 

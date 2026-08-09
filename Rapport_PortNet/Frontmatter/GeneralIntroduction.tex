@@ -1,18 +1,48 @@
 \chapter*{Introduction G\'{e}n\'{e}rale}
 \addcontentsline{toc}{chapter}{Introduction G\'{e}n\'{e}rale}
 
-La transformation num\'{e}rique du commerce ext\'{e}rieur constitue un levier strat\'{e}gique majeur pour la comp\'{e}titivit\'{e} \'{e}conomique du Maroc. Depuis la cr\'{e}ation du Guichet Unique National en 2008, \textbf{PortNet S.A.} joue un r\^{o}le central d'interconnexion entre les op\'{e}rateurs \'{e}conomiques (importateurs, exportateurs, transitaires), les administrations publiques (Douanes, OMPIC, DGI, ONSSA) et les \'{e}tablissements bancaires. La plateforme rassemble aujourd'hui plus de 50\,000 usagers actifs et constitue le passage oblig\'{e} de toute op\'{e}ration de d\'{e}douanement au Maroc.
+Dans un contexte économique mondial marqué par l'intensification des échanges
+internationaux, la transformation digitale des services publics est devenue une
+priorité stratégique. Le Maroc s'est engagé très tôt dans cette voie pour son
+commerce extérieur, en confiant à un guichet unique national la dématérialisation
+de l'ensemble des procédures d'importation et d'exportation : plutôt que de
+s'adresser séparément à une dizaine d'interlocuteurs, l'opérateur économique
+dispose d'un point d'entrée unique où l'information est saisie une seule fois
+puis redistribuée à tous les acteurs concernés.
 
-L'acc\`{e}s aux services informatiques de PortNet et \`{a} la plateforme BADR de l'Administration des Douanes et Imp\^{o}ts Indirects (ADII) est conditionn\'{e} par une proc\'{e}dure de souscription r\'{e}glementaire. Chaque op\'{e}rateur doit fournir un dossier compos\'{e} de neuf pi\`{e}ces justificatives : le Mod\`{e}le~J du Registre de Commerce, le Bulletin de Notification de l'Identifiant Fiscal, l'Attestation de Taxe Professionnelle, le Certificat de l'Identifiant Commun de l'Entreprise (ICE), l'Attestation de Domiciliation, l'Attestation de Relev\'{e} d'Identit\'{e} Bancaire (RIB), la Carte Nationale d'Identit\'{e} \'{E}lectronique (CNIE), les Statuts de la Soci\'{e}t\'{e} et, le cas \'{e}ch\'{e}ant, une Procuration.
+C'est dans ce cadre que s'inscrit le stage de fin d'année que j'ai réalisé au sein
+de \textbf{PortNet S.A.}, acteur central de la dématérialisation des procédures du
+commerce extérieur au Maroc. Le projet confié porte sur la première étape de ce
+parcours, souvent négligée mais déterminante : \textbf{la souscription des
+opérateurs économiques}, c'est-à-dire leur inscription à la plateforme. Tant que
+cette inscription n'est pas validée, l'opérateur ne peut engager aucune procédure.
 
-Dans le processus actuel, l'instruction de chaque dossier repose sur un contr\^{o}le visuel manuel r\'{e}alis\'{e} par des agents v\'{e}rificateurs. Cette approche pr\'{e}sente plusieurs limitations structurelles : des d\'{e}lais d'instruction pouvant atteindre 48 \`{a} 72 heures ouvr\'{e}es en p\'{e}riode de pointe, un taux d'erreur humaine non n\'{e}gligeable face \`{a} la diversit\'{e} des formats de documents administratifs marocains, et l'impossibilit\'{e} pratique de r\'{e}aliser manuellement certaines v\'{e}rifications math\'{e}matiques critiques, telles que le calcul des cl\'{e}s de contr\^{o}le Modulo~97 pour les identifiants ICE et les num\'{e}ros de compte RIB.
+Or cette validation reste aujourd'hui entièrement manuelle. L'opérateur déclare
+son identité juridique et fiscale dans un formulaire en ligne, puis dépose sept à
+neuf pièces justificatives officielles ; un agent doit alors ouvrir chaque
+document, y rechercher visuellement les identifiants et les comparer un à un aux
+valeurs saisies. Les principales limites identifiées sont :
 
-Ces difficult\'{e}s sont amplifi\'{e}es par la sp\'{e}cificit\'{e} des documents administratifs marocains. Les pi\`{e}ces justificatives partagent souvent des mentions l\'{e}gales identiques (\og Royaume du Maroc \fg{}, num\'{e}ros ICE, RC, IF) qui rendent la discrimination entre types de documents particuli\`{e}rement ardue pour un syst\`{e}me automatis\'{e}. Par ailleurs, les formulaires officiels de la DGI et de l'OMPIC pr\'{e}sentent des agencements de texte non standards o\`{u} les valeurs apparaissent avant leurs libell\'{e}s, pi\'{e}geant les algorithmes d'extraction conventionnels. Enfin, les fautes de frappe et transpositions sur les identifiants des g\'{e}rants (num\'{e}ros CIN) n\'{e}cessitent un m\'{e}canisme de tol\'{e}rance qui pr\'{e}serve la rigueur du contr\^{o}le tout en \'{e}vitant les rejets injustifi\'{e}s.
+\begin{itemize}[leftmargin=1.6cm,itemsep=2pt,topsep=4pt]
+  \item la lenteur du contrôle, de l'ordre d'une quinzaine de minutes par dossier ;
+  \item le risque élevé d'erreur humaine sur la comparaison d'identifiants longs
+        (quinze chiffres pour l'ICE, vingt-quatre pour le RIB) ;
+  \item l'impossibilité de détecter à l'\oe il nu une falsification de document ;
+  \item l'absence de contrôle systématique de la cohérence entre les pièces d'un
+        même dossier ;
+  \item les allers-retours par courriel avec l'opérateur, qui allongent le délai
+        d'activation du compte.
+\end{itemize}
 
-C'est dans ce contexte que s'inscrit le pr\'{e}sent Projet de Fin d'Ann\'{e}e (PFA), r\'{e}alis\'{e} au sein du D\'{e}partement D\'{e}veloppement et Ing\'{e}nierie Logicielle de PortNet S.A. L'objectif est de concevoir et d'impl\'{e}menter un syst\`{e}me intelligent de v\'{e}rification documentaire capable d'automatiser l'int\'{e}gralit\'{e} du processus de contr\^{o}le : de l'extraction du texte brut des fichiers PDF \`{a} la validation crois\'{e}e des donn\'{e}es entre tous les documents du dossier, en passant par la classification par emplacement et la v\'{e}rification des sommes de contr\^{o}le math\'{e}matiques.
+Pour répondre à ces enjeux, une solution de \textbf{validation automatique des
+documents de souscription} a été proposée. Elle repose sur une chaîne de
+traitement documentaire combinant extraction de texte natif, reconnaissance
+optique de caractères pour les pièces numérisées, vérification mathématique des
+identifiants officiels par leurs clés de contrôle, et rapprochement automatique
+entre le formulaire et les documents. L'ensemble s'exécute intégralement en
+local, aucune donnée ne quittant l'infrastructure de l'entreprise.
 
-Le syst\`{e}me r\'{e}alis\'{e} repose sur une architecture en pipeline \`{a} trois niveaux. Le premier niveau assure l'ingestion des fichiers PDF par extraction textuelle native (PyMuPDF) avec repli OCR pour les documents num\'{e}ris\'{e}s. Le deuxi\`{e}me niveau impl\'{e}mente un classifier \`{a} deux couches qui combine des ancres textuelles positives propres \`{a} chaque type de document avec des exclusions n\'{e}gatives pour rejeter les faux positifs inter-emplacements. Le troisi\`{e}me niveau orchestre les validations : extraction des variables m\'{e}tier par des parsers regex d\'{e}di\'{e}s, contr\^{o}le des cl\'{e}s Modulo~97, v\'{e}rification de la r\'{e}cence, correspondance floue des cha\^{\i}nes de caract\`{e}res et ex\'{e}cution de la matrice de coh\'{e}rence crois\'{e}e inter-documents.
-
-L'architecture technique est fond\'{e}e sur un backend FastAPI avec persistance PostgreSQL, un frontend mono-page (SPA) reproduisant fid\`{e}lement l'ergonomie du portail PortNet, et une couche d'extraction documentaire en Python pur. Le syst\`{e}me a \'{e}t\'{e} valid\'{e} par une campagne de tests automatiques couvrant 64 cas de test avec un taux de r\'{e}ussite de 100\%.
+Le projet a été mené en binôme, selon une démarche itérative rythmée par des
+points d'avancement hebdomadaires avec l'encadrement de l'entreprise.
 
 Le pr\'{e}sent rapport est organis\'{e} en cinq chapitres. Le Chapitre~1 introduit l'organisme d'accueil, le contexte du projet, l'\'{e}tude et la critique de l'existant, la probl\'{e}matique, le cahier des charges fonctionnel et non-fonctionnel, ainsi que la m\'{e}thodologie de conduite de projet. Le Chapitre~2 pr\'{e}sente l'\'{e}tat de l'art concernant l'extraction textuelle, la reconnaissance optique de caract\`{e}res, la classification de documents, la validation math\'{e}matique et la correspondance floue. Le Chapitre~3 d\'{e}crit la conception et la mod\'{e}lisation UML du syst\`{e}me : cas d'utilisation, s\'{e}quences, activit\'{e}s, \'{e}tats, architecture et classes. Le Chapitre~4 d\'{e}taille la r\'{e}alisation technique, le pipeline d'impl\'{e}mentation, les extracteurs, les validateurs et l'interface utilisateur. Enfin, le Chapitre~5 pr\'{e}sente les tests, les r\'{e}sultats exp\'{e}rimentaux et l'\'{e}valuation des performances du syst\`{e}me.
