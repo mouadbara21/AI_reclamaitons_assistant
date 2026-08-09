@@ -172,6 +172,179 @@ def test_full_pipeline_valid_dossier():
     assert len(report.document_reports) == len(files)
 \end{lstlisting}
 
+\section{Tests de Bout en Bout --- Cas de Succ\`{e}s}
+
+Cette section pr\'{e}sente le parcours complet d'un op\'{e}rateur soumettant un dossier avec des documents valides et coh\'{e}rents. Le jeu de test utilis\'{e} correspond \`{a} la soci\'{e}t\'{e} MEDI TELECOM S.A. (ICE~001512572000078, RC~429045/Casablanca).
+
+\subsection{Page de R\'{e}sultat --- Validation R\'{e}ussie}
+
+La figure~\ref{fig:resultat-succes} montre la page de r\'{e}sultat affich\'{e}e apr\`{e}s la soumission d'un dossier enti\`{e}rement conforme. Le syst\`{e}me affiche un cercle vert avec une coche (\checkmark) et le message \guillemotleft~Votre demande de souscription a \'{e}t\'{e} valid\'{e}e~\guillemotright. Le tableau r\'{e}capitulatif confirme les informations de l'op\'{e}rateur : Raison Sociale, ICE, RC, IF, TP, G\'{e}rant, Date et identifiant unique de souscription.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/resultat_validation_succes.png}
+    \caption{Page de r\'{e}sultat : dossier valid\'{e} avec succ\`{e}s --- tous les documents sont conformes.}
+    \label{fig:resultat-succes}
+\end{figure}
+
+\subsection{D\'{e}tail des V\'{e}rifications par Document}
+
+La figure~\ref{fig:detail-conforme} pr\'{e}sente la liste des 9~documents v\'{e}rifi\'{e}s, chacun affichant un badge vert \guillemotleft~CONFORME~\guillemotright. Le nom du fichier original, le type de document d\'{e}tect\'{e} (entre crochets) et le code interne du classifier sont affich\'{e}s pour chaque entr\'{e}e.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/detail_verifications_conforme.png}
+    \caption{Liste des 9~documents v\'{e}rifi\'{e}s --- tous marqu\'{e}s CONFORME.}
+    \label{fig:detail-conforme}
+\end{figure}
+
+En d\'{e}pliant chaque document, l'op\'{e}rateur peut consulter le d\'{e}tail des v\'{e}rifications effectu\'{e}es. La figure~\ref{fig:detail-depliees-1} montre les v\'{e}rifications de la CIN (extraction du num\'{e}ro EC83147), de la Domiciliation (v\'{e}rification du RC 162657), des Statuts (d\'{e}tection de la forme juridique) et du Mod\`{e}le~J (contr\^{o}le de r\'{e}cence 90~jours et checksum ICE Modulo~97).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/detail_verifications_depliees_1.png}
+    \caption{D\'{e}tail des v\'{e}rifications : CIN, Domiciliation, Statuts et Mod\`{e}le~J (tous CONFORME).}
+    \label{fig:detail-depliees-1}
+\end{figure}
+
+La figure~\ref{fig:detail-depliees-2} compl\`{e}te avec les v\'{e}rifications de la Taxe Professionnelle, du Certificat ICE, de l'Attestation de RIB (validation Modulo~97 du code \`{a} 24~chiffres) et du Document~IF. Chaque ligne affiche la valeur attendue, la valeur extraite et le statut de la v\'{e}rification.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/detail_verifications_depliees_2.png}
+    \caption{D\'{e}tail des v\'{e}rifications : Taxe Professionnelle, ICE, RIB et Document~IF (tous CONFORME).}
+    \label{fig:detail-depliees-2}
+\end{figure}
+
+\subsection{Matrice de Coh\'{e}rence Crois\'{e}e --- Cas Valide}
+
+Les figures~\ref{fig:matrice-valide} et~\ref{fig:matrice-valide-suite} pr\'{e}sentent la matrice de coh\'{e}rence crois\'{e}e compl\`{e}te pour un dossier valide. Chaque ligne compare une variable (ICE, RC Number, RC City, Identifiant Fiscal, Company Name, Si\`{e}ge Social, Gerant Name, Domiciliary Host) entre la valeur du formulaire et la valeur extraite du document, avec le r\'{e}sultat de la comparaison.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/matrice_croisee_valide.png}
+    \caption{Matrice de coh\'{e}rence crois\'{e}e (partie~1) : comparaisons ICE, RC, IF entre formulaire et documents --- tous les r\'{e}sultats sont positifs (\textcolor{success}{\checkmark}).}
+    \label{fig:matrice-valide}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/matrice_croisee_valide_suite.png}
+    \caption{Matrice de coh\'{e}rence crois\'{e}e (partie~2) : comparaisons Company Name, Si\`{e}ge Social, G\'{e}rant et Domiciliation --- tous les r\'{e}sultats sont positifs avec des scores de similarit\'{e} $\geq 91{,}4\%$.}
+    \label{fig:matrice-valide-suite}
+\end{figure}
+
+On observe que la correspondance floue (\textit{fuzzy matching}) g\`{e}re correctement les variations typographiques : le nom de la soci\'{e}t\'{e} \texttt{MEDI T ELECOM S.A.} (avec espace parasite d\^{u} \`{a} l'extraction PDF) est reconnu \`{a} $91{,}4\%$ par rapport \`{a} la valeur formulaire \texttt{MEDI TELECOM S.A.}, d\'{e}passant le seuil de $85\%$ configur\'{e}.
+
+\section{Tests de Bout en Bout --- Cas de Rejet}
+
+Cette section illustre le comportement du syst\`{e}me lorsque des documents invalides ou incoh\'{e}rents sont soumis. Le test utilise d\'{e}lib\'{e}r\'{e}ment des documents provenant de diff\'{e}rentes soci\'{e}t\'{e}s, avec des num\'{e}ros RC, ICE et IF divergents.
+
+\subsection{D\'{e}tection des Mauvais Emplacements}
+
+La figure~\ref{fig:upload-invalides} montre le r\'{e}sultat de la classification lorsque des documents sont d\'{e}pos\'{e}s dans les mauvais emplacements. Le syst\`{e}me d\'{e}tecte imm\'{e}diatement l'incoh\'{e}rence et affiche un badge rouge \guillemotleft~Ce document ne correspond pas au document requis pour ce champ~\guillemotright{} suivi du type attendu entre parenth\`{e}ses.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/upload_documents_invalides.png}
+    \caption{D\'{e}tection en temps r\'{e}el des documents plac\'{e}s dans les mauvais emplacements : badges rouges d'erreur.}
+    \label{fig:upload-invalides}
+\end{figure}
+
+\subsection{Page de R\'{e}sultat --- Demande Rejet\'{e}e}
+
+La figure~\ref{fig:resultat-rejet} affiche la page de r\'{e}sultat pour un dossier rejet\'{e} : un cercle rouge avec une croix (\texttimes) et le message \guillemotleft~Votre demande a \'{e}t\'{e} rejet\'{e}e~\guillemotright{} suivi de l'instruction \guillemotleft~Des anomalies critiques ont \'{e}t\'{e} d\'{e}tect\'{e}es dans vos documents. Veuillez corriger les erreurs indiqu\'{e}es ci-dessous et soumettre \`{a} nouveau votre dossier.~\guillemotright
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/resultat_validation_rejet.png}
+    \caption{Page de r\'{e}sultat : dossier rejet\'{e} --- des anomalies critiques ont \'{e}t\'{e} d\'{e}tect\'{e}es.}
+    \label{fig:resultat-rejet}
+\end{figure}
+
+\subsection{Motifs de Rejet et D\'{e}tails des V\'{e}rifications}
+
+La figure~\ref{fig:detail-rejet} d\'{e}taille les motifs de rejet list\'{e}s par le syst\`{e}me. On distingue trois niveaux de s\'{e}v\'{e}rit\'{e} dans l'interface :
+
+\begin{itemize}[leftmargin=*, itemsep=4pt]
+    \item \textbf{Badge vert CONFORME} : le document est valide et coh\'{e}rent (ex. CIN, Statuts) ;
+    \item \textbf{Badge rouge NON CONFORME} : une erreur critique a \'{e}t\'{e} d\'{e}tect\'{e}e (ex. Mod\`{e}le~J expir\'{e} depuis le 08/08/2022, soit plus de 90~jours) ;
+    \item \textbf{Badge orange ATTENTION} : un avertissement non bloquant a \'{e}t\'{e} d\'{e}tect\'{e} (ex. ICE check key mismatch sur la Taxe Professionnelle).
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/detail_rejet_motifs.png}
+    \caption{Motifs de rejet et d\'{e}tail des v\'{e}rifications : badges NON CONFORME (rouge) et ATTENTION (orange).}
+    \label{fig:detail-rejet}
+\end{figure}
+
+\subsection{Matrice de Coh\'{e}rence Crois\'{e}e --- Cas Invalide}
+
+Les figures~\ref{fig:matrice-invalide} et~\ref{fig:matrice-invalide-suite} montrent la matrice de coh\'{e}rence crois\'{e}e pour un dossier contenant des documents incoh\'{e}rents. Les divergences sont clairement signal\'{e}es :
+
+\begin{itemize}[leftmargin=*, itemsep=2pt]
+    \item \textbf{Erreurs critiques (rouge \texttimes)} : RC mismatch (429045 vs 370621), ICE mismatch, IF mismatch (32770927 vs 35778129) ;
+    \item \textbf{Avertissements (orange \triangle)} : Fuzzy city mismatch Casablanca/AGADIR \`{a} $25\%$, Fuzzy name mismatch $8{,}0\%$ ;
+    \item \textbf{Validations r\'{e}ussies (vert \checkmark)} : RC City match $100\%$, ICE match sur certains documents.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/matrice_croisee_invalide.png}
+    \caption{Matrice de coh\'{e}rence crois\'{e}e invalide (partie~1) : erreurs critiques ICE, RC et IF marqu\'{e}es en rouge.}
+    \label{fig:matrice-invalide}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/matrice_croisee_invalide_suite.png}
+    \caption{Matrice de coh\'{e}rence crois\'{e}e invalide (partie~2) : divergences Company Name, Si\`{e}ge Social et Domiciliation.}
+    \label{fig:matrice-invalide-suite}
+\end{figure}
+
+\section{Tests de Bout en Bout --- Cas WARNING (Erreur CIN Mineure)}
+
+Ce sc\'{e}nario teste le cas interm\'{e}diaire o\`{u} l'op\'{e}rateur commet une erreur de saisie mineure dans le champ CIN du formulaire : \texttt{EC38147} au lieu de \texttt{EC83147} (inversion des chiffres 3 et 8). Tous les documents soumis sont par ailleurs valides et coh\'{e}rents.
+
+\subsection{Saisie Incorrecte du CIN}
+
+La figure~\ref{fig:cin-incorrect} montre le formulaire avec le champ CIN encadr\'{e} en rouge, contenant la valeur erron\'{e}e \texttt{EC38147}. Cette erreur mineure simule un cas fr\'{e}quent de faute de frappe par l'op\'{e}rateur.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.72\textwidth]{Screenshots/formulaire_cin_incorrect.png}
+    \caption{Formulaire avec erreur de saisie CIN : \texttt{EC38147} au lieu de \texttt{EC83147} (inversion 3/8).}
+    \label{fig:cin-incorrect}
+\end{figure}
+
+\subsection{R\'{e}sultat --- V\'{e}rification Compl\'{e}mentaire Requise}
+
+La figure~\ref{fig:resultat-warning} montre le r\'{e}sultat : le syst\`{e}me n'a pas rejet\'{e} le dossier mais a \'{e}mis un avertissement (triangle orange) avec le message \guillemotleft~Votre demande n\'{e}cessite une v\'{e}rification compl\'{e}mentaire~\guillemotright{} et l'indication \guillemotleft~Des \'{e}carts mineurs ont \'{e}t\'{e} d\'{e}tect\'{e}s dans vos documents. Un agent du service r\'{e}clamation examinera votre dossier.~\guillemotright
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/resultat_warning_cin.png}
+    \caption{Page de r\'{e}sultat WARNING : v\'{e}rification compl\'{e}mentaire requise suite \`{a} l'erreur CIN mineure.}
+    \label{fig:resultat-warning}
+\end{figure}
+
+\subsection{D\'{e}tection par la Matrice de Coh\'{e}rence Crois\'{e}e}
+
+La figure~\ref{fig:matrice-warning-cin} montre la ligne de la matrice crois\'{e}e ayant d\'{e}clench\'{e} le WARNING. Le moteur de correspondance floue a compar\'{e} la valeur CIN du formulaire (\texttt{EC38147}) avec la valeur extraite du Mod\`{e}le~J (\texttt{EC83147}) et a calcul\'{e} un score de similarit\'{e} de $85{,}7\%$. Ce score d\'{e}passe le seuil minimal de rejet mais reste inf\'{e}rieur au seuil de validation stricte, d\'{e}clenchant ainsi le statut WARNING.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/matrice_croisee_warning_cin.png}
+    \caption{Matrice crois\'{e}e : d\'{e}tection du CIN mismatch \texttt{EC38147} vs \texttt{EC83147} avec score $85{,}7\%$ (\textit{Slight CIN mismatch}).}
+    \label{fig:matrice-warning-cin}
+\end{figure}
+
+\begin{successbox}
+\textbf{Int\'{e}r\^{e}t du niveau WARNING} \\
+Le niveau WARNING illustre la souplesse du syst\`{e}me : plut\^{o}t que de rejeter syst\'{e}matiquement le dossier pour une erreur de frappe, le syst\`{e}me signale l'\'{e}cart et transf\`{e}re le dossier \`{a} un agent humain pour v\'{e}rification manuelle. Ce comportement r\'{e}duit le taux de faux rejets tout en maintenant la s\'{e}curit\'{e} documentaire.
+\end{successbox}
+
 \section{Matrice de R\'{e}sultats Compl\`{e}te}
 
 \begin{figure}[H]

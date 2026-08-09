@@ -434,6 +434,18 @@ def create_inscription(data: Inscription):
     return {"ok": True, "id": str(insc_id)}
 \end{lstlisting}
 
+Apr\`{e}s la soumission, le backend persiste chaque document t\'{e}l\'{e}vers\'{e} dans un r\'{e}pertoire organis\'{e} par type de document, en lui attribuant un identifiant unique (GUID). La figure~\ref{fig:documents-stockes} illustre le tableau r\'{e}capitulatif des documents stock\'{e}s avec leurs m\'{e}tadonn\'{e}es.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Screenshots/documents_stockes_guids.png}
+    \caption{Tableau des documents stock\'{e}s par le backend avec identifiants GUID, emplacement de classification et taille de fichier.}
+    \label{fig:documents-stockes}
+\end{figure}
+
+Chaque fichier re\c{c}oit un GUID unique (ex. \texttt{23e45767-59f8-409b-b4e9-15631af0b56a}) garantissant l'unicit\'{e} et la tra\c{c}abilit\'{e} du stockage. La colonne \textit{Emplacement} confirme la classification automatique du document par le classifier (\texttt{cni}, \texttt{model\_j}, \texttt{attestation\_rib}, etc.).
+
+
 \section{Frontend SPA}
 
 Le frontend est une application mono-page de 586 lignes reproduisant fid\`{e}lement l'ergonomie du portail PortNet. Les principales fonctionnalit\'{e}s sont :
@@ -459,11 +471,48 @@ Design System & Reproduction fid\`{e}le du portail PortNet (couleurs \texttt{\#1
 \label{tab:frontend-features}
 \end{table}
 
+\subsection{\'{E}tape 4 : R\'{e}capitulatif des Informations de l'Op\'{e}rateur}
+
+La figure~\ref{fig:formulaire-recap} pr\'{e}sente l'\'{e}tape~4 du wizard, o\`{u} les informations de l'op\'{e}rateur saisies aux \'{e}tapes pr\'{e}c\'{e}dentes sont r\'{e}capitulées avant le t\'{e}l\'{e}versement des documents. Ces donn\'{e}es (Raison Sociale, ICE, RC, IF, TP, Si\`{e}ge Social, Nom/Pr\'{e}nom/CIN du g\'{e}rant) serviront de r\'{e}f\'{e}rence pour la v\'{e}rification crois\'{e}e avec les valeurs extraites des documents.
+
 \begin{figure}[H]
     \centering
-    \IfFileExists{Screenshots/frontend_wizard.png}{\includegraphics[width=\textwidth]{Screenshots/frontend_wizard.png}}{\fbox{\parbox{14cm}{\centering\vspace{3cm}\textit{Capture d'\'{e}cran du frontend --- Formulaire multi-\'{e}tapes}\vspace{3cm}}}}
-    \caption{Interface du formulaire multi-\'{e}tapes de souscription.}
-    \label{fig:frontend-wizard}
+    \includegraphics[width=0.82\textwidth]{Screenshots/formulaire_recap_operateur.jpg}
+    \caption{\'{E}tape~4 du formulaire : r\'{e}capitulatif des informations de l'op\'{e}rateur avant le t\'{e}l\'{e}versement des documents.}
+    \label{fig:formulaire-recap}
+\end{figure}
+
+\subsection{Zone d'Upload des Documents}
+
+La figure~\ref{fig:upload-vide} pr\'{e}sente la zone de t\'{e}l\'{e}versement des documents dans son \'{e}tat initial, avant toute action de l'op\'{e}rateur. Chaque emplacement est \'{e}tiquet\'{e} selon le type de document attendu : \textit{Copie de la CIN}, \textit{Statut de la soci\'{e}t\'{e}}, \textit{Copie du mod\`{e}le J / Registre de commerce}, \textit{ICE}, \textit{Attestation de RIB}, \textit{Document IF}, \textit{Taxe Professionnelle}, \textit{Procuration} et \textit{Copie d'un document justifiant la cat\'{e}gorie de l'op\'{e}rateur}. L'astérisque (\texttt{*}) indique les champs obligatoires.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/upload_documents_vide.jpg}
+    \caption{Zone d'upload des documents dans son \'{e}tat initial (aucun fichier d\'{e}pos\'{e}).}
+    \label{fig:upload-vide}
+\end{figure}
+
+\subsection{Classification et Validation en Temps R\'{e}el}
+
+D\`{e}s qu'un fichier PDF est d\'{e}pos\'{e} dans un emplacement, le syst\`{e}me ex\'{e}cute le pipeline de classification en temps r\'{e}el. La figure~\ref{fig:upload-valides} montre le r\'{e}sultat apr\`{e}s le t\'{e}l\'{e}versement de documents valides : chaque emplacement affiche un badge vert \guillemotleft~Document conforme~\guillemotright{} suivi du type d\'{e}tect\'{e} (par exemple, \textit{Carte Nationale d'Identit\'{e} / Passeport}, \textit{Mod\`{e}le J / Registre de commerce}).
+
+Le champ \textit{Procuration} affiche un badge bleu \guillemotleft~Ce document sera v\'{e}rifi\'{e} manuellement par un agent~\guillemotright{}, car la procuration ne fait pas l'objet d'une v\'{e}rification automatis\'{e}e.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/upload_documents_valides.jpg}
+    \caption{Documents t\'{e}l\'{e}vers\'{e}s avec succ\`{e}s : chaque emplacement affiche un badge vert \guillemotleft~Document conforme~\guillemotright.}
+    \label{fig:upload-valides}
+\end{figure}
+
+La figure~\ref{fig:upload-bouton} montre le bas de la page avec la case \guillemotleft~Termes et Conditions d'Utilisation~\guillemotright{} coch\'{e}e et le bouton \guillemotleft~Valider votre souscription~\guillemotright{} activ\'{e}, permettant \`{a} l'op\'{e}rateur de soumettre son dossier complet au pipeline de v\'{e}rification.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{Screenshots/upload_documents_bouton_valider.jpg}
+    \caption{Bas de page : case \guillemotleft~Termes et Conditions~\guillemotright{} coch\'{e}e et bouton de soumission activ\'{e}.}
+    \label{fig:upload-bouton}
 \end{figure}
 
 \section{Correspondance Floue (Fuzzy Matching)}
